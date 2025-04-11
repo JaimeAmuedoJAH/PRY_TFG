@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="color_letra">#FF000000</color>
-    <color name="hint_color">#2A2828</color>
-    <color name="color_letra_botones">#FFFFFFFF</color>
-    <color name="botones">#00592d</color>
+    <color name="hint_color">#FFFFFF</color>
+    <color name="color_fondos">#F4F2F2</color>
+    <color name="background">#00592d</color>
 </resources>

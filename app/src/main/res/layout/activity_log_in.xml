@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo"
+    android:background="@color/background"
     tools:context=".Vista.LogInActivity">
 
     <EditText
@@ -13,7 +13,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="168dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="40dp"
         android:ems="10"
         android:hint="@string/hint_txt_correo"
@@ -22,9 +22,9 @@
         android:textColorHint="@color/hint_color"
         android:textSize="@dimen/letra_size"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/imgIcon" />
 
     <EditText
         android:id="@+id/txtPass"
@@ -50,11 +50,12 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="50dp"
-        android:backgroundTint="@color/botones"
+        android:backgroundTint="@color/color_fondos"
         android:text="@string/txt_btn_ini_sesion"
-        android:textColor="@color/color_letra_botones"
+        android:textColor="@color/color_letra"
         android:textSize="@dimen/letra_size_btn"
-        app:cornerRadius="0dp"
+        android:textStyle="bold"
+        app:cornerRadius="@dimen/corner_radius"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtPass" />
@@ -66,30 +67,15 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="50dp"
-        android:backgroundTint="@color/botones"
+        android:backgroundTint="@color/color_fondos"
         android:text="@string/txt_btn_ini_google"
-        android:textColor="@color/color_letra_botones"
+        android:textColor="@color/color_letra"
         android:textSize="@dimen/letra_size_btn"
-        app:cornerRadius="0dp"
+        android:textStyle="bold"
+        app:cornerRadius="@dimen/corner_radius"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnIni" />
-
-    <TextView
-        android:id="@+id/lblTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="40dp"
-        android:text="@string/app_name"
-        android:textAlignment="center"
-        android:textColor="@color/color_letra"
-        android:textSize="@dimen/letra_lbl_titulo"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnRegistrar"
@@ -98,11 +84,23 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="50dp"
-        android:backgroundTint="@color/botones"
+        android:backgroundTint="@color/color_fondos"
         android:text="@string/txt_btn_registro"
+        android:textColor="@color/color_letra"
         android:textSize="@dimen/letra_size_btn"
-        app:cornerRadius="0dp"
+        android:textStyle="bold"
+        app:cornerRadius="@dimen/corner_radius"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnIniGoogle" />
+
+    <ImageView
+        android:id="@+id/imgIcon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/app_icon" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 <resources>
     <!-- Log in -->
     <string name="app_name">RFATM</string>
+    <string name="default_web_client_id">981605402190-1nv30gm4ric0c6k1rl5vp1gaklak10fc.apps.googleusercontent.com</string>
     <string name="hint_txt_correo">Correo electrónico</string>
     <string name="hint_txt_pass">Contraseña</string>
     <string name="txt_btn_ini_sesion">Iniciar sesión</string>
