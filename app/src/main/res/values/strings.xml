@@ -1,3 +1,18 @@
 <resources>
-    <string name="app_name">PRY-RFATM</string>
+    <!-- Log in -->
+    <string name="app_name">RFATM</string>
+    <string name="hint_txt_correo">Correo electrónico</string>
+    <string name="hint_txt_pass">Contraseña</string>
+    <string name="txt_btn_ini_sesion">Iniciar sesión</string>
+    <string name="txt_btn_ini_google">Iniciar con Google</string>
+    <string name="txt_btn_registro">Regístrate</string>
+
+    <!-- RegistroActivity -->
+    <string name="txt_registro_title">Regístrate</string>
+
+    <!-- MainActivity -->
+    <string name="navigation_btn1">Inicio</string>
+    <string name="navigation_btn2">Clasificación</string>
+    <string name="navigation_btn3">Ranking</string>
+    <string name="navigation_btn4">Perfil</string>
 </resources>

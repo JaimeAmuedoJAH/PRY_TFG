@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.jah.pry_rfatm" />
+                  <option name="mobileSdkAppId" value="1:981605402190:android:38253b84f8dde41f8c251f" />
+                  <option name="projectId" value="pry-rfatm" />
+                  <option name="projectNumber" value="981605402190" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

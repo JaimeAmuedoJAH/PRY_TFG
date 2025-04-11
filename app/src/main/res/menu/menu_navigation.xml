@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/item_inicio"
+        android:icon="@drawable/inicio"
+        android:title="@string/navigation_btn1" />
+    <item
+        android:id="@+id/item_clasificacion"
+        android:icon="@drawable/clasificacion"
+        android:title="@string/navigation_btn2" />
+    <item
+        android:id="@+id/item_ranking"
+        android:icon="@drawable/ranking"
+        android:title="@string/navigation_btn3" />
+    <item
+        android:id="@+id/item_perfil"
+        android:icon="@drawable/perfil"
+        android:title="@string/navigation_btn4" />
+</menu>
