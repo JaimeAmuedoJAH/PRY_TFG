@@ -1,11 +1,8 @@
-package com.jah.pry_rfatm.Vista;
+package com.jah.pry_rfatm.Vista.Activities;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -24,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.jah.pry_rfatm.R;
+import com.jah.pry_rfatm.Vista.Recursos.UtilesUi;
 
 public class LogInActivity extends AppCompatActivity {
 
@@ -40,14 +38,7 @@ public class LogInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().hide();
-        }
-        Window window = getWindow();
-        window.setStatusBarColor(Color.WHITE); // Fondo blanco
-
-        // Para que los iconos sean oscuros sobre el blanco
-        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        UtilesUi.configurarStatusBar(this);
         FirebaseApp.initializeApp(this);
         initComponents();
         btnRegistrar.setOnClickListener(v -> {

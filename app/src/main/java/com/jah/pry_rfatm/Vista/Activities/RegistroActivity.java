@@ -1,6 +1,5 @@
-package com.jah.pry_rfatm.Vista;
+package com.jah.pry_rfatm.Vista.Activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.jah.pry_rfatm.R;
+import com.jah.pry_rfatm.Vista.Recursos.UtilesUi;
 
 public class RegistroActivity extends AppCompatActivity {
 
@@ -20,6 +20,7 @@ public class RegistroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
+        UtilesUi.configurarStatusBar(this);
         initComponents();
         setSupportActionBar(mtbBar);
     }

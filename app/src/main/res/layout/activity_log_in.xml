@@ -6,101 +6,132 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".Vista.LogInActivity">
+    tools:context=".Vista.Activities.LogInActivity">
 
-    <EditText
-        android:id="@+id/txtCorreo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="40dp"
-        android:ems="10"
-        android:hint="@string/hint_txt_correo"
-        android:inputType="text|textEmailAddress"
-        android:textColor="@color/color_letra"
-        android:textColorHint="@color/hint_color"
-        android:textSize="@dimen/letra_size"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgIcon" />
-
-    <EditText
-        android:id="@+id/txtPass"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="40dp"
-        android:ems="10"
-        android:hint="@string/hint_txt_pass"
-        android:inputType="text|textPassword"
-        android:textColor="@color/color_letra"
-        android:textColorHint="@color/hint_color"
-        android:textSize="@dimen/letra_size"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCorreo" />
-
-    <Button
-        android:id="@+id/btnIni"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="50dp"
-        android:backgroundTint="@color/color_fondos"
-        android:text="@string/txt_btn_ini_sesion"
-        android:textColor="@color/color_letra"
-        android:textSize="@dimen/letra_size_btn"
-        android:textStyle="bold"
-        app:cornerRadius="@dimen/corner_radius"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPass" />
-
-    <Button
-        android:id="@+id/btnIniGoogle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="50dp"
-        android:backgroundTint="@color/color_fondos"
-        android:text="@string/txt_btn_ini_google"
-        android:textColor="@color/color_letra"
-        android:textSize="@dimen/letra_size_btn"
-        android:textStyle="bold"
-        app:cornerRadius="@dimen/corner_radius"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnIni" />
-
-    <Button
-        android:id="@+id/btnRegistrar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="50dp"
-        android:backgroundTint="@color/color_fondos"
-        android:text="@string/txt_btn_registro"
-        android:textColor="@color/color_letra"
-        android:textSize="@dimen/letra_size_btn"
-        android:textStyle="bold"
-        app:cornerRadius="@dimen/corner_radius"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnIniGoogle" />
-
+    <!-- Logo -->
     <ImageView
         android:id="@+id/imgIcon"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/app_icon" />
+
+    <!-- Campo de correo con TextInputLayout -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutCorreo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        app:boxBackgroundColor="@android:color/transparent"
+        app:boxStrokeColor="@color/color_letra"
+        app:hintTextColor="@color/hint_color"
+        app:layout_constraintTop_toBottomOf="@id/imgIcon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtCorreo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/actor"
+            android:hint="@string/hint_txt_correo"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/color_letra"
+            android:textColorHint="@color/color_letra"
+            android:textSize="@dimen/letra_size" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Campo de contraseña -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutPass"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        app:boxBackgroundColor="@android:color/transparent"
+        app:boxStrokeColor="@color/color_letra"
+        app:hintTextColor="@color/hint_color"
+        app:passwordToggleEnabled="true"
+        app:layout_constraintTop_toBottomOf="@id/layoutCorreo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/actor"
+            android:hint="@string/hint_txt_pass"
+            android:inputType="textPassword"
+            android:textColor="@color/color_letra"
+            android:textColorHint="@color/color_letra"
+            android:textSize="@dimen/letra_size" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Botón Iniciar sesión -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnIni"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="50dp"
+        android:backgroundTint="@color/color_fondos"
+        android:fontFamily="@font/actor"
+        android:text="@string/txt_btn_ini_sesion"
+        android:textColor="@color/color_letra"
+        android:textSize="@dimen/letra_size_btn"
+        app:cornerRadius="@dimen/corner_radius"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/app_icon" />
+        app:layout_constraintTop_toBottomOf="@id/layoutPass" />
+
+    <!-- Botón Google -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnIniGoogle"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="50dp"
+        android:backgroundTint="@color/color_fondos"
+        android:fontFamily="@font/actor"
+        android:text="@string/txt_btn_ini_google"
+        android:textColor="@color/color_letra"
+        android:textSize="@dimen/letra_size_btn"
+        app:cornerRadius="@dimen/corner_radius"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnIni" />
+
+    <!-- Botón Registrarse -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnRegistrar"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="50dp"
+        android:fontFamily="@font/actor"
+
+        android:strokeColor="@color/color_letra"
+        android:text="@string/txt_btn_registro"
+        android:textColor="@color/color_letra"
+        android:textSize="@dimen/letra_size_btn"
+        app:backgroundTint="@color/color_fondos"
+        app:cornerRadius="@dimen/corner_radius"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnIniGoogle" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

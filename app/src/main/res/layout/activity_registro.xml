@@ -6,78 +6,146 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".Vista.RegistroActivity">
+    tools:context=".Vista.Activities.RegistroActivity">
 
-    <EditText
-        android:id="@+id/txt_usuario"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="40dp"
-        android:ems="10"
-        android:hint="@string/hint_txt_correo"
-        android:inputType="text|textEmailAddress"
-        android:textColor="@color/color_letra"
-        android:textColorHint="@color/hint_color"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-    <EditText
-        android:id="@+id/editTextText2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="40dp"
-        android:ems="10"
-        android:hint="@string/hint_txt_pass"
-        android:inputType="text|textPassword"
-        android:textColor="@color/color_letra"
-        android:textColorHint="@color/hint_color"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_usuario" />
-
-    <Button
-        android:id="@+id/btnRegistrate"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="50dp"
-        android:backgroundTint="@color/color_fondos"
-        android:text="@string/txt_btn_registro"
-        android:textColor="@color/color_letra"
-        android:textSize="@dimen/letra_size"
-        android:textStyle="bold"
-        app:cornerRadius="@dimen/corner_radius"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText2" />
-
+    <!-- Barra superior con título y botón de retroceso -->
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/mtbBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/color_fondos"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
+        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/txt_registro_title" />
+        app:title="@string/txt_registro_title"
+        app:titleTextColor="@color/color_letra" />
 
+
+    <!-- Logo -->
     <ImageView
         android:id="@+id/imageView"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="16dp"
+        app:srcCompat="@drawable/app_icon"
+        app:layout_constraintTop_toBottomOf="@id/mtbBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Campo Correo -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputCorreo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintTop_toBottomOf="@id/imageView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mtbBar"
-        app:srcCompat="@drawable/app_icon" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtCorreo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_txt_correo"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/color_letra"
+            android:textColorHint="@color/hint_color" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Campo Contraseña -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputPass"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintTop_toBottomOf="@id/inputCorreo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_txt_pass"
+            android:inputType="textPassword"
+            android:textColor="@color/color_letra"
+            android:textColorHint="@color/hint_color" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Campo Nombre de Usuario -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputUsername"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintTop_toBottomOf="@id/inputPass"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_txt_usuario"
+            android:inputType="textPersonName"
+            android:textColor="@color/color_letra"
+            android:textColorHint="@color/hint_color" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- RadioButtons -->
+    <RadioGroup
+        android:id="@+id/radioGroupTipoUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/inputUsername"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <RadioButton
+            android:id="@+id/radioJugador"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/txt_jugador"
+            android:textColor="@color/color_letra"
+            android:buttonTint="@color/color_letra" />
+
+        <RadioButton
+            android:id="@+id/radioEntrenador"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="32dp"
+            android:text="@string/txt_entrenador"
+            android:textColor="@color/color_letra"
+            android:buttonTint="@color/color_letra" />
+    </RadioGroup>
+
+    <!-- Botón Registrarse -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnRegistrate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:text="@string/txt_btn_registro"
+        android:textColor="@color/color_letra"
+        android:textStyle="bold"
+        android:textSize="@dimen/letra_size_btn"
+        app:cornerRadius="16dp"
+        app:backgroundTint="@color/color_fondos"
+        app:layout_constraintTop_toBottomOf="@id/radioGroupTipoUsuario"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
