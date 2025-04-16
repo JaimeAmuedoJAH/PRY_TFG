@@ -1,8 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.PRYRFATM" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/color_fondos</item>
+        <item name="colorOnPrimary">@color/color_radiobuttons</item>
+        <item name="colorSecondary">@color/color_radiobuttons</item>
+
     </style>
 
     <style name="Theme.PRYRFATM" parent="Base.Theme.PRYRFATM" />

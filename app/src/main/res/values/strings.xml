@@ -9,9 +9,10 @@
 
     <!-- RegistroActivity -->
     <string name="txt_registro_title">Regístrate</string>
-    <string name="hint_txt_usuario">usuario</string>
-    <string name="txt_jugador">jugador</string>
-    <string name="txt_entrenador">entrenador\n</string>
+    <string name="hint_txt_usuario">Usuario (nombre y apellidos)</string>
+    <string name="txt_jugador">Jugador</string>
+    <string name="txt_entrenador">Entrenador</string>
+    <string name="toast_error_registro">Para registrarte necesitas rellenar todos los campos.</string>
 
     <!-- MainActivity -->
     <string name="navigation_btn1">Inicio</string>

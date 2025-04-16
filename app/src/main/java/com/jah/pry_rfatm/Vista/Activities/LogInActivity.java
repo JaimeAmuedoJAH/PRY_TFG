@@ -6,10 +6,8 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -21,7 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.jah.pry_rfatm.R;
-import com.jah.pry_rfatm.Vista.Recursos.UtilesUi;
+import com.jah.pry_rfatm.Vista.Recursos.UtilesUI;
 
 public class LogInActivity extends AppCompatActivity {
 
@@ -32,27 +30,43 @@ public class LogInActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 9001;
     private GoogleSignInClient mGoogleSignInClient;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
-        UtilesUi.configurarStatusBar(this);
+        UtilesUI.configurarStatusBar(this);
         FirebaseApp.initializeApp(this);
         initComponents();
+        //Activador para registrarnos con nuestro correo.
         btnRegistrar.setOnClickListener(v -> {
             intent = new Intent(getApplicationContext(), RegistroActivity.class);
             startActivity(intent);
         });
-        btnIni.setOnClickListener(v -> {
-
-        });
-        btnIniGoogle.setOnClickListener(v -> {
-            iniciarSesionGoogle();
-        });
+        btnIni.setOnClickListener(v -> iniciarSesionConCorreo());
+        btnIniGoogle.setOnClickListener(v -> iniciarSesionGoogle());
     }
 
+    private void iniciarSesionConCorreo() {
+        String correo = txtCorreo.getText().toString().trim();
+        String pass = txtPass.getText().toString().trim();
+
+        if (correo.isEmpty() || pass.isEmpty()) {
+            Toast.makeText(LogInActivity.this, "Por favor, completa todos los campos.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        mAuth.signInWithEmailAndPassword(correo, pass)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        irAMainActivity();
+                    } else {
+                        Toast.makeText(LogInActivity.this, "Correo o contraseña incorrectos.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+
+    //Resultado del inicio de sesión. Si es existosa cambiamos de activity, sino muestra un mensaje de error
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -69,7 +83,7 @@ public class LogInActivity extends AppCompatActivity {
 
         }
     }
-
+    //Autentificar usuarios. De esta forma pueden iniciar sesión en la app
     private void firebaseAuthConGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         mAuth.signInWithCredential(credential)
@@ -81,21 +95,19 @@ public class LogInActivity extends AppCompatActivity {
                     }
                 });
     }
-
-
+    //Inicia el proceso de Login, abriendo la ventana emergente para seleccionar cuenta de Google para el inicio de sesión
     private void iniciarSesionGoogle() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
-
+    //Si ha salido bien la autenticación te lleva al MainActivity
     private void irAMainActivity() {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
-        finish(); // Finaliza esta actividad para que no regrese al login con el botón atrás
+        finish();
     }
-
-
+    //Iniciamos componentes de la Activity
     private void initComponents() {
         txtCorreo = findViewById(R.id.txtCorreo);
         txtPass = findViewById(R.id.txtPass);

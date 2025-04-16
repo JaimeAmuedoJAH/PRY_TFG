@@ -25,15 +25,16 @@
         android:id="@+id/layoutCorreo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:layout_marginStart="40dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="40dp"
+        android:textColorHint="@color/hint_color"
         app:boxBackgroundColor="@android:color/transparent"
-        app:boxStrokeColor="@color/color_letra"
-        app:hintTextColor="@color/hint_color"
-        app:layout_constraintTop_toBottomOf="@id/imgIcon"
+        app:boxStrokeColor="@color/color_fondos"
+        app:hintTextColor="@color/color_letra"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/imgIcon">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtCorreo"
@@ -43,7 +44,8 @@
             android:hint="@string/hint_txt_correo"
             android:inputType="textEmailAddress"
             android:textColor="@color/color_letra"
-            android:textColorHint="@color/color_letra"
+            android:textColorHint="@color/hint_color"
+            android:textColorLink="@color/color_fondos"
             android:textSize="@dimen/letra_size" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -52,16 +54,17 @@
         android:id="@+id/layoutPass"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="40dp"
+        android:textColorHint="@color/hint_color"
         app:boxBackgroundColor="@android:color/transparent"
-        app:boxStrokeColor="@color/color_letra"
-        app:hintTextColor="@color/hint_color"
-        app:passwordToggleEnabled="true"
-        app:layout_constraintTop_toBottomOf="@id/layoutCorreo"
+        app:boxStrokeColor="@color/color_fondos"
+        app:hintTextColor="@color/color_letra"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/layoutCorreo"
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtPass"
@@ -71,7 +74,8 @@
             android:hint="@string/hint_txt_pass"
             android:inputType="textPassword"
             android:textColor="@color/color_letra"
-            android:textColorHint="@color/color_letra"
+            android:textColorHint="@color/hint_color"
+            android:textColorLink="@color/color_fondos"
             android:textSize="@dimen/letra_size" />
     </com.google.android.material.textfield.TextInputLayout>
 

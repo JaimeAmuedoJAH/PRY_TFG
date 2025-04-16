@@ -8,19 +8,18 @@
     android:background="@color/background"
     tools:context=".Vista.Activities.RegistroActivity">
 
-    <!-- Barra superior con título y botón de retroceso -->
+    <!-- Toolbar -->
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/mtbBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/color_fondos"
         android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:title="@string/txt_registro_title"
         app:titleTextColor="@color/color_letra" />
-
 
     <!-- Logo -->
     <ImageView
@@ -33,7 +32,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Campo Correo -->
+    <!-- Correo -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputCorreo"
         android:layout_width="0dp"
@@ -41,21 +40,23 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="40dp"
-        app:layout_constraintTop_toBottomOf="@id/imageView"
+        android:textColorHint="@color/hint_color"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/imageView">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtCorreo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/actor"
             android:hint="@string/hint_txt_correo"
             android:inputType="textEmailAddress"
             android:textColor="@color/color_letra"
             android:textColorHint="@color/hint_color" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Campo Contraseña -->
+    <!-- Contraseña -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputPass"
         android:layout_width="0dp"
@@ -63,21 +64,23 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="40dp"
-        app:layout_constraintTop_toBottomOf="@id/inputCorreo"
+        android:textColorHint="@color/hint_color"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/inputCorreo">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/actor"
             android:hint="@string/hint_txt_pass"
             android:inputType="textPassword"
             android:textColor="@color/color_letra"
             android:textColorHint="@color/hint_color" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Campo Nombre de Usuario -->
+    <!-- Usuario -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputUsername"
         android:layout_width="0dp"
@@ -85,67 +88,75 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="40dp"
-        app:layout_constraintTop_toBottomOf="@id/inputPass"
+        android:textColorHint="@color/hint_color"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/inputPass">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/actor"
             android:hint="@string/hint_txt_usuario"
             android:inputType="textPersonName"
             android:textColor="@color/color_letra"
             android:textColorHint="@color/hint_color" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- RadioButtons -->
+    <!-- RadioGroup centrado -->
     <RadioGroup
-        android:id="@+id/radioGroupTipoUsuario"
-        android:layout_width="wrap_content"
+        android:id="@+id/rgTipoUsuario"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        android:colorAccent="@color/color_radiobuttons"
         app:layout_constraintTop_toBottomOf="@id/inputUsername"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center_horizontal">
 
         <RadioButton
-            android:id="@+id/radioJugador"
+            android:id="@+id/rbJugador"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            android:buttonTint="@color/radio_button_selector"
+            android:fontFamily="@font/actor"
             android:text="@string/txt_jugador"
             android:textColor="@color/color_letra"
-            android:buttonTint="@color/color_letra" />
+            android:textSize="@dimen/letra_size"/>
 
         <RadioButton
-            android:id="@+id/radioEntrenador"
+            android:id="@+id/rbEntrenador"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="16dp"
+            android:buttonTint="@color/radio_button_selector"
+            android:fontFamily="@font/actor"
+            android:colorAccent="@color/color_radiobuttons"
             android:text="@string/txt_entrenador"
             android:textColor="@color/color_letra"
-            android:buttonTint="@color/color_letra" />
+            android:textSize="@dimen/letra_size"/>
     </RadioGroup>
 
-    <!-- Botón Registrarse -->
+    <!-- Botón Registro -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnRegistrate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:layout_marginStart="50dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="50dp"
+        android:fontFamily="@font/actor"
         android:text="@string/txt_btn_registro"
+        android:textAllCaps="true"
         android:textColor="@color/color_letra"
-        android:textStyle="bold"
         android:textSize="@dimen/letra_size_btn"
-        app:cornerRadius="16dp"
         app:backgroundTint="@color/color_fondos"
-        app:layout_constraintTop_toBottomOf="@id/radioGroupTipoUsuario"
+        app:cornerRadius="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/rgTipoUsuario" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,7 +13,7 @@ import com.jah.pry_rfatm.Vista.Fragments.ClasificacionFragment;
 import com.jah.pry_rfatm.Vista.Fragments.InicioFragment;
 import com.jah.pry_rfatm.Vista.Fragments.PerfilFragment;
 import com.jah.pry_rfatm.Vista.Fragments.RankingFragment;
-import com.jah.pry_rfatm.Vista.Recursos.UtilesUi;
+import com.jah.pry_rfatm.Vista.Recursos.UtilesUI;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        UtilesUi.configurarStatusBar(this);
+        UtilesUI.configurarStatusBar(this);
         FirebaseApp.initializeApp(this);
 
         BottomNavigationView bottomNav = findViewById(R.id.bottomNav);

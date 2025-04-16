@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.Window;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class UtilesUi {
+public class UtilesUI {
 
     public static void configurarStatusBar(AppCompatActivity activity) {
         // Oculta la ActionBar si está presente
