@@ -2,27 +2,29 @@ package com.jah.pry_rfatm.Modelo;
 
 import androidx.annotation.NonNull;
 
+import com.google.firebase.firestore.DocumentReference;
+
 public class Usuario {
 
-    private String equipoId;
+    private DocumentReference equipoId;
     private String fotoPerfil;
     private String nombre;
     private String tipoUsuario;
 
     public Usuario() {}
 
-    public Usuario(String equipoId, String fotoPerfil, String nombre, String tipoUsuario) {
+    public Usuario(DocumentReference equipoId, String fotoPerfil, String nombre, String tipoUsuario) {
         this.equipoId = equipoId;
         this.fotoPerfil = fotoPerfil;
         this.nombre = nombre;
         this.tipoUsuario = tipoUsuario;
     }
 
-    public String getEquipoId() {
+    public DocumentReference getEquipoId() {
         return equipoId;
     }
 
-    public void setEquipoId(String equipoId) {
+    public void setEquipoId(DocumentReference equipoId) {
         this.equipoId = equipoId;
     }
 

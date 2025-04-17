@@ -6,6 +6,8 @@
     <string name="txt_btn_ini_sesion">Iniciar sesión</string>
     <string name="txt_btn_ini_google">Iniciar con Google</string>
     <string name="txt_btn_registro">Regístrate</string>
+    <string name="lbl_recuperar">¿Has olvidado tu contraseña?</string>
+    <string name="txt_recuperar">Recuperar contraseña</string>
 
     <!-- RegistroActivity -->
     <string name="txt_registro_title">Regístrate</string>
@@ -22,4 +24,7 @@
     <string name="btn_cerrar">Cerrar sesión</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="btn_reset">Restablecer contraseña</string>
+    <string name="dialog_nuevo_usuario">Selecciona tu equipo</string>
+    <string name="dialog_nuevo_usuario_radiogroup">Selecciona tu rol</string>
 </resources>

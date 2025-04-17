@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +25,7 @@ import com.jah.pry_rfatm.Vista.Recursos.UtilesUI;
 public class LogInActivity extends AppCompatActivity {
 
     EditText txtCorreo, txtPass;
+    TextView lblRecuperar;
     Button btnIni, btnIniGoogle, btnRegistrar;
     Intent intent;
     private FirebaseAuth mAuth;
@@ -36,7 +38,13 @@ public class LogInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_log_in);
         UtilesUI.configurarStatusBar(this);
         FirebaseApp.initializeApp(this);
+
         initComponents();
+        //Verifica si ya hay un usuario logueado
+        if (mAuth.getCurrentUser() != null) {
+            irAMainActivity();
+            return; //Evita que cargue el login innecesariamente
+        }
         //Activador para registrarnos con nuestro correo.
         btnRegistrar.setOnClickListener(v -> {
             intent = new Intent(getApplicationContext(), RegistroActivity.class);
@@ -44,6 +52,10 @@ public class LogInActivity extends AppCompatActivity {
         });
         btnIni.setOnClickListener(v -> iniciarSesionConCorreo());
         btnIniGoogle.setOnClickListener(v -> iniciarSesionGoogle());
+        lblRecuperar.setOnClickListener(v -> {
+            intent = new Intent(getApplicationContext(), ResetPasswordActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void iniciarSesionConCorreo() {
@@ -114,6 +126,7 @@ public class LogInActivity extends AppCompatActivity {
         btnIni = findViewById(R.id.btnIni);
         btnIniGoogle = findViewById(R.id.btnIniGoogle);
         btnRegistrar = findViewById(R.id.btnRegistrar);
+        lblRecuperar = findViewById(R.id.lblRecuperar);
         mAuth = FirebaseAuth.getInstance();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))

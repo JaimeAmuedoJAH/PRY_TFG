@@ -28,8 +28,6 @@ public class RegistroActivity extends AppCompatActivity {
 
     MaterialToolbar mtbBar;
     EditText txtCorreo, txtPass, txtUsername;
-    RadioGroup rgTipoUsuario;
-    RadioButton rbEntrenador, rbJugador;
     Button btnRegistrate;
     private FirebaseAuth mAuth;
 
@@ -49,9 +47,8 @@ public class RegistroActivity extends AppCompatActivity {
         String correo = txtCorreo.getText().toString().trim();
         String pass = txtPass.getText().toString().trim();
         String username = txtUsername.getText().toString().trim();
-        String tipoUsuario = rbJugador.isChecked() ? "Jugador" : "Entrenador";
         //Comprobamos que se rellenen todos los campos
-        if (correo.isEmpty() || pass.isEmpty() || username.isEmpty() || rgTipoUsuario.getCheckedRadioButtonId() == -1) {
+        if (correo.isEmpty() || pass.isEmpty() || username.isEmpty()) {
             Toast.makeText(this, R.string.toast_error_registro, Toast.LENGTH_SHORT).show();
             return;
         }
@@ -65,15 +62,14 @@ public class RegistroActivity extends AppCompatActivity {
 
                     //Comprobamos si el username ya existe
                     db.collection("usuarios")
-                            .whereEqualTo("username", username)
+                            .whereEqualTo("nombre", username)
                             .get()
                             .addOnSuccessListener(querySnapshot -> {
                                 if (!querySnapshot.isEmpty()) {
                                     // Ya existe, actualizar con nuevo UID y correo
                                     DocumentSnapshot doc = querySnapshot.getDocuments().get(0);
                                     doc.getReference().update(
-                                            "email", correo,
-                                            "uid", user.getUid()
+                                            "email", correo
                                     ).addOnSuccessListener(unused -> {
                                         Toast.makeText(this, "Usuario existente actualizado", Toast.LENGTH_SHORT).show();
                                         finish();
@@ -84,9 +80,7 @@ public class RegistroActivity extends AppCompatActivity {
                                     //Si no existe, crear nuevo documento
                                     Map<String, Object> userData = new HashMap<>();
                                     userData.put("email", correo);
-                                    userData.put("username", username);
-                                    userData.put("tipoUsuario", tipoUsuario);
-                                    userData.put("uid", user.getUid());
+                                    userData.put("name", username);
 
                                     db.collection("usuarios")
                                             .document(user.getUid())
@@ -127,9 +121,6 @@ public class RegistroActivity extends AppCompatActivity {
         txtCorreo = findViewById(R.id.txtCorreo);
         txtPass = findViewById(R.id.txtPass);
         txtUsername = findViewById(R.id.txtUsername);
-        rgTipoUsuario = findViewById(R.id.rgTipoUsuario);
-        rbEntrenador = findViewById(R.id.rbEntrenador);
-        rbJugador = findViewById(R.id.rbJugador);
         btnRegistrate = findViewById(R.id.btnRegistrate);
     }
 }

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layoutDialog"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_fondos"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/actor"
+        android:paddingBottom="8dp"
+        android:text="@string/dialog_nuevo_usuario"
+        android:textColor="@color/color_letra"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <Spinner
+        android:id="@+id/spEquipos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/actor"
+        android:paddingBottom="8dp"
+        android:text="@string/dialog_nuevo_usuario_radiogroup"
+        android:textColor="@color/color_letra"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <RadioGroup
+        android:id="@+id/rgdTipoUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rbdJugador"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/actor"
+            android:text="@string/txt_jugador"
+            android:textColor="@color/color_letra" />
+
+        <RadioButton
+            android:id="@+id/rbdEntrenador"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/actor"
+            android:text="@string/txt_entrenador"
+            android:textColor="@color/color_letra" />
+    </RadioGroup>
+
+</LinearLayout>

@@ -6,4 +6,5 @@
     <color name="color_radiobuttons">#FFFFFF</color>
     <color name="background">#00592d</color>
     <color name="errores">#E70606</color>
+    <color name="recuperar">#FFFFFF</color>
 </resources>

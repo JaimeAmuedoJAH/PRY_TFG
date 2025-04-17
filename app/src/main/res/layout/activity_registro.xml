@@ -105,40 +105,6 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- RadioGroup centrado -->
-    <RadioGroup
-        android:id="@+id/rgTipoUsuario"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal"
-        android:colorAccent="@color/color_radiobuttons"
-        app:layout_constraintTop_toBottomOf="@id/inputUsername"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center_horizontal">
-
-        <RadioButton
-            android:id="@+id/rbJugador"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:buttonTint="@color/radio_button_selector"
-            android:fontFamily="@font/actor"
-            android:text="@string/txt_jugador"
-            android:textColor="@color/color_letra"
-            android:textSize="@dimen/letra_size"/>
-
-        <RadioButton
-            android:id="@+id/rbEntrenador"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:buttonTint="@color/radio_button_selector"
-            android:fontFamily="@font/actor"
-            android:colorAccent="@color/color_radiobuttons"
-            android:text="@string/txt_entrenador"
-            android:textColor="@color/color_letra"
-            android:textSize="@dimen/letra_size"/>
-    </RadioGroup>
 
     <!-- Botón Registro -->
     <com.google.android.material.button.MaterialButton
@@ -146,7 +112,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="50dp"
         android:fontFamily="@font/actor"
         android:text="@string/txt_btn_registro"
@@ -156,7 +122,8 @@
         app:backgroundTint="@color/color_fondos"
         app:cornerRadius="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rgTipoUsuario" />
+        app:layout_constraintTop_toBottomOf="@+id/inputUsername" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
