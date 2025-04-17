@@ -106,14 +106,14 @@ public class InicioFragment extends Fragment {
                                 //Crear el diálogo
                                 AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
                                 builder.setTitle("Registro")
+                                        .setCancelable(false)
                                         .setView(dialogView)
                                         .setPositiveButton("Aceptar", (dialog, which) -> {
                                             String equipoSeleccionado = (String) spinner.getSelectedItem();
                                             String tipoUsuario = rbdJugador.isChecked() ? "jugador" : "entrenador";
 
                                             guardarJugador(uid, equipoSeleccionado, tipoUsuario);
-                                        })
-                                        .setNegativeButton("Cancelar", (dialog, which) -> dialog.dismiss());
+                                        });
 
                                 AlertDialog dialog = builder.create();
 
