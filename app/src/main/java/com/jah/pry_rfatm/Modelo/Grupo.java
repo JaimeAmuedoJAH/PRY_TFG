@@ -1,16 +1,18 @@
 package com.jah.pry_rfatm.Modelo;
 
+import com.google.firebase.firestore.DocumentReference;
+
 import java.util.Arrays;
 
 public class Grupo {
 
     private String nombre;
-    private String ligaId;
-    private String[] equipos;
+    private DocumentReference ligaId;
+    private DocumentReference[] equipos;
 
     public Grupo(){}
 
-    public Grupo(String nombre, String ligaId, String[] equipos) {
+    public Grupo(String nombre, DocumentReference ligaId, DocumentReference[] equipos) {
         this.nombre = nombre;
         this.ligaId = ligaId;
         this.equipos = equipos;
@@ -24,19 +26,19 @@ public class Grupo {
         this.nombre = nombre;
     }
 
-    public String getLigaId() {
+    public DocumentReference getLigaId() {
         return ligaId;
     }
 
-    public void setLigaId(String ligaId) {
+    public void setLigaId(DocumentReference ligaId) {
         this.ligaId = ligaId;
     }
 
-    public String[] getEquipos() {
+    public DocumentReference[] getEquipos() {
         return equipos;
     }
 
-    public void setEquipos(String[] equipos) {
+    public void setEquipos(DocumentReference[] equipos) {
         this.equipos = equipos;
     }
 

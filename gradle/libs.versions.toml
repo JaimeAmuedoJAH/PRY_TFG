@@ -1,8 +1,10 @@
 [versions]
 agp = "8.9.0"
+compiler = "4.16.0"
 credentialsPlayServicesAuth = "1.5.0"
 firebaseAuth = "23.2.0"
 firebaseBom = "33.12.0"
+firebaseStorage = "21.0.1"
 googleid = "1.1.1"
 googleServices = "4.4.2"
 gradle = "8.2.2"
@@ -19,11 +21,14 @@ playServicesAuthVersion = "20.7.0"
 firebaseInappmessaging = "21.0.2"
 
 [libraries]
+compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "compiler" }
 credentials = { module = "androidx.credentials:credentials", version.ref = "credentialsPlayServicesAuth" }
 credentials-play-services-auth = { module = "androidx.credentials:credentials-play-services-auth", version.ref = "credentialsPlayServicesAuth" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-auth = { module = "com.google.firebase:firebase-auth", version.ref = "firebaseAuth" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-storage = { module = "com.google.firebase:firebase-storage", version.ref = "firebaseStorage" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "compiler" }
 google-firebase-auth = { module = "com.google.firebase:firebase-auth" }
 google-services = { module = "com.google.gms:google-services", version.ref = "googleServices" }
 googleid = { module = "com.google.android.libraries.identity.googleid:googleid", version.ref = "googleid" }

@@ -1,7 +1,5 @@
 package com.jah.pry_rfatm.Modelo;
 
-import com.google.firebase.firestore.DocumentReference;
-
 public class Jugador extends Usuario{
 
     private String estilo;
@@ -12,7 +10,7 @@ public class Jugador extends Usuario{
 
     public Jugador() {}
 
-    public Jugador(DocumentReference equipoId, String fotoPerfil, String nombre, String tipoUsuario, String estilo, Integer partidosJugados, Integer victorias, Integer derrotas, Integer porcentajeVictorias) {
+    public Jugador(String equipoId, String fotoPerfil, String nombre, String tipoUsuario, String estilo, Integer partidosJugados, Integer victorias, Integer derrotas, Integer porcentajeVictorias) {
         super(equipoId, fotoPerfil, nombre, tipoUsuario);
         this.estilo = estilo;
         this.partidosJugados = partidosJugados;

@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.PRYRFATM" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/color_fondos</item>
-        <item name="colorOnPrimary">@color/color_radiobuttons</item>
-        <item name="colorSecondary">@color/color_radiobuttons</item>
+        <item name="colorPrimary">@color/color_letra</item>
+        <item name="colorOnPrimary">@color/color_letra</item>
+        <item name="colorSecondary">@color/color_letra</item>
 
     </style>
 

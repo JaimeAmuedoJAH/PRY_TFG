@@ -1,15 +1,17 @@
 package com.jah.pry_rfatm.Modelo;
 
+import com.google.firebase.firestore.DocumentReference;
+
 import java.util.Arrays;
 
 public class Liga {
 
     private String nombre;
-    private String[] grupos;
+    private DocumentReference[] grupos;
 
     public Liga(){}
 
-    public Liga(String nombre, String[] grupos) {
+    public Liga(String nombre, DocumentReference[] grupos) {
         this.nombre = nombre;
         this.grupos = grupos;
     }
@@ -22,11 +24,11 @@ public class Liga {
         this.nombre = nombre;
     }
 
-    public String[] getGrupos() {
+    public DocumentReference[] getGrupos() {
         return grupos;
     }
 
-    public void setGrupos(String[] grupos) {
+    public void setGrupos(DocumentReference[] grupos) {
         this.grupos = grupos;
     }
 

@@ -1,20 +1,26 @@
 package com.jah.pry_rfatm.Modelo;
 
+import com.google.firebase.firestore.DocumentReference;
+
+import java.util.Date;
+
 public class Partido {
 
     private String equipoLocalId;
-    private String equipovVisitanteId;
+    private String equipoVisitanteId;
     private String estado;
-    private String fecha;
+    private Date fecha;
     private String grupoId;
     private String resultado;
     private Integer setsGanados;
     private Integer setsPerdidos;
 
-    public Partido(String equipoLocalId, String equipovVisitanteId, String estado, String fecha, String grupoId, String resultado,
+    public Partido(){}
+
+    public Partido(String equipoLocalId, String equipovVisitanteId, String estado, Date fecha, String grupoId, String resultado,
                    Integer setsGanados, Integer setsPerdidos) {
         this.equipoLocalId = equipoLocalId;
-        this.equipovVisitanteId = equipovVisitanteId;
+        this.equipoVisitanteId = equipovVisitanteId;
         this.estado = estado;
         this.fecha = fecha;
         this.grupoId = grupoId;
@@ -31,12 +37,12 @@ public class Partido {
         this.equipoLocalId = equipoLocalId;
     }
 
-    public String getEquipovVisitanteId() {
-        return equipovVisitanteId;
+    public String getEquipoVisitanteId() {
+        return equipoVisitanteId;
     }
 
-    public void setEquipovVisitanteId(String equipovVisitanteId) {
-        this.equipovVisitanteId = equipovVisitanteId;
+    public void setEquipoVisitanteId(String equipoVisitanteId) {
+        this.equipoVisitanteId = equipoVisitanteId;
     }
 
     public String getEstado() {
@@ -47,11 +53,11 @@ public class Partido {
         this.estado = estado;
     }
 
-    public String getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(String fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
@@ -91,7 +97,7 @@ public class Partido {
     public String toString() {
         return "Partido{" +
                 "equipoLocalId='" + equipoLocalId + '\'' +
-                ", equipovVisitanteId='" + equipovVisitanteId + '\'' +
+                ", equipovVisitanteId='" + equipoVisitanteId + '\'' +
                 ", estado='" + estado + '\'' +
                 ", fecha='" + fecha + '\'' +
                 ", grupoId='" + grupoId + '\'' +

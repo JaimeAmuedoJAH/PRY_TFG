@@ -50,4 +50,9 @@ dependencies {
     implementation(libs.credentials.play.services.auth)
     implementation(libs.googleid)
     implementation (libs.play.services.auth.v2070)
+    implementation (libs.glide)
+    annotationProcessor (libs.compiler)
+    implementation (libs.firebase.storage)
+
+
 }

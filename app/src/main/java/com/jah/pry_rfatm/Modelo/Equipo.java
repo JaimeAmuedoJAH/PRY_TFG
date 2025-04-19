@@ -9,7 +9,7 @@ public class Equipo {
     private String escudo;
     private String grupoId;
     private String ligaId;
-    private String localización;
+    private String localizacion;
     private Integer partidosJugados;
     private Integer victorias;
     private Integer derrotas;
@@ -18,14 +18,14 @@ public class Equipo {
 
     public Equipo(){}
 
-    public Equipo(String nombre, String entrenadorId, String grupoId, String escudo, String ligaId, String localización,
+    public Equipo(String nombre, String entrenadorId, String grupoId, String escudo, String ligaId, String localizacion,
                   Integer partidosJugados, Integer victorias, Integer derrotas, Integer porcentajeVictorias, List<String> jugadores) {
         this.nombre = nombre;
         this.entrenadorId = entrenadorId;
         this.grupoId = grupoId;
         this.escudo = escudo;
         this.ligaId = ligaId;
-        this.localización = localización;
+        this.localizacion = localizacion;
         this.partidosJugados = partidosJugados;
         this.victorias = victorias;
         this.derrotas = derrotas;
@@ -73,12 +73,12 @@ public class Equipo {
         this.ligaId = ligaId;
     }
 
-    public String getLocalización() {
-        return localización;
+    public String getLocalizacion() {
+        return localizacion;
     }
 
-    public void setLocalización(String localización) {
-        this.localización = localización;
+    public void setLocalizacion(String localizacion) {
+        this.localizacion = localizacion;
     }
 
     public Integer getPartidosJugados() {
@@ -129,7 +129,7 @@ public class Equipo {
                 ", escudo='" + escudo + '\'' +
                 ", grupoId='" + grupoId + '\'' +
                 ", ligaId='" + ligaId + '\'' +
-                ", localización='" + localización + '\'' +
+                ", localización='" + localizacion + '\'' +
                 ", partidosJugados=" + partidosJugados +
                 ", victorias=" + victorias +
                 ", derrotas=" + derrotas +

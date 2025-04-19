@@ -39,6 +39,7 @@ public class RegistroActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         initComponents();
         setSupportActionBar(mtbBar);
+        mtbBar.setBackgroundColor(getResources().getColor(R.color.color_fondos));
 
         btnRegistrate.setOnClickListener(view -> registrarUsuario());
     }

@@ -27,4 +27,5 @@
     <string name="btn_reset">Restablecer contraseña</string>
     <string name="dialog_nuevo_usuario">Selecciona tu equipo</string>
     <string name="dialog_nuevo_usuario_radiogroup">Selecciona tu rol</string>
+    <string name="vs_recycler_partido">VS</string>
 </resources>
