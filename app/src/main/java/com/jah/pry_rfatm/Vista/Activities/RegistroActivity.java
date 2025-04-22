@@ -6,8 +6,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,7 +15,7 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.jah.pry_rfatm.Controlador.FirebaseController;
 import com.jah.pry_rfatm.R;
 import com.jah.pry_rfatm.Vista.Recursos.UtilesUI;
 
@@ -29,14 +27,13 @@ public class RegistroActivity extends AppCompatActivity {
     MaterialToolbar mtbBar;
     EditText txtCorreo, txtPass, txtUsername;
     Button btnRegistrate;
-    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
         UtilesUI.configurarStatusBar(this);
-        mAuth = FirebaseAuth.getInstance();
+        //FirebaseController.iniciarFirebase(this);
         initComponents();
         setSupportActionBar(mtbBar);
         mtbBar.setBackgroundColor(getResources().getColor(R.color.color_fondos));
@@ -54,24 +51,19 @@ public class RegistroActivity extends AppCompatActivity {
             return;
         }
 
-        mAuth.createUserWithEmailAndPassword(correo, pass)
+        FirebaseController.mAuth.createUserWithEmailAndPassword(correo, pass)
                 .addOnSuccessListener(authResult -> {
-                    FirebaseUser user = mAuth.getCurrentUser();
+                    FirebaseUser user = FirebaseController.mAuth.getCurrentUser();
                     if (user == null) return;
-
-                    FirebaseFirestore db = FirebaseFirestore.getInstance();
-
                     //Comprobamos si el username ya existe
-                    db.collection("usuarios")
+                    FirebaseController.db.collection("usuarios")
                             .whereEqualTo("nombre", username)
                             .get()
                             .addOnSuccessListener(querySnapshot -> {
                                 if (!querySnapshot.isEmpty()) {
                                     // Ya existe, actualizar con nuevo UID y correo
                                     DocumentSnapshot doc = querySnapshot.getDocuments().get(0);
-                                    doc.getReference().update(
-                                            "email", correo
-                                    ).addOnSuccessListener(unused -> {
+                                    doc.getReference().update("email", correo).addOnSuccessListener(unused -> {
                                         Toast.makeText(this, "Usuario existente actualizado", Toast.LENGTH_SHORT).show();
                                         finish();
                                     }).addOnFailureListener(e -> {
@@ -83,7 +75,7 @@ public class RegistroActivity extends AppCompatActivity {
                                     userData.put("email", correo);
                                     userData.put("name", username);
 
-                                    db.collection("usuarios")
+                                    FirebaseController.db.collection("usuarios")
                                             .document(user.getUid())
                                             .set(userData)
                                             .addOnSuccessListener(unused -> {

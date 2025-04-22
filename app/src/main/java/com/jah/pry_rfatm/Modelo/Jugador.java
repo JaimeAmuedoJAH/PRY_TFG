@@ -1,6 +1,8 @@
 package com.jah.pry_rfatm.Modelo;
 
-public class Jugador extends Usuario{
+import java.io.Serializable;
+
+public class Jugador extends Usuario implements Serializable {
 
     private String estilo;
     private Integer partidosJugados;

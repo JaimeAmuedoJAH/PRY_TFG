@@ -22,12 +22,14 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.FirebaseError;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.jah.pry_rfatm.Controlador.FirebaseController;
 import com.jah.pry_rfatm.Modelo.Jugador;
 import com.jah.pry_rfatm.Modelo.Partido;
 import com.jah.pry_rfatm.R;
@@ -53,14 +55,13 @@ public class InicioFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        FirebaseController.iniciarFirebase(requireContext());
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null) return;
 
         String uid = user.getUid();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        db.collection("usuarios").document(uid).get()
+        FirebaseController.db.collection("usuarios").document(uid).get()
                 .addOnSuccessListener(document -> {
                     if (!document.exists()) {
                         mostrarDialogoEquipo(uid);
@@ -82,55 +83,23 @@ public class InicioFragment extends Fragment {
 
     private void cargarPartidos() {
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        db.collection("usuarios").document(uid).get().addOnSuccessListener(userDoc -> {
-            if (userDoc.exists()) {
-                String equipoPath = userDoc.getString("equipoId"); // Ej: "/equipos/equipo001"
-                Log.d("Firestore", "Raw equipoId: " + equipoPath);
+        FirebaseController.obtenerPartidosPorUsuario(uid, partidos -> {
+            listaPartidos.clear();
+            listaPartidos.addAll(partidos);
+            adaptadorPartido.notifyDataSetChanged();
 
-                if (equipoPath != null && !equipoPath.isEmpty()) {
-                    // Buscar partidos como local
-                    db.collection("partidos")
-                            .whereEqualTo("equipoLocalId", equipoPath)
-                            .get()
-                            .addOnSuccessListener(snapshot1 -> {
-                                // Buscar partidos como visitante
-                                db.collection("partidos")
-                                        .whereEqualTo("equipoVisitanteId", equipoPath)
-                                        .get()
-                                        .addOnSuccessListener(snapshot2 -> {
-                                            listaPartidos.clear();
-
-                                            for (QueryDocumentSnapshot doc : snapshot1) {
-                                                listaPartidos.add(doc.toObject(Partido.class));
-                                            }
-                                            for (QueryDocumentSnapshot doc : snapshot2) {
-                                                listaPartidos.add(doc.toObject(Partido.class));
-                                            }
-
-                                            Log.d("Firestore", "Partidos totales cargados: " + listaPartidos.size());
-                                            adaptadorPartido.notifyDataSetChanged();
-                                        })
-                                        .addOnFailureListener(e -> Log.e("Firestore", "Error cargando partidos visitante: ", e));
-                            })
-                            .addOnFailureListener(e -> Log.e("Firestore", "Error cargando partidos local: ", e));
-                }
-            }
-        }).addOnFailureListener(e -> {
-            Log.e("Firestore", "Error obteniendo usuario: ", e);
+        }, error -> {
+            Toast.makeText(getContext(), "Error al cargar partidos.", Toast.LENGTH_SHORT).show();
         });
     }
 
-
     private void mostrarDialogoEquipo(String uid) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        db.collection("usuarios").document(uid).get()
+        FirebaseController.db.collection("usuarios").document(uid).get()
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) return;
 
-                    db.collection("equipos").get()
+                    FirebaseController.db.collection("equipos").get()
                             .addOnSuccessListener(querySnapshot -> {
                                 List<String> listaNombresEquipos = new ArrayList<>();
                                 Map<String, String> nombreToIdMap = new HashMap<>();
@@ -199,35 +168,9 @@ public class InicioFragment extends Fragment {
     private void guardarJugador(String uid, String equipoId, String tipoUsuario) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        String fotoPerfil = (user != null && user.getPhotoUrl() != null) ? user.getPhotoUrl().toString() : "";
-        String nombre = (user != null && user.getDisplayName() != null) ? user.getDisplayName() : "Jugador";
-        String estilo = "";
-        int partidosJugados = 0;
-        int victorias = 0;
-        int derrotas = 0;
-        int porcentajeVictorias = 0;
-
-        Jugador jugador = new Jugador(
-                equipoId,
-                fotoPerfil,
-                nombre,
-                tipoUsuario,
-                estilo,
-                partidosJugados,
-                victorias,
-                derrotas,
-                porcentajeVictorias
+        FirebaseController.guardarJugador(uid, equipoId, tipoUsuario, user,
+                unused -> Toast.makeText(getContext(), "Jugador registrado correctamente.", Toast.LENGTH_SHORT).show(),
+                e -> Toast.makeText(getContext(), "Error al registrar jugador: " + e.getMessage(), Toast.LENGTH_SHORT).show()
         );
-
-        FirebaseFirestore.getInstance()
-                .collection("usuarios")
-                .document(uid)
-                .set(jugador)
-                .addOnSuccessListener(unused -> {
-                    Toast.makeText(getContext(), "Jugador registrado correctamente.", Toast.LENGTH_SHORT).show();
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(getContext(), "Error al registrar jugador: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                });
     }
 }

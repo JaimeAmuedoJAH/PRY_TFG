@@ -16,9 +16,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.jah.pry_rfatm.Controlador.FirebaseController;
 import com.jah.pry_rfatm.R;
 import com.jah.pry_rfatm.Vista.Recursos.UtilesUI;
 
@@ -28,7 +27,6 @@ public class LogInActivity extends AppCompatActivity {
     TextView lblRecuperar;
     Button btnIni, btnIniGoogle, btnRegistrar;
     Intent intent;
-    private FirebaseAuth mAuth;
     private static final int RC_SIGN_IN = 9001;
     private GoogleSignInClient mGoogleSignInClient;
 
@@ -37,11 +35,10 @@ public class LogInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
         UtilesUI.configurarStatusBar(this);
-        FirebaseApp.initializeApp(this);
 
         initComponents();
         //Verifica si ya hay un usuario logueado
-        if (mAuth.getCurrentUser() != null) {
+        if (FirebaseController.mAuth.getCurrentUser() != null) {
             irAMainActivity();
             return; //Evita que cargue el login innecesariamente
         }
@@ -53,7 +50,7 @@ public class LogInActivity extends AppCompatActivity {
         btnIni.setOnClickListener(v -> iniciarSesionConCorreo());
         btnIniGoogle.setOnClickListener(v -> iniciarSesionGoogle());
         lblRecuperar.setOnClickListener(v -> {
-            intent = new Intent(getApplicationContext(), ResetPasswordActivity.class);
+            intent = new Intent(this, ResetPasswordActivity.class);
             startActivity(intent);
         });
     }
@@ -62,12 +59,16 @@ public class LogInActivity extends AppCompatActivity {
         String correo = txtCorreo.getText().toString().trim();
         String pass = txtPass.getText().toString().trim();
 
-        if (correo.isEmpty() || pass.isEmpty()) {
-            Toast.makeText(LogInActivity.this, "Por favor, completa todos los campos.", Toast.LENGTH_SHORT).show();
+        if (correo.isEmpty()) {
+            txtCorreo.setError("El correo es obligatorio");
+            return;
+        }
+        if (pass.isEmpty()) {
+            txtPass.setError("La contraseña es obligatoria");
             return;
         }
 
-        mAuth.signInWithEmailAndPassword(correo, pass)
+        FirebaseController.mAuth.signInWithEmailAndPassword(correo, pass)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         irAMainActivity();
@@ -98,7 +99,7 @@ public class LogInActivity extends AppCompatActivity {
     //Autentificar usuarios. De esta forma pueden iniciar sesión en la app
     private void firebaseAuthConGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-        mAuth.signInWithCredential(credential)
+        FirebaseController.mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         irAMainActivity();
@@ -114,7 +115,7 @@ public class LogInActivity extends AppCompatActivity {
     }
     //Si ha salido bien la autenticación te lleva al MainActivity
     private void irAMainActivity() {
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish();
@@ -127,7 +128,7 @@ public class LogInActivity extends AppCompatActivity {
         btnIniGoogle = findViewById(R.id.btnIniGoogle);
         btnRegistrar = findViewById(R.id.btnRegistrar);
         lblRecuperar = findViewById(R.id.lblRecuperar);
-        mAuth = FirebaseAuth.getInstance();
+        FirebaseController.iniciarFirebase(this);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()

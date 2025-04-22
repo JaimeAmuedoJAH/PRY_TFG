@@ -1,8 +1,9 @@
 package com.jah.pry_rfatm.Modelo;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Equipo {
+public class Equipo implements Serializable {
 
     private String nombre;
     private String entrenadorId;

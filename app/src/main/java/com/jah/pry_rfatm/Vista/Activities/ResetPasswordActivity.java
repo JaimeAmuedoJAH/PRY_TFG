@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.jah.pry_rfatm.Controlador.FirebaseController;
 import com.jah.pry_rfatm.R;
 
 public class ResetPasswordActivity extends AppCompatActivity {
@@ -31,8 +32,9 @@ public class ResetPasswordActivity extends AppCompatActivity {
         txtMail = findViewById(R.id.txtMail);
         btnReset = findViewById(R.id.btnReset);
         mtbBarReset = findViewById(R.id.mtbBarReset);
-        mAuth = FirebaseAuth.getInstance();
+        FirebaseController.iniciarFirebase(this);
         setSupportActionBar(mtbBarReset);
+        mtbBarReset.setBackgroundColor(getResources().getColor(R.color.color_fondos));
 
         btnReset.setOnClickListener(view -> recuperarContrasenia());
     }
@@ -45,7 +47,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
             return;
         }
 
-        mAuth.sendPasswordResetEmail(email)
+        FirebaseController.mAuth.sendPasswordResetEmail(email)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Toast.makeText(ResetPasswordActivity.this, "Correo enviado. Revisa tu bandeja.", Toast.LENGTH_LONG).show();

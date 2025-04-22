@@ -1,8 +1,8 @@
 package com.jah.pry_rfatm.Modelo;
 
-import com.google.firebase.firestore.DocumentReference;
+import java.io.Serializable;
 
-public class Entrenador extends Usuario{
+public class Entrenador extends Usuario implements Serializable {
 
     public Entrenador() {
     }

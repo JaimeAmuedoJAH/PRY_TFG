@@ -53,6 +53,6 @@ dependencies {
     implementation (libs.glide)
     annotationProcessor (libs.compiler)
     implementation (libs.firebase.storage)
-
+    implementation (libs.firebase.appcheck.debug)
 
 }

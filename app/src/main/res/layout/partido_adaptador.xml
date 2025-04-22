@@ -5,8 +5,10 @@
     android:id="@+id/cvCardPartido"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="30dp"
-    app:cardCornerRadius="@dimen/corner_radius"
+    android:layout_marginLeft="13dp"
+    android:layout_marginTop="26dp"
+    android:layout_marginRight="13dp"
+    app:cardCornerRadius="20dp"
     app:strokeColor="@color/color_letra"
     app:strokeWidth="2dp">
 

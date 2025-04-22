@@ -2,9 +2,10 @@ package com.jah.pry_rfatm.Modelo;
 
 import com.google.firebase.firestore.DocumentReference;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class Grupo {
+public class Grupo implements Serializable {
 
     private String nombre;
     private DocumentReference ligaId;

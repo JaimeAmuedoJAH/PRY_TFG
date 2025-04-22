@@ -2,7 +2,9 @@ package com.jah.pry_rfatm.Modelo;
 
 import androidx.annotation.NonNull;
 
-public class Usuario {
+import java.io.Serializable;
+
+public class Usuario implements Serializable {
 
     private String equipoId;
     private String fotoPerfil;

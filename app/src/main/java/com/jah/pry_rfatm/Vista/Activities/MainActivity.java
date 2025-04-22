@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         UtilesUI.configurarStatusBar(this);
-        FirebaseApp.initializeApp(this);
 
         BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
 

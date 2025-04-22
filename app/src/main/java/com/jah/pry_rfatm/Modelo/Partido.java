@@ -2,9 +2,10 @@ package com.jah.pry_rfatm.Modelo;
 
 import com.google.firebase.firestore.DocumentReference;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Partido {
+public class Partido implements Serializable {
 
     private String equipoLocalId;
     private String equipoVisitanteId;
