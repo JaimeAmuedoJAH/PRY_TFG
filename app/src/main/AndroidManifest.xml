@@ -14,14 +14,19 @@
         android:theme="@style/Theme.PRYRFATM"
         tools:targetApi="31">
         <activity
-            android:name=".Vista.Activities.ActaActivity"
+            android:name=".Vista.Activities.EditarPerfilActivity"
             android:exported="false" />
+        <activity
+            android:name=".Vista.Activities.ActaActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".Vista.Activities.VerPartidoActivity"
             android:exported="false" />
         <activity
             android:name=".Vista.Activities.ResetPasswordActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Vista.Activities.RegistroActivity"
             android:exported="false"

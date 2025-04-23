@@ -30,4 +30,11 @@
     <string name="vs_recycler_partido">VS</string>
     <string name="btn_acta">Acta del partido</string>
     <string name="lbl_sin_fecha">Sin fecha</string>
+    <string name="tolbar_acta">Acta del partido</string>
+    <string name="set_1">SET 1</string>
+    <string name="set_2">SET 2</string>
+    <string name="set_3">SET 3</string>
+    <string name="set_4">SET 4</string>
+    <string name="set_5">SET 5</string>
+    <string name="resultado">Resultado</string>
 </resources>

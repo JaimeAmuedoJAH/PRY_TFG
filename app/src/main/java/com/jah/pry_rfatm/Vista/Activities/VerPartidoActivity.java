@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.jah.pry_rfatm.Controlador.FirebaseController;
+import com.jah.pry_rfatm.Modelo.Equipo;
+import com.jah.pry_rfatm.Modelo.Partido;
 import com.jah.pry_rfatm.R;
 import com.jah.pry_rfatm.Vista.Recursos.UtilesUI;
 
@@ -22,9 +25,10 @@ public class VerPartidoActivity extends AppCompatActivity {
 
     MaterialToolbar mtbBarVerPartido;
     ImageView imgEquipoLocal, imgEquipoVisitante;
-    TextView lblNombreEquipoLocal, lblNombreEquipoVis, lblLocalizacion, lblFechaHora;
+    TextView lblNombreEquipoLocal, lblNombreEquipoVis, lblLocalizacion, lblFechaHora, lblEstado, lblResultadoPartido;
     Button btnActa;
     String nombreEquipoLocal, nombreEquipoVisitante, fechaHora, idLocal, idVisitante, urlEscudoLocal, urlEscudoVisitante;
+    Partido partido;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +43,8 @@ public class VerPartidoActivity extends AppCompatActivity {
 
         btnActa.setOnClickListener(v -> {
             Intent intent = new Intent(this, ActaActivity.class);
-            //ver que datos pasar entre activities
+            intent.putExtra("equipoLocal", nombreEquipoLocal);
+            intent.putExtra("equipoVisitante", nombreEquipoVisitante);
             startActivity(intent);
         });
     }
@@ -48,16 +53,24 @@ public class VerPartidoActivity extends AppCompatActivity {
         lblNombreEquipoLocal.setText(nombreEquipoLocal);
         lblNombreEquipoVis.setText(nombreEquipoVisitante);
         lblFechaHora.setText(fechaHora);
-        FirebaseController.obtenerEquipoPorId(idLocal, equipo -> {
-            lblLocalizacion.setText(equipo.getLocalizacion());
-            urlEscudoLocal = equipo.getEscudo();
+        lblEstado.setText(partido.getEstado());
+        if(partido.getEstado().equals("pendiente")){
+            lblResultadoPartido.setVisibility(View.INVISIBLE);
+        }else{
+            lblResultadoPartido.setVisibility(View.VISIBLE);
+            lblResultadoPartido.setText(partido.getResultado());
+        }
+        lblResultadoPartido.setText(partido.getEstado());
+        FirebaseController.obtenerEquipoPorId(idLocal, equipoLocal -> {
+            lblLocalizacion.setText(equipoLocal.getLocalizacion());
+            urlEscudoLocal = equipoLocal.getEscudo();
             FirebaseController.cargarImagenDesdeStorage(imgEquipoLocal, urlEscudoLocal, FirebaseController.imagenPorDefecto);
         }, e -> {
             lblLocalizacion.setText("No disponible");
         });
 
-        FirebaseController.obtenerEquipoPorId(idVisitante, equipo -> {
-            urlEscudoVisitante = equipo.getEscudo();
+        FirebaseController.obtenerEquipoPorId(idVisitante, equipoVisitante -> {
+            urlEscudoVisitante = equipoVisitante.getEscudo();
             FirebaseController.cargarImagenDesdeStorage(imgEquipoVisitante, urlEscudoVisitante, FirebaseController.imagenPorDefecto);
         }, e -> {
             lblLocalizacion.setText("No disponible");
@@ -87,11 +100,14 @@ public class VerPartidoActivity extends AppCompatActivity {
         lblNombreEquipoVis = findViewById(R.id.lblNombreEquipoVis);
         lblLocalizacion = findViewById(R.id.lblLocalizacion);
         lblFechaHora = findViewById(R.id.lblFechaHora);
+        lblEstado = findViewById(R.id.lblEstado);
+        lblResultadoPartido = findViewById(R.id.lblResultadoPartido);
         btnActa = findViewById(R.id.btnActa);
         nombreEquipoLocal = getIntent().getStringExtra("nombreLocal");
         nombreEquipoVisitante = getIntent().getStringExtra("nombreVisitante");
         fechaHora = getIntent().getStringExtra("fechaHora");
         idLocal = getIntent().getStringExtra("idLocal");
         idVisitante = getIntent().getStringExtra("idVisitante");
+        partido = (Partido) getIntent().getSerializableExtra("partido");
     }
 }

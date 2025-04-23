@@ -3,6 +3,7 @@ package com.jah.pry_rfatm.Controlador;
 import android.content.Context;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -23,8 +24,10 @@ import com.jah.pry_rfatm.Modelo.Partido;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class FirebaseController {
 
@@ -33,6 +36,7 @@ public class FirebaseController {
     public static FirebaseFirestore db;
     private static boolean isInitialized = false;
     public static String imagenPorDefecto = "gs://pry-rfatm.firebasestorage.app/escudo_por_defecto.png";
+    public static String imagenPerfilPorDefecto = "gs://pry-rfatm.firebasestorage.app/foto_perfil_defecto.png";
 
     public static void iniciarFirebase(Context context){
         if (!isInitialized) {
@@ -156,9 +160,47 @@ public class FirebaseController {
         }
     }
 
+    public static void obtenerDatosJugador(OnSuccessListener<Jugador> onSuccess, OnFailureListener onFailure) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            String uid = user.getUid();
+            db.collection("usuarios").document(uid).get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        if (documentSnapshot.exists()) {
+                            Jugador jugador = documentSnapshot.toObject(Jugador.class);
+                            onSuccess.onSuccess(jugador);
+                        } else {
+                            onFailure.onFailure(new Exception("Jugador no encontrado."));
+                        }
+                    })
+                    .addOnFailureListener(onFailure);
+        } else {
+            onFailure.onFailure(new Exception("Usuario no autenticado."));
+        }
+    }
+
+
     public static String formatearFecha(Date fecha) {
         if (fecha == null) return "Sin fecha";
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
         return sdf.format(fecha);
+    }
+
+    public static void actualizarPorcentajeVictorias(String uid, int victorias, int partidosJugados, TextView lblPorcentaje) {
+        int porcentaje;
+        if(partidosJugados > 0){
+            porcentaje = (victorias/partidosJugados) * 100;
+        }else{
+            porcentaje = 0;
+        }
+
+        Map<String, Object> actualizacion = new HashMap<>();
+        actualizacion.put("porcentajeVictorias", porcentaje);
+
+        db.collection("usuarios").document(uid)
+                .update(actualizacion)
+                .addOnSuccessListener(aVoid -> Log.d("Firebase", "Porcentaje actualizado"))
+                .addOnFailureListener(e -> Log.e("Firebase", "Error al actualizar porcentaje", e));
+        lblPorcentaje.setText(String.valueOf(porcentaje + "%"));
     }
 }

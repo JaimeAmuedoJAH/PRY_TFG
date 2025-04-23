@@ -105,14 +105,45 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
-        android:layout_marginTop="50dp"
         android:layout_marginEnd="80dp"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="@color/color_fondos"
         android:fontFamily="@font/actor"
         android:text="@string/btn_acta"
         android:textColor="@color/color_letra"
         android:textSize="@dimen/letra_size_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/lblEstado"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="60dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textColor="@color/color_letra"
+        android:textSize="@dimen/letra_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lblFechaHora" />
+
+    <TextView
+        android:id="@+id/lblResultadoPartido"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="60dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textColor="@color/color_letra"
+        android:textSize="@dimen/letra_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblEstado" />
 </androidx.constraintlayout.widget.ConstraintLayout>
