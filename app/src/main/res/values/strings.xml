@@ -37,4 +37,5 @@
     <string name="set_4">SET 4</string>
     <string name="set_5">SET 5</string>
     <string name="resultado">Resultado</string>
+    <string name="clasificacion_fragment_tittle">Clasificación:</string>
 </resources>

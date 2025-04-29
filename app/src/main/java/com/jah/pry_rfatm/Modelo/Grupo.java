@@ -1,19 +1,18 @@
 package com.jah.pry_rfatm.Modelo;
 
-import com.google.firebase.firestore.DocumentReference;
-
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.List;
 
 public class Grupo implements Serializable {
 
     private String nombre;
-    private DocumentReference ligaId;
-    private DocumentReference[] equipos;
+    private String ligaId;
+    private List<String> equipos;
 
     public Grupo(){}
 
-    public Grupo(String nombre, DocumentReference ligaId, DocumentReference[] equipos) {
+    public Grupo(String nombre, String ligaId, List<String> equipos) {
         this.nombre = nombre;
         this.ligaId = ligaId;
         this.equipos = equipos;
@@ -27,19 +26,19 @@ public class Grupo implements Serializable {
         this.nombre = nombre;
     }
 
-    public DocumentReference getLigaId() {
+    public String getLigaId() {
         return ligaId;
     }
 
-    public void setLigaId(DocumentReference ligaId) {
+    public void setLigaId(String ligaId) {
         this.ligaId = ligaId;
     }
 
-    public DocumentReference[] getEquipos() {
+    public List<String> getEquipos() {
         return equipos;
     }
 
-    public void setEquipos(DocumentReference[] equipos) {
+    public void setEquipos(List<String> equipos) {
         this.equipos = equipos;
     }
 
@@ -48,7 +47,7 @@ public class Grupo implements Serializable {
         return "Grupo{" +
                 "nombre='" + nombre + '\'' +
                 ", ligaId='" + ligaId + '\'' +
-                ", equipos=" + Arrays.toString(equipos) +
+                ", equipos=" + equipos +
                 '}';
     }
 }

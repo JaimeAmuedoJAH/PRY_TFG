@@ -115,6 +115,10 @@
         android:textColor="@color/color_letra"
         android:textSize="@dimen/letra_size_btn"
         app:cornerRadius="@dimen/corner_radius"
+        app:icon="@drawable/google"
+        app:iconPadding="0dp"
+        app:iconSize="28dp"
+        app:iconTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnIni" />

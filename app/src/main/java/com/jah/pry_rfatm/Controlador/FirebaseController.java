@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -18,6 +17,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.jah.pry_rfatm.Modelo.Equipo;
+import com.jah.pry_rfatm.Modelo.Grupo;
 import com.jah.pry_rfatm.Modelo.Jugador;
 import com.jah.pry_rfatm.Modelo.Partido;
 
@@ -179,6 +179,19 @@ public class FirebaseController {
         }
     }
 
+    public static void obtenerGrupos(OnSuccessListener<List<Grupo>> onSuccess, OnFailureListener onFailure) {
+        db.collection("grupos")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    List<Grupo> listaGrupos = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        Grupo grupo = document.toObject(Grupo.class);
+                        listaGrupos.add(grupo);
+                    }
+                    onSuccess.onSuccess(listaGrupos);
+                })
+                .addOnFailureListener(onFailure);
+    }
 
     public static String formatearFecha(Date fecha) {
         if (fecha == null) return "Sin fecha";

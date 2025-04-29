@@ -16,11 +16,12 @@ public class Equipo implements Serializable {
     private Integer derrotas;
     private Integer porcentajeVictorias;
     private List<String> jugadores;
+    private List<String> suplentes;
 
     public Equipo(){}
 
     public Equipo(String nombre, String entrenadorId, String grupoId, String escudo, String ligaId, String localizacion,
-                  Integer partidosJugados, Integer victorias, Integer derrotas, Integer porcentajeVictorias, List<String> jugadores) {
+                  Integer partidosJugados, Integer victorias, Integer derrotas, Integer porcentajeVictorias, List<String> jugadores, List<String> suplentes) {
         this.nombre = nombre;
         this.entrenadorId = entrenadorId;
         this.grupoId = grupoId;
@@ -32,6 +33,7 @@ public class Equipo implements Serializable {
         this.derrotas = derrotas;
         this.porcentajeVictorias = porcentajeVictorias;
         this.jugadores = jugadores;
+        this.suplentes = suplentes;
     }
 
     public String getNombre() {
@@ -122,6 +124,14 @@ public class Equipo implements Serializable {
         this.jugadores = jugadores;
     }
 
+    public List<String> getSuplentes() {
+        return suplentes;
+    }
+
+    public void setSuplentes(List<String> suplentes) {
+        this.suplentes = suplentes;
+    }
+
     @Override
     public String toString() {
         return "Equipo{" +
@@ -130,12 +140,13 @@ public class Equipo implements Serializable {
                 ", escudo='" + escudo + '\'' +
                 ", grupoId='" + grupoId + '\'' +
                 ", ligaId='" + ligaId + '\'' +
-                ", localización='" + localizacion + '\'' +
+                ", localizacion='" + localizacion + '\'' +
                 ", partidosJugados=" + partidosJugados +
                 ", victorias=" + victorias +
                 ", derrotas=" + derrotas +
                 ", porcentajeVictorias=" + porcentajeVictorias +
                 ", jugadores=" + jugadores +
+                ", suplentes=" + suplentes +
                 '}';
     }
 }
