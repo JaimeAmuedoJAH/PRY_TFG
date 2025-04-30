@@ -12,6 +12,10 @@ public class Jugador extends Usuario implements Serializable {
 
     public Jugador() {}
 
+    public Jugador(String tipoUsuario) {
+        super(tipoUsuario);
+    }
+
     public Jugador(String equipoId, String fotoPerfil, String nombre, String tipoUsuario, String estilo, Integer partidosJugados, Integer victorias, Integer derrotas, Integer porcentajeVictorias) {
         super(equipoId, fotoPerfil, nombre, tipoUsuario);
         this.estilo = estilo;

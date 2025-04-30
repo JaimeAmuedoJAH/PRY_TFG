@@ -12,10 +12,13 @@ import com.google.firebase.appcheck.FirebaseAppCheck;
 import com.google.firebase.appcheck.debug.DebugAppCheckProviderFactory;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.jah.pry_rfatm.Modelo.Entrenador;
 import com.jah.pry_rfatm.Modelo.Equipo;
 import com.jah.pry_rfatm.Modelo.Grupo;
 import com.jah.pry_rfatm.Modelo.Jugador;
@@ -100,28 +103,52 @@ public class FirebaseController {
 
         String fotoPerfil = (user != null && user.getPhotoUrl() != null) ? user.getPhotoUrl().toString() : "";
         String nombre = (user != null && user.getDisplayName() != null) ? user.getDisplayName() : "Jugador";
-        String estilo = "";
-        int partidosJugados = 0;
-        int victorias = 0;
-        int derrotas = 0;
-        int porcentajeVictorias = 0;
 
-        Jugador jugador = new Jugador(
-                equipoId,
-                fotoPerfil,
-                nombre,
-                tipoUsuario,
-                estilo,
-                partidosJugados,
-                victorias,
-                derrotas,
-                porcentajeVictorias
-        );
+        if (tipoUsuario.equals("jugador")) {
+            Jugador jugador = new Jugador(
+                    equipoId,
+                    fotoPerfil,
+                    nombre,
+                    tipoUsuario,
+                    "", // estilo
+                    0, // partidos
+                    0, // victorias
+                    0, // derrotas
+                    0  // porcentaje
+            );
 
-        db.collection("usuarios").document(uid).set(jugador)
-                .addOnSuccessListener(onSuccess)
-                .addOnFailureListener(onFailure);
+            db.collection("usuarios").document(uid).set(jugador)
+                    .addOnSuccessListener(onSuccess)
+                    .addOnFailureListener(onFailure);
+
+            // Añadir a suplentes
+            DocumentReference equipoRef = db.collection("equipos").document(equipoId.split("/")[2]);
+            equipoRef.update("suplentes", FieldValue.arrayUnion(uid))
+                    .addOnSuccessListener(aVoid -> Log.d("Firestore", "Jugador añadido como suplente"))
+                    .addOnFailureListener(e -> Log.w("Firestore", "Error al añadir suplente", e));
+
+        } else if (tipoUsuario.equals("entrenador")) {
+            Entrenador entrenador = new Entrenador(
+                    equipoId,
+                    fotoPerfil,
+                    nombre,
+                    tipoUsuario
+            );
+
+            db.collection("usuarios").document(uid).set(entrenador)
+                    .addOnSuccessListener(onSuccess)
+                    .addOnFailureListener(onFailure);
+
+            // Añadir como entrenador del equipo
+            DocumentReference equipoRef = db.collection("equipos").document(equipoId.split("/")[2]);
+            equipoRef.update("entrenadorId", FieldValue.arrayUnion(uid))
+                    .addOnSuccessListener(aVoid -> Log.d("Firestore", "Entrenador añadido"))
+                    .addOnFailureListener(e -> Log.w("Firestore", "Error al añadir entrenador", e));
+
+        }
     }
+
+
 
     public static void obtenerEquipoPorId(String equipoId,
                                           OnSuccessListener<Equipo> onSuccess,

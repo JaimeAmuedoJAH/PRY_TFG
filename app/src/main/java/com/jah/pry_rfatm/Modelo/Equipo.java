@@ -1,12 +1,13 @@
 package com.jah.pry_rfatm.Modelo;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 
 public class Equipo implements Serializable {
 
     private String nombre;
-    private String entrenadorId;
+    private List<String> entrenadorId;
     private String escudo;
     private String grupoId;
     private String ligaId;
@@ -20,7 +21,7 @@ public class Equipo implements Serializable {
 
     public Equipo(){}
 
-    public Equipo(String nombre, String entrenadorId, String grupoId, String escudo, String ligaId, String localizacion,
+    public Equipo(String nombre, List<String> entrenadorId, String grupoId, String escudo, String ligaId, String localizacion,
                   Integer partidosJugados, Integer victorias, Integer derrotas, Integer porcentajeVictorias, List<String> jugadores, List<String> suplentes) {
         this.nombre = nombre;
         this.entrenadorId = entrenadorId;
@@ -44,11 +45,11 @@ public class Equipo implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getEntrenadorId() {
+    public List<String> getEntrenadorId() {
         return entrenadorId;
     }
 
-    public void setEntrenadorId(String entrenadorId) {
+    public void setEntrenadorId(List<String> entrenadorId) {
         this.entrenadorId = entrenadorId;
     }
 
@@ -136,7 +137,7 @@ public class Equipo implements Serializable {
     public String toString() {
         return "Equipo{" +
                 "nombre='" + nombre + '\'' +
-                ", entrenadorId='" + entrenadorId + '\'' +
+                ", entrenadorId=" + entrenadorId +
                 ", escudo='" + escudo + '\'' +
                 ", grupoId='" + grupoId + '\'' +
                 ", ligaId='" + ligaId + '\'' +

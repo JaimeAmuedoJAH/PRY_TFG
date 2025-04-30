@@ -13,6 +13,10 @@ public class Usuario implements Serializable {
 
     public Usuario() {}
 
+    public Usuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
     public Usuario(String equipoId, String fotoPerfil, String nombre, String tipoUsuario) {
         this.equipoId = equipoId;
         this.fotoPerfil = fotoPerfil;

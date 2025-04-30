@@ -65,6 +65,8 @@ public class InicioFragment extends Fragment {
                 .addOnSuccessListener(document -> {
                     if (!document.exists()) {
                         mostrarDialogoEquipo(uid);
+                    }else{
+                        cargarPartidos();
                     }
                 })
                 .addOnFailureListener(e -> {
@@ -77,8 +79,6 @@ public class InicioFragment extends Fragment {
         listaPartidos = new ArrayList<>();
         adaptadorPartido = new AdaptadorPartido(listaPartidos);
         rvPartido.setAdapter(adaptadorPartido);
-
-        cargarPartidos();
     }
 
     private void cargarPartidos() {
@@ -120,7 +120,6 @@ public class InicioFragment extends Fragment {
                                 LayoutInflater inflater = LayoutInflater.from(requireContext());
                                 View dialogView = inflater.inflate(R.layout.dialog_nuevo_usuario, null);
                                 Spinner spinner = dialogView.findViewById(R.id.spEquipos);
-                                RadioGroup rgdTipoUsuario = dialogView.findViewById(R.id.rgdTipoUsuario);
                                 RadioButton rbdJugador = dialogView.findViewById(R.id.rbdJugador);
                                 RadioButton rbdEntrenador = dialogView.findViewById(R.id.rbdEntrenador);
 
@@ -136,22 +135,24 @@ public class InicioFragment extends Fragment {
                                             String equipoSeleccionadoNombre = (String) spinner.getSelectedItem();
                                             String equipoDocId = nombreToIdMap.get(equipoSeleccionadoNombre);
                                             String equipoPath = "/equipos/" + equipoDocId;
-
-                                            String tipoUsuario = rbdJugador.isChecked() ? "jugador" : "entrenador";
+                                            String tipoUsuario = "";
+                                            if(rbdJugador.isChecked()){
+                                                tipoUsuario = "jugador";
+                                            }else if(rbdEntrenador.isChecked()){
+                                                tipoUsuario = "entrenador";
+                                            }
+                                            Log.i("entrenador", tipoUsuario);
                                             guardarJugador(uid, equipoPath, tipoUsuario);
+                                            cargarPartidos();
                                         });
 
                                 AlertDialog dialog = builder.create();
                                 dialog.setOnShowListener(dialogInterface -> {
                                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.background)));
                                     Button btnPositivo = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
-                                    Button btnNegativo = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
 
                                     if (btnPositivo != null) {
                                         btnPositivo.setTextColor(getResources().getColor(R.color.color_letra));
-                                    }
-                                    if (btnNegativo != null) {
-                                        btnNegativo.setTextColor(getResources().getColor(R.color.color_letra));
                                     }
                                 });
                                 dialog.show();
@@ -169,8 +170,8 @@ public class InicioFragment extends Fragment {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         FirebaseController.guardarJugador(uid, equipoId, tipoUsuario, user,
-                unused -> Toast.makeText(getContext(), "Jugador registrado correctamente.", Toast.LENGTH_SHORT).show(),
-                e -> Toast.makeText(getContext(), "Error al registrar jugador: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+                unused -> Toast.makeText(getContext(), "Registro completado.", Toast.LENGTH_SHORT).show(),
+                e -> Toast.makeText(getContext(), "Error al registrar: " + e.getMessage(), Toast.LENGTH_SHORT).show()
         );
     }
 }
