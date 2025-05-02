@@ -57,7 +57,7 @@ public class FirebaseController {
         }
     }
 
-    public static void obtenerPartidosPorUsuario(String uid, OnSuccessListener<List<Partido>> onSuccess, OnFailureListener onFailure) {
+    public static void obtenerPartidos(String uid, OnSuccessListener<List<Partido>> onSuccess, OnFailureListener onFailure) {
         db.collection("usuarios").document(uid).get()
                 .addOnSuccessListener(userDoc -> {
                     if (userDoc.exists()) {
@@ -219,6 +219,19 @@ public class FirebaseController {
                 })
                 .addOnFailureListener(onFailure);
     }
+
+    public static void enviarCorreoRecuperacion(String email,
+                                                OnSuccessListener<Void> onSuccess,
+                                                OnFailureListener onFailure) {
+        if (mAuth == null) {
+            mAuth = FirebaseAuth.getInstance();
+        }
+
+        mAuth.sendPasswordResetEmail(email)
+                .addOnSuccessListener(onSuccess)
+                .addOnFailureListener(onFailure);
+    }
+
 
     public static String formatearFecha(Date fecha) {
         if (fecha == null) return "Sin fecha";

@@ -34,6 +34,7 @@ public class PerfilFragment extends Fragment {
 
     private GoogleSignInClient mGoogleSignInClient;
     private View rootView;
+    String imagenPerfil, nombreUsuario, estilo;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -127,6 +128,9 @@ public class PerfilFragment extends Fragment {
             lblEstilo.setText(jugador.getEstilo());
             lblVictorias.setText(String.valueOf(jugador.getVictorias()));
             lblDerrotas.setText(String.valueOf(jugador.getDerrotas()));
+            imagenPerfil = jugador.getFotoPerfil();
+            nombreUsuario = jugador.getNombre();
+            estilo = jugador.getEstilo();
 
             String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
             FirebaseController.actualizarPorcentajeVictorias(uid, jugador.getVictorias(), jugador.getPartidosJugados(), lblPorcentaje);
@@ -164,6 +168,9 @@ public class PerfilFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.item_editar) {
             Intent intent = new Intent(requireContext(), EditarPerfilActivity.class);
+            intent.putExtra("imagenPerfil", imagenPerfil);
+            intent.putExtra("nombreUsuario", nombreUsuario);
+            intent.putExtra("estilo", estilo);
             startActivity(intent);
             return true;
         }

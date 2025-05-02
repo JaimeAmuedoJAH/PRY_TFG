@@ -43,19 +43,15 @@ public class ResetPasswordActivity extends AppCompatActivity {
         String email = txtMail.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(ResetPasswordActivity.this, "Ingresa tu correo", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Ingresa tu correo", Toast.LENGTH_SHORT).show();
             return;
         }
-
-        FirebaseController.mAuth.sendPasswordResetEmail(email)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(ResetPasswordActivity.this, "Correo enviado. Revisa tu bandeja.", Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(ResetPasswordActivity.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                });
+        FirebaseController.enviarCorreoRecuperacion(email,
+                aVoid -> Toast.makeText(this, "Correo enviado. Revisa tu bandeja.", Toast.LENGTH_LONG).show(),
+                e -> Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show()
+        );
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -13,7 +13,6 @@ import android.app.AlertDialog;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -22,15 +21,10 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.FirebaseError;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.jah.pry_rfatm.Controlador.FirebaseController;
-import com.jah.pry_rfatm.Modelo.Jugador;
 import com.jah.pry_rfatm.Modelo.Partido;
 import com.jah.pry_rfatm.R;
 import com.jah.pry_rfatm.Vista.Adaptador.AdaptadorPartido;
@@ -84,7 +78,7 @@ public class InicioFragment extends Fragment {
     private void cargarPartidos() {
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        FirebaseController.obtenerPartidosPorUsuario(uid, partidos -> {
+        FirebaseController.obtenerPartidos(uid, partidos -> {
             listaPartidos.clear();
             listaPartidos.addAll(partidos);
             adaptadorPartido.notifyDataSetChanged();

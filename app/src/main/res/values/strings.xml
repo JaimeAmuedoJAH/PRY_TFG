@@ -38,4 +38,7 @@
     <string name="set_5">SET 5</string>
     <string name="resultado">Resultado</string>
     <string name="clasificacion_fragment_tittle">Clasificación:</string>
+    <string name="editar_perfil_estilo">Estilo de juego</string>
+    <string name="editar_perfil_nombre">Nombre de usuario</string>
+    <string name="editar_perfil_cambiar">Cambiar contraseña</string>
 </resources>
