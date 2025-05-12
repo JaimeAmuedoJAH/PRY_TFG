@@ -19,6 +19,10 @@ import com.jah.pry_rfatm.Vista.Adaptador.AdaptadorClasficicacion;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Fragmento que muestra la clasificación de los equipos.
+ * Recupera los datos de los grupos desde Firebase y los muestra en un RecyclerView.
+ */
 public class ClasificacionFragment extends Fragment {
 
     View view;
@@ -26,6 +30,15 @@ public class ClasificacionFragment extends Fragment {
     AdaptadorClasficicacion adaptadorClasficicacion;
     List<Grupo> listaGrupos;
 
+    /**
+     * Crea y retorna la vista del fragmento.
+     * Configura el RecyclerView y obtiene los datos desde Firebase.
+     *
+     * @param inflater           El LayoutInflater.
+     * @param container          El contenedor padre.
+     * @param savedInstanceState Datos guardados del estado anterior, si existen.
+     * @return La vista del fragmento.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

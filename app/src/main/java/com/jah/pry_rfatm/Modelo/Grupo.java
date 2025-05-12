@@ -1,17 +1,30 @@
 package com.jah.pry_rfatm.Modelo;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Representa un grupo dentro de una liga, compuesto por varios equipos.
+ */
 public class Grupo implements Serializable {
 
+    /** Nombre del grupo */
     private String nombre;
+    /** ID de la liga a la que pertenece el grupo */
     private String ligaId;
+    /** Lista de IDs de equipos que conforman el grupo */
     private List<String> equipos;
 
-    public Grupo(){}
+    /** Constructor por defecto */
+    public Grupo() {}
 
+    /**
+     * Constructor con parámetros.
+     *
+     * @param nombre Nombre del grupo
+     * @param ligaId ID de la liga
+     * @param equipos Lista de IDs de los equipos
+     */
     public Grupo(String nombre, String ligaId, List<String> equipos) {
         this.nombre = nombre;
         this.ligaId = ligaId;

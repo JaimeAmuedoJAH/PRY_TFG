@@ -21,6 +21,11 @@ import com.jah.pry_rfatm.Controlador.FirebaseController;
 import com.jah.pry_rfatm.R;
 import com.jah.pry_rfatm.Vista.Recursos.UtilesUI;
 
+/**
+ * Activity que permite a los usuarios iniciar sesión mediante correo y contraseña o con Google.
+ * Verifica si ya hay un usuario autenticado para omitir el inicio de sesión.
+ * Usa Firebase para la autenticación.
+ */
 public class LogInActivity extends AppCompatActivity {
 
     EditText txtCorreo, txtPass;
@@ -30,6 +35,9 @@ public class LogInActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 9001;
     private GoogleSignInClient mGoogleSignInClient;
 
+    /**
+     * Inicializa la actividad, configura UI y listeners.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +63,9 @@ public class LogInActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Inicia sesión usando correo y contraseña mediante Firebase.
+     */
     private void iniciarSesionConCorreo() {
         String correo = txtCorreo.getText().toString().trim();
         String pass = txtPass.getText().toString().trim();
@@ -78,8 +89,12 @@ public class LogInActivity extends AppCompatActivity {
                 });
     }
 
-
-    //Resultado del inicio de sesión. Si es existosa cambiamos de activity, sino muestra un mensaje de error
+    /**
+     * Procesa el resultado del intento de inicio de sesión con Google.
+     * @param requestCode Código de solicitud
+     * @param resultCode Resultado del intent
+     * @param data Datos del intent
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -96,7 +111,11 @@ public class LogInActivity extends AppCompatActivity {
 
         }
     }
-    //Autentificar usuarios. De esta forma pueden iniciar sesión en la app
+
+    /**
+     * Autentica al usuario en Firebase usando las credenciales de Google.
+     * @param idToken Token de ID proporcionado por Google
+     */
     private void firebaseAuthConGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         FirebaseController.mAuth.signInWithCredential(credential)
@@ -108,19 +127,28 @@ public class LogInActivity extends AppCompatActivity {
                     }
                 });
     }
-    //Inicia el proceso de Login, abriendo la ventana emergente para seleccionar cuenta de Google para el inicio de sesión
+
+    /**
+     * Lanza el intent para iniciar sesión con una cuenta de Google.
+     */
     private void iniciarSesionGoogle() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
-    //Si ha salido bien la autenticación te lleva al MainActivity
+
+    /**
+     * Redirige al usuario a la actividad principal.
+     */
     private void irAMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish();
     }
-    //Iniciamos componentes de la Activity
+
+    /**
+     * Inicializa los componentes de la interfaz de usuario y Firebase.
+     */
     private void initComponents() {
         txtCorreo = findViewById(R.id.txtCorreo);
         txtPass = findViewById(R.id.txtPass);

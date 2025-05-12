@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.FirebaseApp;
 import com.jah.pry_rfatm.R;
 import com.jah.pry_rfatm.Vista.Fragments.ClasificacionFragment;
 import com.jah.pry_rfatm.Vista.Fragments.InicioFragment;
@@ -15,8 +14,15 @@ import com.jah.pry_rfatm.Vista.Fragments.PerfilFragment;
 import com.jah.pry_rfatm.Vista.Fragments.RankingFragment;
 import com.jah.pry_rfatm.Vista.Recursos.UtilesUI;
 
+/**
+ * Actividad principal que contiene la navegación inferior para acceder a distintos fragments:
+ * Inicio, Clasificación, Ranking y Perfil.
+ */
 public class MainActivity extends AppCompatActivity {
 
+    /**
+     * Inicializa la actividad y configura la navegación entre fragments.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
         cargarFragment(new InicioFragment());
     }
 
+    /**
+     * Carga el fragmento seleccionado en el contenedor.
+     * @param fragment Fragmento a cargar
+     */
     private void cargarFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frameContainer, fragment).commit();

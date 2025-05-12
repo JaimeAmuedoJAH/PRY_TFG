@@ -22,7 +22,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:menu="@menu/menu_bar_perfil"
-            app:title="Perfil" />
+            app:title="@string/navigation_btn4" />
 
         <Button
             android:id="@+id/btnCerrar"
@@ -99,6 +99,7 @@
             android:text="TextView"
             android:textColor="@color/color_letra"
             android:textSize="@dimen/letra_size"
+            app:layout_constraintEnd_toEndOf="@+id/imgEscudo"
             app:layout_constraintStart_toStartOf="@+id/imgEscudo"
             app:layout_constraintTop_toBottomOf="@+id/imgEscudo" />
 

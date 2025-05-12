@@ -1,6 +1,9 @@
+import org.jetbrains.dokka.gradle.DokkaTask
+
 plugins {
     alias(libs.plugins.android.application)
     id("com.google.gms.google-services")
+    id("org.jetbrains.dokka") version "1.9.10"
 }
 
 android {
@@ -15,6 +18,10 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        lint {
+            baseline = file("lint-baseline.xml")
+        }
     }
 
     buildTypes {
@@ -26,6 +33,7 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -37,23 +45,44 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
-    implementation(libs.firebase.firestore)
-    implementation(libs.firebase.inappmessaging)
     implementation(libs.gridlayout)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.ext.junit)
-    androidTestImplementation(libs.espresso.core)
+
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
-    implementation (libs.firebase.auth)
+    implementation(libs.firebase.auth)
     implementation(libs.google.firebase.auth)
+    implementation(libs.firebase.firestore)
+    implementation(libs.firebase.inappmessaging)
+    implementation(libs.firebase.storage)
+    implementation(libs.firebase.appcheck.debug)
+
     implementation(libs.credentials)
     implementation(libs.credentials.play.services.auth)
     implementation(libs.googleid)
-    implementation (libs.play.services.auth.v2070)
-    implementation (libs.glide)
-    annotationProcessor (libs.compiler)
-    implementation (libs.firebase.storage)
-    implementation (libs.firebase.appcheck.debug)
+    implementation(libs.play.services.auth.v2070)
 
+    implementation(libs.glide)
+    annotationProcessor(libs.compiler)
+
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.ext.junit)
+    androidTestImplementation(libs.espresso.core)
 }
+
+/*tasks.named<DokkaTask>("dokkaHtml") {
+    outputDirectory.set(buildDir.resolve("dokka/html"))
+
+    dokkaSourceSets.configureEach {
+        includeNonPublic.set(true)
+        skipEmptyPackages.set(false)
+        reportUndocumented.set(true)
+
+        // Necesario para incluir código Java
+        sourceRoots.from(file("src/main/java"))
+
+        perPackageOption {
+            matchingRegex.set(".*")
+            suppress.set(false)
+        }
+    }
+}*/

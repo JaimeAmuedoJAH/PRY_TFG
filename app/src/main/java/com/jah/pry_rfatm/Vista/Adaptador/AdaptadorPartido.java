@@ -19,15 +19,29 @@ import com.jah.pry_rfatm.Vista.Activities.VerPartidoActivity;
 
 import java.util.List;
 
+/**
+ * Adaptador para mostrar la lista de partidos en un RecyclerView.
+ * Carga los equipos desde Firebase y permite acceder a la vista detallada del partido.
+ */
 public class AdaptadorPartido extends RecyclerView.Adapter<AdaptadorPartido.HolderPartido> {
 
     private List<Partido> listaPartidos;
     private Context context;
 
+    /**
+     * Constructor del adaptador.
+     * @param listaPartidos Lista de objetos Partido a mostrar.
+     */
     public AdaptadorPartido(List<Partido> listaPartidos) {
         this.listaPartidos = listaPartidos;
     }
 
+    /**
+     * Crea y retorna un nuevo ViewHolder para los partidos.
+     * @param parent Contenedor padre.
+     * @param viewType Tipo de vista.
+     * @return HolderPartido.
+     */
     @NonNull
     @Override
     public HolderPartido onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -36,6 +50,11 @@ public class AdaptadorPartido extends RecyclerView.Adapter<AdaptadorPartido.Hold
         return new HolderPartido(view);
     }
 
+    /**
+     * Enlaza los datos de un partido con su ViewHolder.
+     * @param holder ViewHolder que contiene las vistas.
+     * @param position Posición del partido.
+     */
     @Override
     public void onBindViewHolder(@NonNull HolderPartido holder, int position) {
         Partido partido = listaPartidos.get(position);
@@ -73,16 +92,27 @@ public class AdaptadorPartido extends RecyclerView.Adapter<AdaptadorPartido.Hold
 
     }
 
+    /**
+     * Devuelve el número total de partidos.
+     * @return Tamaño de la lista de partidos.
+     */
     @Override
     public int getItemCount() {
         return listaPartidos.size();
     }
 
+    /**
+     * ViewHolder para representar un partido en la interfaz.
+     */
     public static class HolderPartido extends RecyclerView.ViewHolder {
         TextView lblEquipo1, lblEquipo2, lblHora;
         ImageView imgEquipo1, imgEquipo2;
         MaterialCardView cvCardPartido;
 
+        /**
+         * Constructor que enlaza las vistas del item.
+         * @param itemView Vista inflada del ítem.
+         */
         public HolderPartido(@NonNull View itemView) {
             super(itemView);
             lblEquipo1 = itemView.findViewById(R.id.lblEquipo1);

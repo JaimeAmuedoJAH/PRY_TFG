@@ -4,23 +4,55 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Representa un equipo deportivo con su información básica y estadística.
+ */
 public class Equipo implements Serializable {
 
+    /** Nombre del equipo */
     private String nombre;
+    /** Lista de IDs de los entrenadores del equipo */
     private List<String> entrenadorId;
+    /** URL o ruta del escudo del equipo */
     private String escudo;
+    /** ID del grupo al que pertenece el equipo */
     private String grupoId;
+    /** ID de la liga a la que pertenece el equipo */
     private String ligaId;
+    /** Localización geográfica del equipo */
     private String localizacion;
+    /** Cantidad de partidos jugados */
     private Integer partidosJugados;
+    /** Cantidad de victorias obtenidas */
     private Integer victorias;
+    /** Cantidad de derrotas sufridas */
     private Integer derrotas;
+    /** Porcentaje de victorias del equipo */
     private Integer porcentajeVictorias;
+    /** Lista de IDs de los jugadores titulares */
     private List<String> jugadores;
+    /** Lista de IDs de los jugadores suplentes */
     private List<String> suplentes;
 
-    public Equipo(){}
+    /** Constructor por defecto */
+    public Equipo() {}
 
+    /**
+     * Constructor con todos los campos.
+     *
+     * @param nombre Nombre del equipo
+     * @param entrenadorId Lista de IDs de entrenadores
+     * @param grupoId ID del grupo
+     * @param escudo Escudo del equipo
+     * @param ligaId ID de la liga
+     * @param localizacion Localización del equipo
+     * @param partidosJugados Partidos jugados
+     * @param victorias Victorias obtenidas
+     * @param derrotas Derrotas sufridas
+     * @param porcentajeVictorias Porcentaje de victorias
+     * @param jugadores Lista de jugadores titulares
+     * @param suplentes Lista de suplentes
+     */
     public Equipo(String nombre, List<String> entrenadorId, String grupoId, String escudo, String ligaId, String localizacion,
                   Integer partidosJugados, Integer victorias, Integer derrotas, Integer porcentajeVictorias, List<String> jugadores, List<String> suplentes) {
         this.nombre = nombre;

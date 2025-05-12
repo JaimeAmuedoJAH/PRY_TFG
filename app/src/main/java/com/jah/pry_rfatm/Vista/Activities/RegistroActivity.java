@@ -22,12 +22,19 @@ import com.jah.pry_rfatm.Vista.Recursos.UtilesUI;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Actividad que permite a nuevos usuarios registrarse en la aplicación mediante correo, contraseña y nombre de usuario.
+ * También verifica si el nombre de usuario ya existe y actualiza información si es necesario.
+ */
 public class RegistroActivity extends AppCompatActivity {
 
     MaterialToolbar mtbBar;
     EditText txtCorreo, txtPass, txtUsername;
     Button btnRegistrate;
 
+    /**
+     * Inicializa la actividad y configura la barra de herramientas y listener de botón.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +48,9 @@ public class RegistroActivity extends AppCompatActivity {
         btnRegistrate.setOnClickListener(view -> registrarUsuario());
     }
 
+    /**
+     * Registra un nuevo usuario o actualiza uno existente en Firebase Authentication y Firestore.
+     */
     private void registrarUsuario() {
         String correo = txtCorreo.getText().toString().trim();
         String pass = txtPass.getText().toString().trim();
@@ -96,6 +106,9 @@ public class RegistroActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Infla el menú de opciones en la barra de herramientas.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -103,12 +116,18 @@ public class RegistroActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Maneja los eventos del menú, incluyendo botón de retroceso.
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.item_atras) finish();
         return false;
     }
 
+    /**
+     * Inicializa los componentes de UI.
+     */
     private void initComponents() {
         mtbBar = findViewById(R.id.mtbBar);
         txtCorreo = findViewById(R.id.txtCorreo);

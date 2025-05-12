@@ -19,15 +19,30 @@ import com.jah.pry_rfatm.R;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Adaptador para mostrar la clasificación de equipos en un RecyclerView.
+ * Utiliza información de Firebase Firestore para cargar dinámicamente los equipos
+ * y sus estadísticas (victorias, derrotas, puntos) dentro de cada grupo.
+ */
 public class AdaptadorClasficicacion extends RecyclerView.Adapter<AdaptadorClasficicacion.holderClasificacion> {
 
     List<Grupo> dataSet;
     Context context;
 
+    /**
+     * Constructor del adaptador.
+     * @param dataSet Lista de objetos Grupo que contienen los equipos a mostrar.
+     */
     public AdaptadorClasficicacion(List<Grupo> dataSet) {
         this.dataSet = dataSet;
     }
 
+    /**
+     * Crea y devuelve una nueva instancia del ViewHolder.
+     * @param parent El ViewGroup padre al que se adjunta el nuevo View.
+     * @param viewType Tipo de vista (no utilizado en este caso).
+     * @return Un nuevo holderClasificacion.
+     */
     @NonNull
     @Override
     public AdaptadorClasficicacion.holderClasificacion onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -36,6 +51,11 @@ public class AdaptadorClasficicacion extends RecyclerView.Adapter<AdaptadorClasf
         return new holderClasificacion(view);
     }
 
+    /**
+     * Enlaza los datos de un Grupo con su ViewHolder correspondiente.
+     * @param holder ViewHolder que se está configurando.
+     * @param position Posición del ítem en la lista.
+     */
     @Override
     public void onBindViewHolder(@NonNull AdaptadorClasficicacion.holderClasificacion holder, int position) {
         Grupo grupo = dataSet.get(position);
@@ -46,6 +66,12 @@ public class AdaptadorClasficicacion extends RecyclerView.Adapter<AdaptadorClasf
         obtenerDatosClasificacion(holder, grupo, db);
     }
 
+    /**
+     * Obtiene los datos de los equipos desde Firestore y los muestra ordenados por puntos.
+     * @param holder ViewHolder donde se mostrarán los datos.
+     * @param grupo Grupo que contiene los IDs de los equipos.
+     * @param db Instancia de FirebaseFirestore.
+     */
     private static void obtenerDatosClasificacion(@NonNull AdaptadorClasficicacion.holderClasificacion holder, Grupo grupo, FirebaseFirestore db) {
         List<String> idsEquipos = grupo.getEquipos();
         if (idsEquipos == null || idsEquipos.isEmpty()) return;
@@ -129,13 +155,19 @@ public class AdaptadorClasficicacion extends RecyclerView.Adapter<AdaptadorClasf
         }
     }
 
-
-
+    /**
+     * Retorna el número total de elementos en el dataset.
+     * @return Cantidad de grupos.
+     */
     @Override
     public int getItemCount() {
         return dataSet.size();
     }
 
+
+    /**
+     * ViewHolder que representa cada tarjeta de grupo con estadísticas de hasta 8 equipos.
+     */
     public static class holderClasificacion extends RecyclerView.ViewHolder {
 
         MaterialCardView cvCardGrupo;
@@ -157,6 +189,10 @@ public class AdaptadorClasficicacion extends RecyclerView.Adapter<AdaptadorClasf
         // Fila 8
         TextView lblEq8, lblVic8, lblDer8, lblPuntos8;
 
+        /**
+         * Constructor que inicializa las vistas del item.
+         * @param itemView Vista inflada del ítem.
+         */
         public holderClasificacion(@NonNull View itemView) {
             super(itemView);
 

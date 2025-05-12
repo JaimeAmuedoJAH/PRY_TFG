@@ -5,13 +5,25 @@ import com.google.firebase.firestore.DocumentReference;
 import java.io.Serializable;
 import java.util.Arrays;
 
+/**
+ * Representa una liga deportiva, que puede estar compuesta por varios grupos.
+ */
 public class Liga implements Serializable {
 
+    /** Nombre de la liga */
     private String nombre;
+    /** Referencias a los documentos de grupos en Firestore */
     private DocumentReference[] grupos;
 
-    public Liga(){}
+    /** Constructor por defecto */
+    public Liga() {}
 
+    /**
+     * Constructor con parámetros.
+     *
+     * @param nombre Nombre de la liga
+     * @param grupos Arreglo de referencias a grupos
+     */
     public Liga(String nombre, DocumentReference[] grupos) {
         this.nombre = nombre;
         this.grupos = grupos;

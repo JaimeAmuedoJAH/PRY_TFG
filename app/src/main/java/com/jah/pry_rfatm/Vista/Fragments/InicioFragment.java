@@ -34,18 +34,40 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Fragmento que se muestra al inicio de la aplicación.
+ * Verifica si el usuario está registrado y asociado a un equipo.
+ * Si no está registrado, muestra un diálogo para seleccionar equipo y tipo de usuario.
+ * Muestra una lista de partidos asociados al usuario autenticado.
+ */
 public class InicioFragment extends Fragment {
 
     RecyclerView rvPartido;
     private AdaptadorPartido adaptadorPartido;
     private List<Partido> listaPartidos;
 
+    /**
+     * Infla el layout del fragmento.
+     *
+     * @param inflater           El LayoutInflater.
+     * @param container          El contenedor padre.
+     * @param savedInstanceState Datos guardados del estado anterior.
+     * @return La vista inflada.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_inicio, container, false);
     }
 
+
+    /**
+     * Método llamado cuando la vista ha sido creada.
+     * Inicializa la interfaz de usuario y verifica el registro del usuario.
+     *
+     * @param view               La vista raíz.
+     * @param savedInstanceState Datos guardados del estado anterior.
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -64,7 +86,7 @@ public class InicioFragment extends Fragment {
                     }
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(getContext(), "Error al verificar jugador.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.toast_error_al_verificar_jugador, Toast.LENGTH_SHORT).show();
                 });
 
         rvPartido = view.findViewById(R.id.rvPartido);
@@ -75,6 +97,9 @@ public class InicioFragment extends Fragment {
         rvPartido.setAdapter(adaptadorPartido);
     }
 
+    /**
+     * Carga los partidos asociados al usuario autenticado desde Firebase.
+     */
     private void cargarPartidos() {
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -84,10 +109,16 @@ public class InicioFragment extends Fragment {
             adaptadorPartido.notifyDataSetChanged();
 
         }, error -> {
-            Toast.makeText(getContext(), "Error al cargar partidos.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.toast_error_al_cargar_partidos, Toast.LENGTH_SHORT).show();
         });
     }
 
+    /**
+     * Muestra un diálogo que permite al usuario seleccionar equipo y tipo de usuario
+     * si aún no está registrado.
+     *
+     * @param uid UID del usuario autenticado.
+     */
     private void mostrarDialogoEquipo(String uid) {
         FirebaseController.db.collection("usuarios").document(uid).get()
                 .addOnSuccessListener(documentSnapshot -> {
@@ -107,7 +138,7 @@ public class InicioFragment extends Fragment {
                                 }
 
                                 if (listaNombresEquipos.isEmpty()) {
-                                    Toast.makeText(getContext(), "No hay equipos registrados.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), R.string.toast_no_hay_equipos_registrados, Toast.LENGTH_SHORT).show();
                                     return;
                                 }
 
@@ -152,20 +183,27 @@ public class InicioFragment extends Fragment {
                                 dialog.show();
                             })
                             .addOnFailureListener(e -> {
-                                Toast.makeText(getContext(), "Error al cargar equipos.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), R.string.toast_error_al_cargar_equipos, Toast.LENGTH_SHORT).show();
                             });
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(getContext(), "Error al verificar jugador.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.toast_error_al_verificar_jugador, Toast.LENGTH_SHORT).show();
                 });
     }
 
+    /**
+     * Guarda los datos del nuevo jugador o entrenador en Firebase.
+     *
+     * @param uid         UID del usuario.
+     * @param equipoId    ID del equipo seleccionado.
+     * @param tipoUsuario Tipo de usuario ("jugador" o "entrenador").
+     */
     private void guardarJugador(String uid, String equipoId, String tipoUsuario) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         FirebaseController.guardarJugador(uid, equipoId, tipoUsuario, user,
-                unused -> Toast.makeText(getContext(), "Registro completado.", Toast.LENGTH_SHORT).show(),
-                e -> Toast.makeText(getContext(), "Error al registrar: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+                unused -> Toast.makeText(getContext(), R.string.toast_registro_completado, Toast.LENGTH_SHORT).show(),
+                e -> Toast.makeText(getContext(), R.string.toast_error_al_registrar + " " + e.getMessage(), Toast.LENGTH_SHORT).show()
         );
     }
 }

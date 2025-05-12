@@ -6,13 +6,181 @@
     android:layout_height="match_parent"
     android:background="@color/background">
 
-    <Button
-        android:id="@+id/btnCerrarSesion"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/mtbBarEntrenador"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/menu_bar_perfil"
+        app:title="@string/navigation_btn4" />
+
+    <ImageView
+        android:id="@+id/imgFotoEntrenador"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mtbBarEntrenador"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/imgFotoEscudo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mtbBarEntrenador"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/lblNombreEntrenador"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/actor"
+        android:text=""
+        android:textColor="@color/color_letra"
+        android:textSize="@dimen/letra_size"
+        app:layout_constraintEnd_toEndOf="@+id/imgFotoEntrenador"
+        app:layout_constraintStart_toStartOf="@+id/imgFotoEntrenador"
+        app:layout_constraintTop_toBottomOf="@+id/imgFotoEntrenador" />
+
+    <TextView
+        android:id="@+id/lblNombreEquipoEnt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/actor"
+        android:text=""
+        android:textColor="@color/color_letra"
+        android:textSize="@dimen/letra_size"
+        app:layout_constraintEnd_toEndOf="@+id/imgFotoEscudo"
+        app:layout_constraintStart_toStartOf="@+id/imgFotoEscudo"
+        app:layout_constraintTop_toBottomOf="@+id/imgFotoEscudo" />
+
+    <TextView
+        android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/actor"
+        android:text="@string/perfil_plantilla"
+        android:textColor="@color/color_letra"
+        android:textSize="@dimen/letra_size"
+        app:layout_constraintStart_toStartOf="@+id/lblNombreEntrenador"
+        app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/actor"
+        android:text="@string/perfil_suplentes"
+        android:textColor="@color/color_letra"
+        android:textSize="@dimen/letra_size"
+        app:layout_constraintEnd_toEndOf="@+id/lblNombreEquipoEnt"
+        app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+    <TextView
+        android:id="@+id/lblJugador1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/actor"
+        android:textColor="@color/color_letra"
+        android:textSize="@dimen/letra_size"
+        app:layout_constraintStart_toStartOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <TextView
+        android:id="@+id/lblJugador2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/actor"
+        android:textColor="@color/color_letra"
+        android:textSize="@dimen/letra_size"
+        app:layout_constraintStart_toStartOf="@+id/lblJugador1"
+        app:layout_constraintTop_toBottomOf="@+id/lblJugador1" />
+
+    <TextView
+        android:id="@+id/lblJugador3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/actor"
+        android:textColor="@color/color_letra"
+        android:textSize="@dimen/letra_size"
+        app:layout_constraintStart_toStartOf="@+id/lblJugador2"
+        app:layout_constraintTop_toBottomOf="@+id/lblJugador2" />
+
+    <TextView
+        android:id="@+id/lblJugador4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/actor"
+        android:textColor="@color/color_letra"
+        android:textSize="@dimen/letra_size"
+        app:layout_constraintEnd_toEndOf="@+id/textView11"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+    <TextView
+        android:id="@+id/lblJugador5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/actor"
+        android:textColor="@color/color_letra"
+        android:textSize="@dimen/letra_size"
+        app:layout_constraintEnd_toEndOf="@+id/lblJugador4"
+        app:layout_constraintTop_toBottomOf="@+id/lblJugador4" />
+
+    <TextView
+        android:id="@+id/lblJugador6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/actor"
+        android:textColor="@color/color_letra"
+        android:textSize="@dimen/letra_size"
+        app:layout_constraintEnd_toEndOf="@+id/lblJugador5"
+        app:layout_constraintTop_toBottomOf="@+id/lblJugador5" />
+
+    <Button
+        android:id="@+id/btnCerrarSesion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="8dp"
         android:backgroundTint="@color/color_fondos"
-        android:text="Button"
+        android:fontFamily="@font/actor"
+        android:text="@string/btn_cerrar"
+        android:textSize="@dimen/letra_size_btn"
+        app:cornerRadius="@dimen/corner_radius"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/actor"
+        android:text="@string/entrenador"
+        android:textColor="@color/color_letra"
+        android:textSize="@dimen/letra_size"
+        app:layout_constraintStart_toStartOf="@+id/lblNombreEntrenador"
+        app:layout_constraintTop_toBottomOf="@+id/lblNombreEntrenador" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

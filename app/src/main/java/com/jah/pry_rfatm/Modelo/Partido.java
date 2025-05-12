@@ -5,21 +5,45 @@ import com.google.firebase.firestore.DocumentReference;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * Representa un partido disputado entre dos equipos.
+ */
 public class Partido implements Serializable {
 
+    /** ID del equipo local */
     private String equipoLocalId;
+    /** ID del equipo visitante */
     private String equipoVisitanteId;
+    /** Estado del partido (ej. programado, finalizado) */
     private String estado;
+    /** Fecha del partido */
     private Date fecha;
+    /** ID del grupo en el que se disputa el partido */
     private String grupoId;
+    /** Resultado del partido (puede ser una cadena con formato libre) */
     private String resultado;
+    /** Número de sets ganados por el equipo principal */
     private Integer setsGanados;
+    /** Número de sets perdidos por el equipo principal */
     private Integer setsPerdidos;
 
-    public Partido(){}
+    /** Constructor por defecto */
+    public Partido() {}
 
-    public Partido(String equipoLocalId, String equipovVisitanteId, String estado, Date fecha, String grupoId, String resultado,
-                   Integer setsGanados, Integer setsPerdidos) {
+    /**
+     * Constructor con todos los campos del partido.
+     *
+     * @param equipoLocalId ID del equipo local
+     * @param equipovVisitanteId ID del equipo visitante
+     * @param estado Estado del partido
+     * @param fecha Fecha del partido
+     * @param grupoId ID del grupo
+     * @param resultado Resultado final del partido
+     * @param setsGanados Sets ganados
+     * @param setsPerdidos Sets perdidos
+     */
+    public Partido(String equipoLocalId, String equipovVisitanteId, String estado, Date fecha,
+                   String grupoId, String resultado, Integer setsGanados, Integer setsPerdidos) {
         this.equipoLocalId = equipoLocalId;
         this.equipoVisitanteId = equipovVisitanteId;
         this.estado = estado;

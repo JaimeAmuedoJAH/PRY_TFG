@@ -17,6 +17,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.jah.pry_rfatm.Controlador.FirebaseController;
 import com.jah.pry_rfatm.R;
 
+/**
+ * Actividad que permite a los usuarios recuperar su contraseña enviando un correo a través de Firebase.
+ */
 public class ResetPasswordActivity extends AppCompatActivity {
 
     EditText txtMail;
@@ -24,6 +27,9 @@ public class ResetPasswordActivity extends AppCompatActivity {
     MaterialToolbar mtbBarReset;
     private FirebaseAuth mAuth;
 
+    /**
+     * Inicializa la actividad, Firebase y la interfaz de usuario.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +45,9 @@ public class ResetPasswordActivity extends AppCompatActivity {
         btnReset.setOnClickListener(view -> recuperarContrasenia());
     }
 
+    /**
+     * Envía un correo de recuperación de contraseña si el email ingresado es válido.
+     */
     private void recuperarContrasenia() {
         String email = txtMail.getText().toString().trim();
 
@@ -52,6 +61,9 @@ public class ResetPasswordActivity extends AppCompatActivity {
         );
     }
 
+    /**
+     * Infla el menú en la barra superior.
+     */
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -60,6 +72,9 @@ public class ResetPasswordActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Maneja eventos del menú como botón de retroceso.
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.item_atras) finish();

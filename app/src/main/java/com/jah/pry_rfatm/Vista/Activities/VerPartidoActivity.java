@@ -21,6 +21,10 @@ import com.jah.pry_rfatm.Modelo.Partido;
 import com.jah.pry_rfatm.R;
 import com.jah.pry_rfatm.Vista.Recursos.UtilesUI;
 
+/**
+ * Actividad que muestra la información detallada de un partido, incluyendo equipos, fecha y estado.
+ * También permite acceder al acta del partido.
+ */
 public class VerPartidoActivity extends AppCompatActivity {
 
     MaterialToolbar mtbBarVerPartido;
@@ -30,6 +34,9 @@ public class VerPartidoActivity extends AppCompatActivity {
     String nombreEquipoLocal, nombreEquipoVisitante, fechaHora, idLocal, idVisitante, urlEscudoLocal, urlEscudoVisitante;
     Partido partido;
 
+    /**
+     * Inicializa la actividad, componentes UI y configura la barra superior.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +56,10 @@ public class VerPartidoActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Asigna la información del partido a los elementos visuales.
+     * Carga imágenes y datos de los equipos desde Firebase.
+     */
     private void asginarInformacion() {
         lblNombreEquipoLocal.setText(nombreEquipoLocal);
         lblNombreEquipoVis.setText(nombreEquipoVisitante);
@@ -78,6 +89,9 @@ public class VerPartidoActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Infla el menú en la barra de herramientas.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -85,12 +99,18 @@ public class VerPartidoActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Maneja el evento del botón de menú para regresar.
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.item_atras) finish();
         return false;
     }
 
+    /**
+     * Inicializa todos los componentes visuales y recupera extras del intent.
+     */
     private void initComponents() {
         FirebaseController.iniciarFirebase(this);
         mtbBarVerPartido = findViewById(R.id.mtbBarVerPartido);
