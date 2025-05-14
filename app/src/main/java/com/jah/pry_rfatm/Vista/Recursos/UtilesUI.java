@@ -1,10 +1,17 @@
 package com.jah.pry_rfatm.Vista.Recursos;
 
+import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.appbar.MaterialToolbar;
+import com.jah.pry_rfatm.Controlador.FirebaseController;
+import com.jah.pry_rfatm.R;
 
 /**
  * Clase de utilidades relacionada con la configuración de la interfaz de usuario (UI).
@@ -23,11 +30,6 @@ public class UtilesUI {
      * @param activity La actividad sobre la cual se aplicarán los cambios en la UI.
      */
     public static void configurarStatusBar(AppCompatActivity activity) {
-        // Oculta la ActionBar si está presente
-        if (activity.getSupportActionBar() != null) {
-            activity.getSupportActionBar().hide();
-        }
-
         // Configura la status bar (barra superior)
         Window window = activity.getWindow();
         window.setStatusBarColor(Color.WHITE); // Fondo blanco

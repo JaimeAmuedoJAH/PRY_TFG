@@ -1,6 +1,221 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/mtbEditarEntrenador"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/color_fondos"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Editar Perfil" />
+
+    <ImageView
+        android:id="@+id/imgFotoPerfilEnt"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mtbEditarEntrenador"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/imgFotoEscudoEq"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mtbEditarEntrenador"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="40dp"
+        android:hint="@string/editar_perfil_nombre"
+        android:textColorHint="@color/color_letra"
+        app:boxStrokeColor="@color/color_fondos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgFotoPerfilEnt">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtNombreEntrenador"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/actor" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnCambiarPass"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/actor"
+                android:text="@string/perfil_plantilla"
+                android:textAlignment="center"
+                android:textColor="@color/color_letra"
+                android:textSize="@dimen/letra_lbl_titulo" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:hint="Nombre de jugador"
+                android:textAlignment="center"
+                android:textColorHint="@color/color_letra"
+                app:boxStrokeColor="@color/color_fondos">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtJugador1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/actor"
+                    android:textColor="@color/color_letra" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:hint="@string/nombre_de_jugador"
+                android:textAlignment="center"
+                android:textColorHint="@color/color_letra"
+                app:boxStrokeColor="@color/color_fondos">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtJugador2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/actor"
+                    android:textColor="@color/color_letra" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:hint="@string/nombre_de_jugador"
+                android:textAlignment="center"
+                android:textColorHint="@color/color_letra"
+                app:boxStrokeColor="@color/color_fondos">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtJugador3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/actor"
+                    android:textColor="@color/color_letra" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/actor"
+                android:text="@string/perfil_suplentes"
+                android:textAlignment="center"
+                android:textColor="@color/color_letra"
+                android:textSize="@dimen/letra_lbl_titulo" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:hint="@string/nombre_de_jugador"
+                android:textAlignment="center"
+                android:textColorHint="@color/color_letra"
+                app:boxStrokeColor="@color/color_fondos">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtJugador4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/actor"
+                    android:textColor="@color/color_letra" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:hint="@string/nombre_de_jugador"
+                android:textAlignment="center"
+                android:textColorHint="@color/color_letra"
+                app:boxStrokeColor="@color/color_fondos">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtJugador5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/actor"
+                    android:textColor="@color/color_letra" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:hint="@string/nombre_de_jugador"
+                android:textAlignment="center"
+                android:textColorHint="@color/color_letra"
+                app:boxStrokeColor="@color/color_fondos">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtJugador6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/actor"
+                    android:textColor="@color/color_letra" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btnCambiarPass"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/color_fondos"
+        android:fontFamily="@font/actor"
+        android:text="@string/editar_perfil_cambiar"
+        android:textSize="@dimen/letra_size_btn"
+        app:cornerRadius="@dimen/corner_radius"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

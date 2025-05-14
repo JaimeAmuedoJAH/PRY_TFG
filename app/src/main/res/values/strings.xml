@@ -72,4 +72,14 @@
     <string name="perfil_suplentes">Suplentes</string>
     <string name="entrenador">entrenador</string>
     <string name="exception_usuario_no_autenticado">Usuario no autenticado.</string>
+    <string name="no_es_un_entrenador">No es un entrenador</string>
+    <string name="error">Error</string>
+    <string name="no_encontrado">No encontrado</string>
+    <string name="jugador_desconocido">Jugador desconocido</string>
+    <string name="nombre_de_jugador">Nombre de jugador</string>
+    <string name="error_al_obtener_ruta_del_equipo">Error al obtener ruta del equipo</string>
+    <string name="equipo_actualizado_correctamente">Equipo actualizado correctamente</string>
+    <string name="error_al_actualizar_equipo">Error al actualizar equipo</string>
+    <string name="no_se_encontr_el_equipo_del_entrenador">No se encontró el equipo del entrenador</string>
+    <string name="error_al_obtener_el_equipo">Error al obtener el equipo</string>
 </resources>

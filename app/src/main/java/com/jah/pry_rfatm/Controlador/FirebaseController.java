@@ -23,6 +23,7 @@ import com.jah.pry_rfatm.Modelo.Equipo;
 import com.jah.pry_rfatm.Modelo.Grupo;
 import com.jah.pry_rfatm.Modelo.Jugador;
 import com.jah.pry_rfatm.Modelo.Partido;
+import com.jah.pry_rfatm.Modelo.Usuario;
 import com.jah.pry_rfatm.R;
 
 import java.text.SimpleDateFormat;
@@ -221,21 +222,28 @@ public class FirebaseController {
             if (url.startsWith("gs://")) {
                 StorageReference ref = FirebaseStorage.getInstance().getReferenceFromUrl(url);
                 ref.getDownloadUrl().addOnSuccessListener(uri ->
-                        Glide.with(imageView).load(uri.toString()).into(imageView)
-                ).addOnFailureListener(e ->
-                        defaultRef.getDownloadUrl().addOnSuccessListener(uri ->
-                                Glide.with(imageView).load(uri.toString()).into(imageView)
-                        )
-                );
+                        Glide.with(imageView.getContext()).load(uri.toString()).into(imageView)
+                ).addOnFailureListener(e -> {
+                    Log.e("FirebaseStorage", "Fallo al cargar imagen gs://, usando por defecto", e);
+                    defaultRef.getDownloadUrl().addOnSuccessListener(uri ->
+                            Glide.with(imageView.getContext()).load(uri.toString()).into(imageView)
+                    ).addOnFailureListener(ex -> {
+                        Log.e("FirebaseStorage", "Fallo al cargar imagen por defecto", ex);
+                    });
+                });
             } else {
-                Glide.with(imageView).load(url).into(imageView);
+                // Si no es gs://, asumir que es URL pública directa
+                Glide.with(imageView.getContext()).load(url).into(imageView);
             }
         } else {
             defaultRef.getDownloadUrl().addOnSuccessListener(uri ->
-                    Glide.with(imageView).load(uri.toString()).into(imageView)
-            );
+                    Glide.with(imageView.getContext()).load(uri.toString()).into(imageView)
+            ).addOnFailureListener(e -> {
+                Log.e("FirebaseStorage", "Fallo al cargar imagen por defecto", e);
+            });
         }
     }
+
 
     /**
      * Obtiene los datos del usuario actual.
@@ -243,7 +251,7 @@ public class FirebaseController {
      * @param onSuccess Callback en caso de éxito con el objeto Jugador
      * @param onFailure Callback en caso de fallo
      */
-    public static void obtenerDatosUsuario(OnSuccessListener<Object> onSuccess, OnFailureListener onFailure) {
+    public static void obtenerDatosUsuario(OnSuccessListener<Usuario> onSuccess, OnFailureListener onFailure) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             String uid = user.getUid();
@@ -252,10 +260,10 @@ public class FirebaseController {
                         if (documentSnapshot.exists()) {
                             String tipoUsuario = documentSnapshot.getString("tipoUsuario");
 
-                            if ("jugador".equals(tipoUsuario)) {
+                            if ("jugador".equalsIgnoreCase(tipoUsuario)) {
                                 Jugador jugador = documentSnapshot.toObject(Jugador.class);
                                 onSuccess.onSuccess(jugador);
-                            } else if ("entrenador".equals(tipoUsuario)) {
+                            } else if ("entrenador".equalsIgnoreCase(tipoUsuario)) {
                                 Entrenador entrenador = documentSnapshot.toObject(Entrenador.class);
                                 onSuccess.onSuccess(entrenador);
                             } else {
@@ -270,8 +278,6 @@ public class FirebaseController {
             onFailure.onFailure(new Exception("Usuario no autenticado."));
         }
     }
-
-
     /**
      * Recupera todos los grupos disponibles desde Firestore.
      *

@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -167,8 +168,10 @@ public class PerfilFragment extends Fragment {
         btnCerrarSesion.setOnClickListener(v -> cerrarSesion());
 
         MaterialToolbar mtbBarEntrenador = view.findViewById(R.id.mtbBarEntrenador);
-        ((AppCompatActivity) requireActivity()).setSupportActionBar(mtbBarEntrenador);
-        mtbBarEntrenador.setBackgroundColor(getResources().getColor(R.color.color_fondos));
+        if (isAdded()) {
+            ((AppCompatActivity) requireActivity()).setSupportActionBar(mtbBarEntrenador);
+            mtbBarEntrenador.setBackgroundColor(getResources().getColor(R.color.color_fondos));
+        }
 
         TextView lblNombreEntrenador = view.findViewById(R.id.lblNombreEntrenador);
         TextView lblNombreEquipoEnt = view.findViewById(R.id.lblNombreEquipoEnt);
@@ -181,11 +184,15 @@ public class PerfilFragment extends Fragment {
         ImageView imgFotoEntrenador = view.findViewById(R.id.imgFotoEntrenador);
         ImageView imgFotoEscudo = view.findViewById(R.id.imgFotoEscudo);
 
+        jugadores = new String[6]; // Guardará los nombres para futuras acciones
+
         FirebaseController.obtenerDatosUsuario(usuario -> {
             if (usuario instanceof Entrenador) {
                 Entrenador entrenador = (Entrenador) usuario;
 
                 lblNombreEntrenador.setText(entrenador.getNombre());
+                nombreUsuario = entrenador.getNombre();
+                imagenPerfil = entrenador.getFotoPerfil();
 
                 if (entrenador.getFotoPerfil() != null && !entrenador.getFotoPerfil().isEmpty()) {
                     FirebaseController.cargarImagenDesdeStorage(
@@ -195,11 +202,11 @@ public class PerfilFragment extends Fragment {
                     );
                 }
 
-                String equipoId = entrenador.getEquipoId().split("/")[2]; // Asumiendo formato "equipos/{id}"
+                String equipoId = entrenador.getEquipoId().split("/")[2]; // Formato esperado: "equipos/{id}"
 
                 FirebaseController.obtenerEquipoPorId(equipoId, equipo -> {
                     lblNombreEquipoEnt.setText(equipo.getNombre());
-
+                    imagenEscudo = equipo.getEscudo();
                     if (equipo.getEscudo() != null && !equipo.getEscudo().isEmpty()) {
                         FirebaseController.cargarImagenDesdeStorage(
                                 imgFotoEscudo,
@@ -213,9 +220,10 @@ public class PerfilFragment extends Fragment {
                     List<String> titulares = equipo.getJugadores();
                     List<String> suplentes = equipo.getSuplentes();
 
-                    TextView[] lblTitulares = { lblJugador1, lblJugador2, lblJugador3 };
-                    TextView[] lblSuplentes = { lblJugador4, lblJugador5, lblJugador6 };
+                    TextView[] lblTitulares = {lblJugador1, lblJugador2, lblJugador3};
+                    TextView[] lblSuplentes = {lblJugador4, lblJugador5, lblJugador6};
 
+                    // Titulares
                     for (int i = 0; i < titulares.size() && i < lblTitulares.length; i++) {
                         final int index = i;
                         String jugadorId = titulares.get(i);
@@ -226,14 +234,19 @@ public class PerfilFragment extends Fragment {
                                 .addOnSuccessListener(snapshot -> {
                                     if (snapshot.exists()) {
                                         Jugador jugador = snapshot.toObject(Jugador.class);
-                                        lblTitulares[index].setText(jugador != null ? jugador.getNombre() : "Jugador desconocido");
+                                        String nombre = (jugador != null && jugador.getNombre() != null)
+                                                ? jugador.getNombre()
+                                                : getString(R.string.jugador_desconocido);
+                                        lblTitulares[index].setText(nombre);
+                                        jugadores[index] = nombre;
                                     } else {
-                                        lblTitulares[index].setText("No encontrado");
+                                        lblTitulares[index].setText(R.string.no_encontrado);
                                     }
                                 })
-                                .addOnFailureListener(e -> lblTitulares[index].setText("Error"));
+                                .addOnFailureListener(e -> lblTitulares[index].setText(R.string.error));
                     }
 
+                    // Suplentes
                     for (int i = 0; i < suplentes.size() && i < lblSuplentes.length; i++) {
                         final int index = i;
                         String jugadorId = suplentes.get(i);
@@ -244,17 +257,22 @@ public class PerfilFragment extends Fragment {
                                 .addOnSuccessListener(snapshot -> {
                                     if (snapshot.exists()) {
                                         Jugador jugador = snapshot.toObject(Jugador.class);
-                                        lblSuplentes[index].setText(jugador != null ? jugador.getNombre() : "Jugador desconocido");
+                                        String nombre = (jugador != null && jugador.getNombre() != null)
+                                                ? jugador.getNombre()
+                                                : getString(R.string.jugador_desconocido);
+                                        lblSuplentes[index].setText(nombre);
+                                        jugadores[index + 3] = nombre;
                                     } else {
-                                        lblSuplentes[index].setText("No encontrado");
+                                        lblSuplentes[index].setText(R.string.no_encontrado);
                                     }
                                 })
-                                .addOnFailureListener(e -> lblSuplentes[index].setText("Error"));
+                                .addOnFailureListener(e -> lblSuplentes[index].setText(R.string.error));
                     }
 
                 }, e -> lblNombreEquipoEnt.setText(R.string.toast_equipo_no_encontrado));
+
             } else {
-                lblNombreEntrenador.setText("No es un entrenador");
+                lblNombreEntrenador.setText(R.string.no_es_un_entrenador);
             }
         }, e -> lblNombreEntrenador.setText(R.string.toast_error_al_cargar_datos));
     }
@@ -354,10 +372,12 @@ public class PerfilFragment extends Fragment {
                 intent.putExtra("imagenPerfil", imagenPerfil);
                 intent.putExtra("nombreUsuario", nombreUsuario);
                 intent.putExtra("estilo", estilo);
+                intent.putExtra("tipoUsuario", tipoUsuario);
             }else if(tipoUsuario.equals("entrenador")){
                 intent.putExtra("imagenPerfil", imagenPerfil);
-                intent.putExtra("imagenPerfil", imagenEscudo);
+                intent.putExtra("imagenEscudo", imagenEscudo);
                 intent.putExtra("nombreUsuario", nombreUsuario);
+                intent.putExtra("tipoUsuario", tipoUsuario);
                 intent.putExtra("jugador1", jugadores[0]);
                 intent.putExtra("jugador2", jugadores[1]);
                 intent.putExtra("jugador3", jugadores[2]);
