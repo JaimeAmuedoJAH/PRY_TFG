@@ -1,6 +1,8 @@
 package com.jah.pry_rfatm.Vista.Activities;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -12,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -22,40 +25,42 @@ import com.jah.pry_rfatm.Vista.Recursos.UtilesUI;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Actividad que permite a nuevos usuarios registrarse en la aplicación mediante correo, contraseña y nombre de usuario.
- * También verifica si el nombre de usuario ya existe y actualiza información si es necesario.
- */
 public class RegistroActivity extends AppCompatActivity {
 
     MaterialToolbar mtbBar;
     EditText txtCorreo, txtPass, txtUsername;
+    TextInputLayout inputPass;
     Button btnRegistrate;
 
-    /**
-     * Inicializa la actividad y configura la barra de herramientas y listener de botón.
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
         UtilesUI.configurarStatusBar(this);
-        //FirebaseController.iniciarFirebase(this);
         initComponents();
         setSupportActionBar(mtbBar);
         mtbBar.setBackgroundColor(getResources().getColor(R.color.color_fondos));
 
         btnRegistrate.setOnClickListener(view -> registrarUsuario());
+
+        // Limpiar errores si se edita la contraseña
+        txtPass.addTextChangedListener(new TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
+                inputPass.setError(null);
+            }
+            @Override public void afterTextChanged(Editable s) {}
+        });
     }
 
     /**
-     * Registra un nuevo usuario o actualiza uno existente en Firebase Authentication y Firestore.
+     * Registra un nuevo usuario en Firebase Authentication y Firestore.
      */
     private void registrarUsuario() {
         String correo = txtCorreo.getText().toString().trim();
         String pass = txtPass.getText().toString().trim();
         String username = txtUsername.getText().toString().trim();
-        //Comprobamos que se rellenen todos los campos
+
         if (correo.isEmpty() || pass.isEmpty() || username.isEmpty()) {
             Toast.makeText(this, R.string.toast_error_registro, Toast.LENGTH_SHORT).show();
             return;
@@ -65,13 +70,12 @@ public class RegistroActivity extends AppCompatActivity {
                 .addOnSuccessListener(authResult -> {
                     FirebaseUser user = FirebaseController.mAuth.getCurrentUser();
                     if (user == null) return;
-                    //Comprobamos si el username ya existe
+
                     FirebaseController.db.collection("usuarios")
                             .whereEqualTo("nombre", username)
                             .get()
                             .addOnSuccessListener(querySnapshot -> {
                                 if (!querySnapshot.isEmpty()) {
-                                    // Ya existe, actualizar con nuevo UID y correo
                                     DocumentSnapshot doc = querySnapshot.getDocuments().get(0);
                                     doc.getReference().update("email", correo).addOnSuccessListener(unused -> {
                                         Toast.makeText(this, "Usuario existente actualizado", Toast.LENGTH_SHORT).show();
@@ -80,7 +84,6 @@ public class RegistroActivity extends AppCompatActivity {
                                         Toast.makeText(this, "Error al actualizar usuario", Toast.LENGTH_SHORT).show();
                                     });
                                 } else {
-                                    //Si no existe, crear nuevo documento
                                     Map<String, Object> userData = new HashMap<>();
                                     userData.put("email", correo);
                                     userData.put("name", username);
@@ -102,12 +105,21 @@ public class RegistroActivity extends AppCompatActivity {
                             });
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Error al registrar: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    String errorMsg = e.getMessage();
+                    if (errorMsg != null && errorMsg.contains("The given password is invalid")) {
+                        inputPass.setError("La contraseña debe tener al menos 6 caracteres, una mayúscula, un número y un carácter especial.");
+                    } else {
+                        inputPass.setError(null);
+                        Toast.makeText(this, "Error al registrar: " + errorMsg, Toast.LENGTH_LONG).show();
+                    }
                 });
     }
 
     /**
-     * Infla el menú de opciones en la barra de herramientas.
+     * Crea el menú de opciones en la barra de acción.
+     * @param menu The options menu in which you place your items.
+     *
+     * @return
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -117,7 +129,10 @@ public class RegistroActivity extends AppCompatActivity {
     }
 
     /**
-     * Maneja los eventos del menú, incluyendo botón de retroceso.
+     * Maneja la selección de elementos del menú.
+     * @param item The menu item that was selected.
+     *
+     * @return
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -126,7 +141,7 @@ public class RegistroActivity extends AppCompatActivity {
     }
 
     /**
-     * Inicializa los componentes de UI.
+     * Inicializa los componentes de la interfaz de usuario.
      */
     private void initComponents() {
         mtbBar = findViewById(R.id.mtbBar);
@@ -134,5 +149,6 @@ public class RegistroActivity extends AppCompatActivity {
         txtPass = findViewById(R.id.txtPass);
         txtUsername = findViewById(R.id.txtUsername);
         btnRegistrate = findViewById(R.id.btnRegistrate);
+        inputPass = findViewById(R.id.inputPass);
     }
 }

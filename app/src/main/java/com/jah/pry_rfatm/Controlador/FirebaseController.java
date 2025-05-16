@@ -1,6 +1,7 @@
 package com.jah.pry_rfatm.Controlador;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -134,7 +135,7 @@ public class FirebaseController {
      * @param onSuccess Callback en caso de éxito
      * @param onFailure Callback en caso de fallo
      */
-    public static void guardarJugador(String uid, String equipoId, String tipoUsuario,
+    public static void guardarUsuario(String uid, String equipoId, String tipoUsuario,
                                       FirebaseUser user,
                                       OnSuccessListener<Void> onSuccess,
                                       OnFailureListener onFailure) {
@@ -162,8 +163,8 @@ public class FirebaseController {
             // Añadir a suplentes
             DocumentReference equipoRef = db.collection("equipos").document(equipoId.split("/")[2]);
             equipoRef.update("suplentes", FieldValue.arrayUnion(uid))
-                    .addOnSuccessListener(aVoid -> Log.d("Firestore", "Jugador añadido como suplente"))
-                    .addOnFailureListener(e -> Log.w("Firestore", "Error al añadir suplente", e));
+                    .addOnSuccessListener(aVoid -> Log.d("Firestore", String.valueOf((R.string.jugador_a_adido_como_suplente))))
+                    .addOnFailureListener(e -> Log.w("Firestore", String.valueOf(R.string.error_al_a_adir_suplente), e));
 
         } else if (tipoUsuario.equals("entrenador")) {
             Entrenador entrenador = new Entrenador(
@@ -180,8 +181,8 @@ public class FirebaseController {
             // Añadir como entrenador del equipo
             DocumentReference equipoRef = db.collection("equipos").document(equipoId.split("/")[2]);
             equipoRef.update("entrenadorId", FieldValue.arrayUnion(uid))
-                    .addOnSuccessListener(aVoid -> Log.d("Firestore", "Entrenador añadido"))
-                    .addOnFailureListener(e -> Log.w("Firestore", "Error al añadir entrenador", e));
+                    .addOnSuccessListener(aVoid -> Log.d("Firestore", String.valueOf(R.string.entrenador_a_adido)))
+                    .addOnFailureListener(e -> Log.w("Firestore", String.valueOf(R.string.error_al_a_adir_entrenador), e));
 
         }
     }
@@ -224,11 +225,11 @@ public class FirebaseController {
                 ref.getDownloadUrl().addOnSuccessListener(uri ->
                         Glide.with(imageView.getContext()).load(uri.toString()).into(imageView)
                 ).addOnFailureListener(e -> {
-                    Log.e("FirebaseStorage", "Fallo al cargar imagen gs://, usando por defecto", e);
+                    Log.e("FirebaseStorage", String.valueOf(R.string.fallo_al_cargar_imagen_gs_usando_por_defecto), e);
                     defaultRef.getDownloadUrl().addOnSuccessListener(uri ->
                             Glide.with(imageView.getContext()).load(uri.toString()).into(imageView)
                     ).addOnFailureListener(ex -> {
-                        Log.e("FirebaseStorage", "Fallo al cargar imagen por defecto", ex);
+                        Log.e("FirebaseStorage", String.valueOf(R.string.fallo_al_cargar_imagen_por_defecto), ex);
                     });
                 });
             } else {
@@ -239,7 +240,7 @@ public class FirebaseController {
             defaultRef.getDownloadUrl().addOnSuccessListener(uri ->
                     Glide.with(imageView.getContext()).load(uri.toString()).into(imageView)
             ).addOnFailureListener(e -> {
-                Log.e("FirebaseStorage", "Fallo al cargar imagen por defecto", e);
+                Log.e("FirebaseStorage", String.valueOf(R.string.fallo_al_cargar_imagen_por_defecto), e);
             });
         }
     }
@@ -267,15 +268,15 @@ public class FirebaseController {
                                 Entrenador entrenador = documentSnapshot.toObject(Entrenador.class);
                                 onSuccess.onSuccess(entrenador);
                             } else {
-                                onFailure.onFailure(new Exception("Tipo de usuario no reconocido."));
+                                onFailure.onFailure(new Exception(String.valueOf(R.string.tipo_de_usuario_no_reconocido)));
                             }
                         } else {
-                            onFailure.onFailure(new Exception("Usuario no encontrado en Firestore."));
+                            onFailure.onFailure(new Exception(String.valueOf(R.string.usuario_no_encontrado_en_firestore)));
                         }
                     })
                     .addOnFailureListener(onFailure);
         } else {
-            onFailure.onFailure(new Exception("Usuario no autenticado."));
+            onFailure.onFailure(new Exception(String.valueOf(R.string.usuario_no_autenticado)));
         }
     }
     /**
@@ -318,6 +319,31 @@ public class FirebaseController {
     }
 
     /**
+     * Subir una imagen a Firebase Storage.
+     * @param pathEnStorage
+     * @param uriImagen
+     * @param onSuccess
+     * @param onFailure
+     */
+    public static void subirImagenAFirebaseStorage(
+            String pathEnStorage,
+            Uri uriImagen,
+            OnSuccessListener<String> onSuccess,
+            OnFailureListener onFailure
+    ) {
+        StorageReference storageRef = storage.getReference().child(pathEnStorage);
+
+        storageRef.putFile(uriImagen)
+                .addOnSuccessListener(taskSnapshot ->
+                        storageRef.getDownloadUrl()
+                                .addOnSuccessListener(uri -> onSuccess.onSuccess(uri.toString()))
+                                .addOnFailureListener(onFailure)
+                )
+                .addOnFailureListener(onFailure);
+    }
+
+
+    /**
      * Formatea una fecha en el formato "dd/MM/yyyy HH:mm".
      *
      * @param fecha Objeto Date
@@ -351,8 +377,8 @@ public class FirebaseController {
 
         db.collection("usuarios").document(uid)
                 .update(actualizacion)
-                .addOnSuccessListener(aVoid -> Log.d("Firebase", "Porcentaje actualizado"))
-                .addOnFailureListener(e -> Log.e("Firebase", "Error al actualizar porcentaje", e));
+                .addOnSuccessListener(aVoid -> Log.d("Firebase", String.valueOf(R.string.porcentaje_actualizado)))
+                .addOnFailureListener(e -> Log.e("Firebase", String.valueOf(R.string.error_al_actualizar_porcentaje), e));
         lblPorcentaje.setText(String.valueOf(porcentaje + "%"));
     }
 }

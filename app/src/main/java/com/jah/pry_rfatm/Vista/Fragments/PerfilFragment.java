@@ -215,7 +215,7 @@ public class PerfilFragment extends Fragment {
                         );
                     }
 
-                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    //FirebaseFirestore db = FirebaseFirestore.getInstance();
 
                     List<String> titulares = equipo.getJugadores();
                     List<String> suplentes = equipo.getSuplentes();
@@ -228,22 +228,24 @@ public class PerfilFragment extends Fragment {
                         final int index = i;
                         String jugadorId = titulares.get(i);
 
-                        db.collection("usuarios")
-                                .document(jugadorId)
-                                .get()
-                                .addOnSuccessListener(snapshot -> {
-                                    if (snapshot.exists()) {
-                                        Jugador jugador = snapshot.toObject(Jugador.class);
-                                        String nombre = (jugador != null && jugador.getNombre() != null)
-                                                ? jugador.getNombre()
-                                                : getString(R.string.jugador_desconocido);
-                                        lblTitulares[index].setText(nombre);
-                                        jugadores[index] = nombre;
-                                    } else {
-                                        lblTitulares[index].setText(R.string.no_encontrado);
-                                    }
-                                })
-                                .addOnFailureListener(e -> lblTitulares[index].setText(R.string.error));
+                        if (jugadorId != null && !jugadorId.isEmpty()) {
+                            FirebaseController.db.collection("usuarios")
+                                    .document(jugadorId)
+                                    .get()
+                                    .addOnSuccessListener(snapshot -> {
+                                        if (snapshot.exists()) {
+                                            Jugador jugador = snapshot.toObject(Jugador.class);
+                                            String nombre = (jugador != null && jugador.getNombre() != null)
+                                                    ? jugador.getNombre()
+                                                    : getString(R.string.jugador_desconocido);
+                                            lblTitulares[index].setText(nombre);
+                                            jugadores[index] = nombre;
+                                        } else {
+                                            lblTitulares[index].setText(R.string.no_encontrado);
+                                        }
+                                    })
+                                    .addOnFailureListener(e -> lblTitulares[index].setText(R.string.error));
+                        }
                     }
 
                     // Suplentes
@@ -251,22 +253,22 @@ public class PerfilFragment extends Fragment {
                         final int index = i;
                         String jugadorId = suplentes.get(i);
 
-                        db.collection("usuarios")
-                                .document(jugadorId)
-                                .get()
-                                .addOnSuccessListener(snapshot -> {
-                                    if (snapshot.exists()) {
-                                        Jugador jugador = snapshot.toObject(Jugador.class);
-                                        String nombre = (jugador != null && jugador.getNombre() != null)
-                                                ? jugador.getNombre()
-                                                : getString(R.string.jugador_desconocido);
-                                        lblSuplentes[index].setText(nombre);
-                                        jugadores[index + 3] = nombre;
-                                    } else {
-                                        lblSuplentes[index].setText(R.string.no_encontrado);
-                                    }
-                                })
-                                .addOnFailureListener(e -> lblSuplentes[index].setText(R.string.error));
+                        if (jugadorId != null && !jugadorId.isEmpty()) {
+                            FirebaseController.db.collection("usuarios")
+                                    .document(jugadorId)
+                                    .get()
+                                    .addOnSuccessListener(snapshot -> {
+                                        if (snapshot.exists()) {
+                                            Jugador jugador = snapshot.toObject(Jugador.class);
+                                            String nombre = (jugador != null && jugador.getNombre() != null)
+                                                    ? jugador.getNombre()
+                                                    : getString(R.string.jugador_desconocido);
+                                            lblSuplentes[index].setText(nombre);
+                                            jugadores[index + 3] = nombre;
+                                        }
+                                    })
+                                    .addOnFailureListener(e -> lblSuplentes[index].setText(R.string.error));
+                        }
                     }
 
                 }, e -> lblNombreEquipoEnt.setText(R.string.toast_equipo_no_encontrado));

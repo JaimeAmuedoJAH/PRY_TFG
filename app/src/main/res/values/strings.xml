@@ -82,4 +82,15 @@
     <string name="error_al_actualizar_equipo">Error al actualizar equipo</string>
     <string name="no_se_encontr_el_equipo_del_entrenador">No se encontró el equipo del entrenador</string>
     <string name="error_al_obtener_el_equipo">Error al obtener el equipo</string>
+    <string name="jugador_a_adido_como_suplente">Jugador añadido como suplente</string>
+    <string name="error_al_a_adir_suplente">Error al añadir suplente</string>
+    <string name="entrenador_a_adido">Entrenador añadido</string>
+    <string name="error_al_a_adir_entrenador">Error al añadir entrenador</string>
+    <string name="fallo_al_cargar_imagen_gs_usando_por_defecto">Fallo al cargar imagen gs://, usando por defecto</string>
+    <string name="fallo_al_cargar_imagen_por_defecto">Fallo al cargar imagen por defecto</string>
+    <string name="tipo_de_usuario_no_reconocido">Tipo de usuario no reconocido.</string>
+    <string name="usuario_no_encontrado_en_firestore">Usuario no encontrado en Firestore.</string>
+    <string name="usuario_no_autenticado">Usuario no autenticado.</string>
+    <string name="porcentaje_actualizado">Porcentaje actualizado</string>
+    <string name="error_al_actualizar_porcentaje">Error al actualizar porcentaje</string>
 </resources>

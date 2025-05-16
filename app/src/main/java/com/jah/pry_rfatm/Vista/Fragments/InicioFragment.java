@@ -25,49 +25,28 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.jah.pry_rfatm.Controlador.FirebaseController;
+import com.jah.pry_rfatm.Logica.InicioLogicHelper;
 import com.jah.pry_rfatm.Modelo.Partido;
 import com.jah.pry_rfatm.R;
 import com.jah.pry_rfatm.Vista.Adaptador.AdaptadorPartido;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
-/**
- * Fragmento que se muestra al inicio de la aplicación.
- * Verifica si el usuario está registrado y asociado a un equipo.
- * Si no está registrado, muestra un diálogo para seleccionar equipo y tipo de usuario.
- * Muestra una lista de partidos asociados al usuario autenticado.
- */
 public class InicioFragment extends Fragment {
 
     RecyclerView rvPartido;
     private AdaptadorPartido adaptadorPartido;
     private List<Partido> listaPartidos;
 
-    /**
-     * Infla el layout del fragmento.
-     *
-     * @param inflater           El LayoutInflater.
-     * @param container          El contenedor padre.
-     * @param savedInstanceState Datos guardados del estado anterior.
-     * @return La vista inflada.
-     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_inicio, container, false);
     }
 
-
-    /**
-     * Método llamado cuando la vista ha sido creada.
-     * Inicializa la interfaz de usuario y verifica el registro del usuario.
-     *
-     * @param view               La vista raíz.
-     * @param savedInstanceState Datos guardados del estado anterior.
-     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -81,7 +60,7 @@ public class InicioFragment extends Fragment {
                 .addOnSuccessListener(document -> {
                     if (!document.exists()) {
                         mostrarDialogoEquipo(uid);
-                    }else{
+                    } else {
                         cargarPartidos();
                     }
                 })
@@ -98,26 +77,23 @@ public class InicioFragment extends Fragment {
     }
 
     /**
-     * Carga los partidos asociados al usuario autenticado desde Firebase.
+     * Carga los partidos desde Firebase y actualiza el adaptador.
      */
     private void cargarPartidos() {
-        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
         FirebaseController.obtenerPartidos(uid, partidos -> {
             listaPartidos.clear();
             listaPartidos.addAll(partidos);
             adaptadorPartido.notifyDataSetChanged();
-
         }, error -> {
             Toast.makeText(getContext(), R.string.toast_error_al_cargar_partidos, Toast.LENGTH_SHORT).show();
         });
     }
 
     /**
-     * Muestra un diálogo que permite al usuario seleccionar equipo y tipo de usuario
-     * si aún no está registrado.
-     *
-     * @param uid UID del usuario autenticado.
+     * Muestra un diálogo para seleccionar un equipo.
+     * @param uid
      */
     private void mostrarDialogoEquipo(String uid) {
         FirebaseController.db.collection("usuarios").document(uid).get()
@@ -127,13 +103,13 @@ public class InicioFragment extends Fragment {
                     FirebaseController.db.collection("equipos").get()
                             .addOnSuccessListener(querySnapshot -> {
                                 List<String> listaNombresEquipos = new ArrayList<>();
-                                Map<String, String> nombreToIdMap = new HashMap<>();
+                                List<String> listaIds = new ArrayList<>();
 
                                 for (DocumentSnapshot doc : querySnapshot.getDocuments()) {
                                     String nombreEquipo = doc.getString("nombre");
                                     if (nombreEquipo != null) {
                                         listaNombresEquipos.add(nombreEquipo);
-                                        nombreToIdMap.put(nombreEquipo, doc.getId());
+                                        listaIds.add(doc.getId());
                                     }
                                 }
 
@@ -141,6 +117,8 @@ public class InicioFragment extends Fragment {
                                     Toast.makeText(getContext(), R.string.toast_no_hay_equipos_registrados, Toast.LENGTH_SHORT).show();
                                     return;
                                 }
+
+                                Map<String, String> nombreToIdMap = InicioLogicHelper.procesarEquipos(listaNombresEquipos, listaIds);
 
                                 LayoutInflater inflater = LayoutInflater.from(requireContext());
                                 View dialogView = inflater.inflate(R.layout.dialog_nuevo_usuario, null);
@@ -159,13 +137,11 @@ public class InicioFragment extends Fragment {
                                         .setPositiveButton("Aceptar", (dialog, which) -> {
                                             String equipoSeleccionadoNombre = (String) spinner.getSelectedItem();
                                             String equipoDocId = nombreToIdMap.get(equipoSeleccionadoNombre);
-                                            String equipoPath = "/equipos/" + equipoDocId;
-                                            String tipoUsuario = "";
-                                            if(rbdJugador.isChecked()){
-                                                tipoUsuario = "jugador";
-                                            }else if(rbdEntrenador.isChecked()){
-                                                tipoUsuario = "entrenador";
-                                            }
+                                            String equipoPath = InicioLogicHelper.construirPathEquipo(equipoDocId);
+                                            String tipoUsuario = InicioLogicHelper.obtenerTipoUsuario(
+                                                    rbdJugador.isChecked(),
+                                                    rbdEntrenador.isChecked()
+                                            );
                                             Log.i("entrenador", tipoUsuario);
                                             guardarJugador(uid, equipoPath, tipoUsuario);
                                             cargarPartidos();
@@ -192,16 +168,15 @@ public class InicioFragment extends Fragment {
     }
 
     /**
-     * Guarda los datos del nuevo jugador o entrenador en Firebase.
-     *
-     * @param uid         UID del usuario.
-     * @param equipoId    ID del equipo seleccionado.
-     * @param tipoUsuario Tipo de usuario ("jugador" o "entrenador").
+     * Guarda un jugador en Firebase.
+     * @param uid
+     * @param equipoId
+     * @param tipoUsuario
      */
     private void guardarJugador(String uid, String equipoId, String tipoUsuario) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        FirebaseController.guardarJugador(uid, equipoId, tipoUsuario, user,
+        FirebaseController.guardarUsuario(uid, equipoId, tipoUsuario, user,
                 unused -> Toast.makeText(getContext(), R.string.toast_registro_completado, Toast.LENGTH_SHORT).show(),
                 e -> Toast.makeText(getContext(), R.string.toast_error_al_registrar + " " + e.getMessage(), Toast.LENGTH_SHORT).show()
         );
