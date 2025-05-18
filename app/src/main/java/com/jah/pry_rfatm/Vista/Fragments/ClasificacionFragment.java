@@ -7,11 +7,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.jah.pry_rfatm.Controlador.FirebaseController;
+import com.jah.pry_rfatm.Logica.ClasificacionLogic;
+import com.jah.pry_rfatm.Modelo.Equipo;
 import com.jah.pry_rfatm.Modelo.Grupo;
 import com.jah.pry_rfatm.R;
 import com.jah.pry_rfatm.Vista.Adaptador.AdaptadorClasficicacion;

@@ -93,4 +93,10 @@
     <string name="usuario_no_autenticado">Usuario no autenticado.</string>
     <string name="porcentaje_actualizado">Porcentaje actualizado</string>
     <string name="error_al_actualizar_porcentaje">Error al actualizar porcentaje</string>
+    <string name="error_cargando_jugadores">Error cargando jugadores</string>
+    <string name="puntos">Puntos</string>
+    <string name="derrotas">Derrotas</string>
+    <string name="victorias">Victorias</string>
+    <string name="nombre">Nombre</string>
+    <string name="ranking">Ranking:</string>
 </resources>

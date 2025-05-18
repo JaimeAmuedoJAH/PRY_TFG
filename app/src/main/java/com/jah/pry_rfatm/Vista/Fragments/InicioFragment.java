@@ -50,18 +50,22 @@ public class InicioFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         FirebaseController.iniciarFirebase(requireContext());
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser user = FirebaseController.mAuth.getCurrentUser();
         if (user == null) return;
 
         String uid = user.getUid();
 
         FirebaseController.db.collection("usuarios").document(uid).get()
                 .addOnSuccessListener(document -> {
-                    if (!document.exists()) {
+                    String equipoId = document.getString("equipoId");
+                    String tipoUsuario = document.getString("tipoUsuario");
+
+                    if (equipoId == null || equipoId.isEmpty() || tipoUsuario == null || tipoUsuario.isEmpty()) {
                         mostrarDialogoEquipo(uid);
                     } else {
-                        cargarPartidos();
+                        cargarPartidos(); // ✅ Ahora sí, si ya está registrado
                     }
                 })
                 .addOnFailureListener(e -> {
@@ -70,7 +74,6 @@ public class InicioFragment extends Fragment {
 
         rvPartido = view.findViewById(R.id.rvPartido);
         rvPartido.setLayoutManager(new LinearLayoutManager(getContext()));
-
         listaPartidos = new ArrayList<>();
         adaptadorPartido = new AdaptadorPartido(listaPartidos);
         rvPartido.setAdapter(adaptadorPartido);
@@ -98,7 +101,15 @@ public class InicioFragment extends Fragment {
     private void mostrarDialogoEquipo(String uid) {
         FirebaseController.db.collection("usuarios").document(uid).get()
                 .addOnSuccessListener(documentSnapshot -> {
-                    if (documentSnapshot.exists()) return;
+                    if (documentSnapshot.exists()) {
+                        String equipo = documentSnapshot.getString("equipoId");
+                        String tipoUsuario = documentSnapshot.getString("tipoUsuario");
+
+                        // Si ya tiene ambos campos, no mostramos el diálogo
+                        if (equipo != null && !equipo.isEmpty() && tipoUsuario != null && !tipoUsuario.isEmpty()) {
+                            return;
+                        }
+                    }
 
                     FirebaseController.db.collection("equipos").get()
                             .addOnSuccessListener(querySnapshot -> {
@@ -142,8 +153,7 @@ public class InicioFragment extends Fragment {
                                                     rbdJugador.isChecked(),
                                                     rbdEntrenador.isChecked()
                                             );
-                                            Log.i("entrenador", tipoUsuario);
-                                            guardarJugador(uid, equipoPath, tipoUsuario);
+                                            guardarUsuario(uid, equipoPath, tipoUsuario);
                                             cargarPartidos();
                                         });
 
@@ -151,7 +161,6 @@ public class InicioFragment extends Fragment {
                                 dialog.setOnShowListener(dialogInterface -> {
                                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.background)));
                                     Button btnPositivo = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
-
                                     if (btnPositivo != null) {
                                         btnPositivo.setTextColor(getResources().getColor(R.color.color_letra));
                                     }
@@ -167,18 +176,23 @@ public class InicioFragment extends Fragment {
                 });
     }
 
+
     /**
-     * Guarda un jugador en Firebase.
+     * Guarda un usuario en Firebase.
      * @param uid
      * @param equipoId
      * @param tipoUsuario
      */
-    private void guardarJugador(String uid, String equipoId, String tipoUsuario) {
+    private void guardarUsuario(String uid, String equipoId, String tipoUsuario) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         FirebaseController.guardarUsuario(uid, equipoId, tipoUsuario, user,
-                unused -> Toast.makeText(getContext(), R.string.toast_registro_completado, Toast.LENGTH_SHORT).show(),
+                unused -> {
+                    Toast.makeText(getContext(), R.string.toast_registro_completado, Toast.LENGTH_SHORT).show();
+                    cargarPartidos();
+                },
                 e -> Toast.makeText(getContext(), R.string.toast_error_al_registrar + " " + e.getMessage(), Toast.LENGTH_SHORT).show()
         );
     }
+
 }

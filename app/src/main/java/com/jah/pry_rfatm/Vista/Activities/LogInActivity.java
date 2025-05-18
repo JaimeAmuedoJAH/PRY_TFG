@@ -16,10 +16,17 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.SetOptions;
 import com.jah.pry_rfatm.Controlador.FirebaseController;
 import com.jah.pry_rfatm.R;
 import com.jah.pry_rfatm.Vista.Recursos.UtilesUI;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Activity que permite a los usuarios iniciar sesión mediante correo y contraseña o con Google.
@@ -82,6 +89,14 @@ public class LogInActivity extends AppCompatActivity {
         FirebaseController.mAuth.signInWithEmailAndPassword(correo, pass)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
+                        FirebaseUser user = FirebaseController.mAuth.getCurrentUser();
+
+                        if (user != null && !user.isEmailVerified()) {
+                            Toast.makeText(this, "Debes verificar tu correo electrónico antes de continuar", Toast.LENGTH_LONG).show();
+                            FirebaseController.mAuth.signOut();  // importante para cerrar sesión del usuario no verificado
+                            return;
+                        }
+
                         irAMainActivity();
                     } else {
                         Toast.makeText(LogInActivity.this, "Correo o contraseña incorrectos.", Toast.LENGTH_SHORT).show();
@@ -140,6 +155,37 @@ public class LogInActivity extends AppCompatActivity {
      * Redirige al usuario a la actividad principal.
      */
     private void irAMainActivity() {
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (firebaseUser != null) {
+            String uid = firebaseUser.getUid();
+            String nombre = firebaseUser.getDisplayName(); // nombre del correo si está disponible
+            String fotoPerfil = firebaseUser.getPhotoUrl() != null ? firebaseUser.getPhotoUrl().toString() : "";
+
+            DocumentReference userRef = FirebaseController.db.collection("usuarios").document(uid);
+            userRef.get().addOnSuccessListener(documentSnapshot -> {
+                if (!documentSnapshot.exists()) {
+                    // Crear el documento si no existe
+                    Map<String, Object> data = new HashMap<>();
+                    data.put("nombre", nombre != null ? nombre : "");
+                    data.put("fotoPerfil", fotoPerfil);
+                    userRef.set(data);
+                } else {
+                    // Si existe, actualizar si no están presentes
+                    Map<String, Object> updates = new HashMap<>();
+                    if (!documentSnapshot.contains("nombre")) {
+                        updates.put("nombre", nombre != null ? nombre : "");
+                    }
+                    if (!documentSnapshot.contains("fotoPerfil")) {
+                        updates.put("fotoPerfil", fotoPerfil);
+                    }
+                    if (!updates.isEmpty()) {
+                        userRef.update(updates);
+                    }
+                }
+            });
+        }
+
+
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);

@@ -66,7 +66,7 @@ public class AdaptadorRanking extends RecyclerView.Adapter<AdaptadorRanking.Hold
      */
     public static class HolderRanking extends RecyclerView.ViewHolder {
 
-        TextView tvNombre, tvVictorias, tvDerrotas, tvPorcentaje;
+        TextView tvNombre, tvVictorias, tvDerrotas, tvPuntos;
 
         /**
          * Constructor que vincula las vistas.
@@ -77,7 +77,7 @@ public class AdaptadorRanking extends RecyclerView.Adapter<AdaptadorRanking.Hold
             tvNombre = itemView.findViewById(R.id.tvNombre);
             tvVictorias = itemView.findViewById(R.id.tvVictorias);
             tvDerrotas = itemView.findViewById(R.id.tvDerrotas);
-            tvPorcentaje = itemView.findViewById(R.id.tvPorcentaje);
+            tvPuntos = itemView.findViewById(R.id.tvPuntos);
         }
 
         /**
@@ -88,7 +88,7 @@ public class AdaptadorRanking extends RecyclerView.Adapter<AdaptadorRanking.Hold
             tvNombre.setText(jugador.getNombre());
             tvVictorias.setText(String.valueOf(jugador.getVictorias()));
             tvDerrotas.setText(String.valueOf(jugador.getDerrotas()));
-            tvPorcentaje.setText(String.valueOf(jugador.getPorcentajeVictorias()));
+            tvPuntos.setText(String.valueOf(jugador.getPorcentajeVictorias()));
         }
     }
 }

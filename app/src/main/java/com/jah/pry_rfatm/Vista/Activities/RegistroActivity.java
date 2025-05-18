@@ -71,6 +71,15 @@ public class RegistroActivity extends AppCompatActivity {
                     FirebaseUser user = FirebaseController.mAuth.getCurrentUser();
                     if (user == null) return;
 
+                    // Enviar correo de verificación
+                    user.sendEmailVerification()
+                            .addOnSuccessListener(unused -> {
+                                Toast.makeText(this, "Correo de verificación enviado a " + user.getEmail(), Toast.LENGTH_SHORT).show();
+                            })
+                            .addOnFailureListener(e -> {
+                                Toast.makeText(this, "Error al enviar verificación: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                            });
+
                     FirebaseController.db.collection("usuarios")
                             .whereEqualTo("nombre", username)
                             .get()

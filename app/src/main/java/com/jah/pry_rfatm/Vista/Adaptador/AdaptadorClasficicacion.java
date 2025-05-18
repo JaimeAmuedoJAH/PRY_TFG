@@ -1,6 +1,7 @@
 package com.jah.pry_rfatm.Vista.Adaptador;
 
 import android.content.Context;
+import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,12 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.card.MaterialCardView;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.jah.pry_rfatm.Controlador.FirebaseController;
+import com.jah.pry_rfatm.Logica.ClasificacionLogic;
 import com.jah.pry_rfatm.Modelo.Equipo;
 import com.jah.pry_rfatm.Modelo.Grupo;
 import com.jah.pry_rfatm.R;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -61,98 +61,71 @@ public class AdaptadorClasficicacion extends RecyclerView.Adapter<AdaptadorClasf
         Grupo grupo = dataSet.get(position);
         holder.lblGrupo.setText(grupo.getNombre());
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        ClasificacionLogic.obtenerClasificacion(grupo, FirebaseController.db, new ClasificacionLogic.ClasificacionCallback() {
+            @Override
+            public void onClasificacionObtenida(List<Pair<Equipo, Integer>> equiposOrdenados) {
+                for (int i = 0; i < equiposOrdenados.size(); i++) {
+                    Equipo eq = equiposOrdenados.get(i).first;
+                    int puntosEq = equiposOrdenados.get(i).second;
 
-        obtenerDatosClasificacion(holder, grupo, db);
-    }
-
-    /**
-     * Obtiene los datos de los equipos desde Firestore y los muestra ordenados por puntos.
-     * @param holder ViewHolder donde se mostrarán los datos.
-     * @param grupo Grupo que contiene los IDs de los equipos.
-     * @param db Instancia de FirebaseFirestore.
-     */
-    private static void obtenerDatosClasificacion(@NonNull AdaptadorClasficicacion.holderClasificacion holder, Grupo grupo, FirebaseFirestore db) {
-        List<String> idsEquipos = grupo.getEquipos();
-        if (idsEquipos == null || idsEquipos.isEmpty()) return;
-
-        List<Pair<Equipo, Integer>> listaEquipos = new ArrayList<>();
-
-        for (String idRef : idsEquipos) {
-            String idEquipo = idRef.split("/")[1];
-
-            db.collection("equipos").document(idEquipo).get().addOnSuccessListener(documentSnapshot -> {
-                if (documentSnapshot.exists()) {
-                    Equipo equipo = documentSnapshot.toObject(Equipo.class);
-                    if (equipo != null) {
-                        int puntos = equipo.getVictorias() * 3;
-                        listaEquipos.add(new Pair<>(equipo, puntos));
-
-                        if (listaEquipos.size() == idsEquipos.size()) {
-                            // Ordenar por puntos descendente
-                            listaEquipos.sort((e1, e2) -> Integer.compare(e2.second, e1.second));
-
-                            // Mostrar en los TextViews
-                            for (int i = 0; i < listaEquipos.size(); i++) {
-                                Equipo eq = listaEquipos.get(i).first;
-                                int puntosEq = listaEquipos.get(i).second;
-
-                                switch (i) {
-                                    case 0:
-                                        holder.lblEq1.setText(eq.getNombre());
-                                        holder.lblVic1.setText(String.valueOf(eq.getVictorias()));
-                                        holder.lblDer1.setText(String.valueOf(eq.getDerrotas()));
-                                        holder.lblPuntos1.setText(String.valueOf(puntosEq));
-                                        break;
-                                    case 1:
-                                        holder.lblEq2.setText(eq.getNombre());
-                                        holder.lblVic2.setText(String.valueOf(eq.getVictorias()));
-                                        holder.lblDer2.setText(String.valueOf(eq.getDerrotas()));
-                                        holder.lblPuntos2.setText(String.valueOf(puntosEq));
-                                        break;
-                                    case 2:
-                                        holder.lblEq3.setText(eq.getNombre());
-                                        holder.lblVic3.setText(String.valueOf(eq.getVictorias()));
-                                        holder.lblDer3.setText(String.valueOf(eq.getDerrotas()));
-                                        holder.lblPuntos3.setText(String.valueOf(puntosEq));
-                                        break;
-                                    case 3:
-                                        holder.lblEq4.setText(eq.getNombre());
-                                        holder.lblVic4.setText(String.valueOf(eq.getVictorias()));
-                                        holder.lblDer4.setText(String.valueOf(eq.getDerrotas()));
-                                        holder.lblPuntos4.setText(String.valueOf(puntosEq));
-                                        break;
-                                    case 4:
-                                        holder.lblEq5.setText(eq.getNombre());
-                                        holder.lblVic5.setText(String.valueOf(eq.getVictorias()));
-                                        holder.lblDer5.setText(String.valueOf(eq.getDerrotas()));
-                                        holder.lblPuntos5.setText(String.valueOf(puntosEq));
-                                        break;
-                                    case 5:
-                                        holder.lblEq6.setText(eq.getNombre());
-                                        holder.lblVic6.setText(String.valueOf(eq.getVictorias()));
-                                        holder.lblDer6.setText(String.valueOf(eq.getDerrotas()));
-                                        holder.lblPuntos6.setText(String.valueOf(puntosEq));
-                                        break;
-                                    case 6:
-                                        holder.lblEq7.setText(eq.getNombre());
-                                        holder.lblVic7.setText(String.valueOf(eq.getVictorias()));
-                                        holder.lblDer7.setText(String.valueOf(eq.getDerrotas()));
-                                        holder.lblPuntos7.setText(String.valueOf(puntosEq));
-                                        break;
-                                    case 7:
-                                        holder.lblEq8.setText(eq.getNombre());
-                                        holder.lblVic8.setText(String.valueOf(eq.getVictorias()));
-                                        holder.lblDer8.setText(String.valueOf(eq.getDerrotas()));
-                                        holder.lblPuntos8.setText(String.valueOf(puntosEq));
-                                        break;
-                                }
-                            }
-                        }
+                    switch (i) {
+                        case 0:
+                            holder.lblEq1.setText(eq.getNombre());
+                            holder.lblVic1.setText(String.valueOf(eq.getVictorias()));
+                            holder.lblDer1.setText(String.valueOf(eq.getDerrotas()));
+                            holder.lblPuntos1.setText(String.valueOf(puntosEq));
+                            break;
+                        case 1:
+                            holder.lblEq2.setText(eq.getNombre());
+                            holder.lblVic2.setText(String.valueOf(eq.getVictorias()));
+                            holder.lblDer2.setText(String.valueOf(eq.getDerrotas()));
+                            holder.lblPuntos2.setText(String.valueOf(puntosEq));
+                            break;
+                        case 2:
+                            holder.lblEq3.setText(eq.getNombre());
+                            holder.lblVic3.setText(String.valueOf(eq.getVictorias()));
+                            holder.lblDer3.setText(String.valueOf(eq.getDerrotas()));
+                            holder.lblPuntos3.setText(String.valueOf(puntosEq));
+                            break;
+                        case 3:
+                            holder.lblEq4.setText(eq.getNombre());
+                            holder.lblVic4.setText(String.valueOf(eq.getVictorias()));
+                            holder.lblDer4.setText(String.valueOf(eq.getDerrotas()));
+                            holder.lblPuntos4.setText(String.valueOf(puntosEq));
+                            break;
+                        case 4:
+                            holder.lblEq5.setText(eq.getNombre());
+                            holder.lblVic5.setText(String.valueOf(eq.getVictorias()));
+                            holder.lblDer5.setText(String.valueOf(eq.getDerrotas()));
+                            holder.lblPuntos5.setText(String.valueOf(puntosEq));
+                            break;
+                        case 5:
+                            holder.lblEq6.setText(eq.getNombre());
+                            holder.lblVic6.setText(String.valueOf(eq.getVictorias()));
+                            holder.lblDer6.setText(String.valueOf(eq.getDerrotas()));
+                            holder.lblPuntos6.setText(String.valueOf(puntosEq));
+                            break;
+                        case 6:
+                            holder.lblEq7.setText(eq.getNombre());
+                            holder.lblVic7.setText(String.valueOf(eq.getVictorias()));
+                            holder.lblDer7.setText(String.valueOf(eq.getDerrotas()));
+                            holder.lblPuntos7.setText(String.valueOf(puntosEq));
+                            break;
+                        case 7:
+                            holder.lblEq8.setText(eq.getNombre());
+                            holder.lblVic8.setText(String.valueOf(eq.getVictorias()));
+                            holder.lblDer8.setText(String.valueOf(eq.getDerrotas()));
+                            holder.lblPuntos8.setText(String.valueOf(puntosEq));
+                            break;
                     }
                 }
-            });
-        }
+            }
+
+            @Override
+            public void onError(Exception e) {
+                Log.e("Clasificación", "Error obteniendo datos", e);
+            }
+        });
     }
 
     /**
@@ -163,7 +136,6 @@ public class AdaptadorClasficicacion extends RecyclerView.Adapter<AdaptadorClasf
     public int getItemCount() {
         return dataSet.size();
     }
-
 
     /**
      * ViewHolder que representa cada tarjeta de grupo con estadísticas de hasta 8 equipos.

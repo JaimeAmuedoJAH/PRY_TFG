@@ -115,14 +115,15 @@ public class FirebaseController {
                                     })
                                     .addOnFailureListener(onFailure);
                         } else {
-                            onFailure.onFailure(new Exception(String.valueOf(R.string.exception_equipoid_vac_o_o_nulo)));
+                            onFailure.onFailure(new Exception("El equipoId es nulo o vacío"));
                         }
                     } else {
-                        onFailure.onFailure(new Exception(String.valueOf(R.string.exception_documento_de_usuario_no_existe)));
+                        onFailure.onFailure(new Exception("El documento de usuario no existe"));
                     }
                 })
                 .addOnFailureListener(onFailure);
     }
+
 
     /**
      * Guarda la información de un jugador o entrenador en Firestore.
