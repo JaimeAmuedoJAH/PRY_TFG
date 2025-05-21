@@ -9,6 +9,9 @@ import com.jah.pry_rfatm.Modelo.Grupo;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase de lógica para la clasificación de equipos.
+ */
 public class ClasificacionLogic {
 
     /**

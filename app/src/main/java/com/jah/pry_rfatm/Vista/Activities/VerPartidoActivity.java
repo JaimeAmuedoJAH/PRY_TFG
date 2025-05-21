@@ -2,7 +2,6 @@ package com.jah.pry_rfatm.Vista.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -10,13 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.material.appbar.MaterialToolbar;
 import com.jah.pry_rfatm.Controlador.FirebaseController;
-import com.jah.pry_rfatm.Modelo.Equipo;
 import com.jah.pry_rfatm.Modelo.Partido;
 import com.jah.pry_rfatm.R;
 import com.jah.pry_rfatm.Vista.Recursos.UtilesUI;
@@ -33,6 +29,7 @@ public class VerPartidoActivity extends AppCompatActivity {
     Button btnActa;
     String nombreEquipoLocal, nombreEquipoVisitante, fechaHora, idLocal, idVisitante, urlEscudoLocal, urlEscudoVisitante;
     Partido partido;
+    String partidoId;
 
     /**
      * Inicializa la actividad, componentes UI y configura la barra superior.
@@ -45,13 +42,14 @@ public class VerPartidoActivity extends AppCompatActivity {
         UtilesUI.configurarStatusBar(this);
         setSupportActionBar(mtbBarVerPartido);
         mtbBarVerPartido.setBackgroundColor(getResources().getColor(R.color.color_fondos));
-        
+
         asginarInformacion();
 
         btnActa.setOnClickListener(v -> {
             Intent intent = new Intent(this, ActaActivity.class);
-            intent.putExtra("equipoLocal", nombreEquipoLocal);
-            intent.putExtra("equipoVisitante", nombreEquipoVisitante);
+            intent.putExtra("idLocal", partido.getEquipoLocalId().split("/")[2]);
+            intent.putExtra("idVisitante", partido.getEquipoVisitanteId().split("/")[2]);
+            intent.putExtra("idDocumentoPartido", partidoId);
             startActivity(intent);
         });
     }
@@ -71,22 +69,20 @@ public class VerPartidoActivity extends AppCompatActivity {
             lblResultadoPartido.setVisibility(View.VISIBLE);
             lblResultadoPartido.setText(partido.getResultado());
         }
-        lblResultadoPartido.setText(partido.getEstado());
         FirebaseController.obtenerEquipoPorId(idLocal, equipoLocal -> {
             lblLocalizacion.setText(equipoLocal.getLocalizacion());
             urlEscudoLocal = equipoLocal.getEscudo();
             FirebaseController.cargarImagenDesdeStorage(imgEquipoLocal, urlEscudoLocal, FirebaseController.imagenPorDefecto);
         }, e -> {
-            lblLocalizacion.setText("No disponible");
+
         });
 
         FirebaseController.obtenerEquipoPorId(idVisitante, equipoVisitante -> {
             urlEscudoVisitante = equipoVisitante.getEscudo();
             FirebaseController.cargarImagenDesdeStorage(imgEquipoVisitante, urlEscudoVisitante, FirebaseController.imagenPorDefecto);
         }, e -> {
-            lblLocalizacion.setText("No disponible");
-        });
 
+        });
     }
 
     /**
@@ -129,5 +125,6 @@ public class VerPartidoActivity extends AppCompatActivity {
         idLocal = getIntent().getStringExtra("idLocal");
         idVisitante = getIntent().getStringExtra("idVisitante");
         partido = (Partido) getIntent().getSerializableExtra("partido");
+        partidoId = getIntent().getStringExtra("idDocumentoPartido");
     }
 }

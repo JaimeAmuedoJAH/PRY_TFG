@@ -100,7 +100,7 @@
             app:layout_constraintTop_toBottomOf="@+id/lblTipo" />
 
         <TextView
-            android:id="@+id/lblNombreEquipo"
+            android:id="@+id/lblActaA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"

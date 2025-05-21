@@ -20,11 +20,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.SetOptions;
 import com.jah.pry_rfatm.Controlador.FirebaseController;
 import com.jah.pry_rfatm.R;
 import com.jah.pry_rfatm.Vista.Recursos.UtilesUI;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -184,7 +182,6 @@ public class LogInActivity extends AppCompatActivity {
                 }
             });
         }
-
 
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

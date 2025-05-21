@@ -9,6 +9,9 @@ import com.jah.pry_rfatm.Modelo.Jugador;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase de lógica para la clasificación de equipos.
+ */
 public class RankingLogic {
 
     private final FirebaseFirestore db;

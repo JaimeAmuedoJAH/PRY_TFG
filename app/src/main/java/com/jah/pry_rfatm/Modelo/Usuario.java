@@ -1,7 +1,6 @@
 package com.jah.pry_rfatm.Modelo;
 
 import androidx.annotation.NonNull;
-
 import java.io.Serializable;
 
 /**

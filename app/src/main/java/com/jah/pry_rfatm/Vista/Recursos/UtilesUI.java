@@ -21,13 +21,7 @@ public class UtilesUI {
 
     /**
      * Configura la barra de estado (status bar) para una actividad.
-     * <p>
-     * - Oculta la ActionBar si está presente. <br>
-     * - Cambia el color de fondo de la barra de estado a blanco. <br>
-     * - Establece iconos oscuros en la barra de estado si el dispositivo tiene Android Marshmallow (API 23) o superior.
-     * </p>
-     *
-     * @param activity La actividad sobre la cual se aplicarán los cambios en la UI.
+     * @param activity
      */
     public static void configurarStatusBar(AppCompatActivity activity) {
         // Configura la status bar (barra superior)

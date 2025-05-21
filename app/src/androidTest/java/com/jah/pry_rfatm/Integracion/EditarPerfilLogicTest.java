@@ -1,4 +1,4 @@
-package com.jah.pry_rfatm.Unitario;
+package com.jah.pry_rfatm.Integracion;
 
 import static org.junit.Assert.*;
 

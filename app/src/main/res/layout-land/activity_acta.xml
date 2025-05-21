@@ -1,199 +1,510 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
-    tools:context=".Vista.Activities.ActaActivity">
+    android:background="@color/background">
 
+    <!-- Toolbar fija arriba -->
     <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/mtbBarActa"
+        android:id="@+id/mtbActa"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
+        android:titleTextColor="@android:color/white"
+        android:fontFamily="@font/actor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/tolbar_acta"
-        app:titleTextColor="@color/color_letra" />
+        app:titleCentered="true" />
 
+    <!-- Contenido desplazable dentro de ScrollView -->
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@color/color_fondos"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblEquipoLocal">
+        app:layout_constraintTop_toBottomOf="@id/mtbActa">
 
-        <androidx.gridlayout.widget.GridLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:columnCount="8"
-            app:rowCount="9">
+            android:orientation="vertical"
+            android:padding="16dp">
 
             <TextView
-                android:id="@+id/TextView"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="200dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
+                android:background="#DDDDDD"
                 android:fontFamily="@font/actor"
-                android:text="@string/set_1"
-                android:textAlignment="center"
-                android:textSize="@dimen/letra_size" />
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/acta_del_partido"
+                android:textColor="@color/color_letra"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
+            <TableLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/actor"
-                android:text="@string/set_2"
-                android:textAlignment="center"
-                android:textSize="@dimen/letra_size" />
+                android:background="#004d25"
+                android:stretchColumns="1,6">
 
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="wrap_content"
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/lblEquipoABC"
+                        android:layout_span="6"
+                        android:fontFamily="@font/actor"
+                        android:hint="Nombre EquipoABC"
+                        android:padding="8dp"
+                        android:textColor="@color/color_letra"
+                        android:textColorHint="@color/color_letra"
+                        android:textSize="@dimen/letra_size" />
+
+                    <TextView
+                        android:id="@+id/lblEquipoXYZ"
+                        android:fontFamily="@font/actor"
+                        android:gravity="end"
+                        android:hint="Nombre EquipoXYZ"
+                        android:padding="8dp"
+                        android:textColor="@color/color_letra"
+                        android:textColorHint="@color/color_letra"
+                        android:textSize="@dimen/letra_size" />
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/actor"
-                android:text="@string/set_3"
-                android:textAlignment="center"
-                android:textSize="@dimen/letra_size" />
+                android:stretchColumns="1,2,3,4,5,6">
 
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/actor"
-                android:text="@string/set_4"
-                android:textAlignment="center"
-                android:textSize="@dimen/letra_size" />
+                <!-- 7 FILAS DE DATOS -->
+                <TableRow>
 
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/actor"
-                android:text="@string/set_5"
-                android:textAlignment="center"
-                android:textSize="@dimen/letra_size" />
+                    <EditText
+                        android:id="@+id/lblJugadorA1"
+                        android:hint="JugadorA"
+                        android:fontFamily="@font/actor"
+                        android:inputType="textPersonName"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
 
-            <TextView
-                android:id="@+id/lblXYZ"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="150dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/actor"
-                android:text="@string/resultado"
-                android:textAlignment="center"
-                android:textSize="@dimen/letra_size" />
+                    <EditText
+                        android:id="@+id/lblSet11"
+                        android:hint="set1"
+                        android:fontFamily="@font/actor"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
 
-            <TextView
-                android:id="@+id/textView13"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                    <EditText
+                        android:id="@+id/lblSet21"
+                        android:hint="set2"
+                        android:fontFamily="@font/actor"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
 
-            <TextView
-                android:id="@+id/textView14"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                    <EditText
+                        android:id="@+id/lblSet31"
+                        android:hint="set3"
+                        android:fontFamily="@font/actor"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
 
-            <TextView
-                android:id="@+id/lblJugadorA1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
+                    <EditText
+                        android:id="@+id/lblSet41"
+                        android:hint="set4"
+                        android:fontFamily="@font/actor"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
 
-            <TextView
-                android:id="@+id/lblP1S1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
+                    <EditText
+                        android:id="@+id/lblSet51"
+                        android:hint="set5"
+                        android:fontFamily="@font/actor"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
 
-            <TextView
-                android:id="@+id/lblP1S2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
+                    <EditText
+                        android:id="@+id/lblJugadorY1"
+                        android:hint="JugadorY"
+                        android:fontFamily="@font/actor"
+                        android:inputType="textPersonName"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size"
+                        />
+                </TableRow>
 
-            <TextView
-                android:id="@+id/lblP1S3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
+                <TableRow>
 
-            <TextView
-                android:id="@+id/lblP1S4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
+                    <EditText
+                        android:id="@+id/lblJugadorB1"
+                        android:hint="JugadorB"
+                        android:fontFamily="@font/actor"
+                        android:inputType="textPersonName"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
 
-            <TextView
-                android:id="@+id/lblP1S5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
+                    <EditText
+                        android:id="@+id/lblSet12"
+                        android:hint="set1"
+                        android:fontFamily="@font/actor"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
 
-            <TextView
-                android:id="@+id/lblResultado"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
+                    <EditText
+                        android:id="@+id/lblSet22"
+                        android:hint="set2"
+                        android:fontFamily="@font/actor"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
 
-            <TextView
-                android:id="@+id/lblJugadorY1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
-        </androidx.gridlayout.widget.GridLayout>
+                    <EditText
+                        android:id="@+id/lblSet32"
+                        android:hint="set3"
+                        android:fontFamily="@font/actor"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+
+                    <EditText
+                        android:id="@+id/lblSet42"
+                        android:hint="set4"
+                        android:fontFamily="@font/actor"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+
+                    <EditText
+                        android:id="@+id/lblSet52"
+                        android:hint="set5"
+                        android:fontFamily="@font/actor"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+
+                    <EditText
+                        android:id="@+id/lblJugadorX1"
+                        android:hint="JugadorX"
+                        android:fontFamily="@font/actor"
+                        android:inputType="textPersonName"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+                </TableRow>
+
+                <TableRow>
+
+                    <EditText
+                        android:id="@+id/lblJugadorC1"
+                        android:hint="JugadorC"
+                        android:fontFamily="@font/actor"
+                        android:inputType="textPersonName"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+
+                    <EditText
+                        android:id="@+id/lblSet13"
+                        android:hint="set1"
+                        android:fontFamily="@font/actor"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+
+                    <EditText
+                        android:id="@+id/lblSet23"
+                        android:hint="set2"
+                        android:fontFamily="@font/actor"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+
+                    <EditText
+                        android:id="@+id/lblSet33"
+                        android:hint="set3"
+                        android:fontFamily="@font/actor"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+
+                    <EditText
+                        android:id="@+id/lblSet43"
+                        android:hint="set4"
+                        android:fontFamily="@font/actor"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+
+                    <EditText
+                        android:id="@+id/lblSet53"
+                        android:hint="set5"
+                        android:fontFamily="@font/actor"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+
+                    <EditText
+                        android:id="@+id/lblJugadorZ1"
+                        android:hint="JugadorZ"
+                        android:fontFamily="@font/actor"
+                        android:inputType="textPersonName"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+                </TableRow>
+
+                <TableRow>
+
+                    <EditText
+                        android:id="@+id/lblJugadorA2"
+                        android:hint="JugadorA"
+                        android:fontFamily="@font/actor"
+                        android:inputType="textPersonName"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+
+                    <EditText
+                        android:id="@+id/lblSet14"
+                        android:hint="set1"
+                        android:fontFamily="@font/actor"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+
+                    <EditText
+                        android:id="@+id/lblSet24"
+                        android:hint="set2"
+                        android:fontFamily="@font/actor"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+
+                    <EditText
+                        android:id="@+id/lblSet34"
+                        android:hint="set3"
+                        android:fontFamily="@font/actor"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+
+                    <EditText
+                        android:id="@+id/lblSet44"
+                        android:hint="set4"
+                        android:fontFamily="@font/actor"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+
+                    <EditText
+                        android:id="@+id/lblSet54"
+                        android:hint="set5"
+                        android:fontFamily="@font/actor"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+
+                    <EditText
+                        android:id="@+id/lblJugadorX2"
+                        android:hint="JugadorX"
+                        android:fontFamily="@font/actor"
+                        android:inputType="textPersonName"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+                </TableRow>
+
+                <TableRow>
+
+                    <EditText
+                        android:id="@+id/lblJugadorC2"
+                        android:hint="JugadorC"
+                        android:fontFamily="@font/actor"
+                        android:inputType="textPersonName"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+
+                    <EditText
+                        android:id="@+id/lblSet15"
+                        android:hint="set1"
+                        android:fontFamily="@font/actor"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+
+                    <EditText
+                        android:id="@+id/lblSet25"
+                        android:hint="set2"
+                        android:fontFamily="@font/actor"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+
+                    <EditText
+                        android:id="@+id/lblSet35"
+                        android:hint="set3"
+                        android:fontFamily="@font/actor"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+
+                    <EditText
+                        android:id="@+id/lblSet45"
+                        android:hint="set4"
+                        android:fontFamily="@font/actor"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+
+                    <EditText
+                        android:id="@+id/lblSet55"
+                        android:hint="set5"
+                        android:fontFamily="@font/actor"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+
+                    <EditText
+                        android:id="@+id/lblJugadorY2"
+                        android:hint="JugadorY"
+                        android:fontFamily="@font/actor"
+                        android:inputType="textPersonName"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+                </TableRow>
+
+                <TableRow>
+
+                    <EditText
+                        android:id="@+id/lblJugadorB2"
+                        android:hint="JugadorB"
+                        android:fontFamily="@font/actor"
+                        android:inputType="textPersonName"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+
+                    <EditText
+                        android:id="@+id/lblSet16"
+                        android:hint="set1"
+                        android:fontFamily="@font/actor"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+
+                    <EditText
+                        android:id="@+id/lblSet26"
+                        android:hint="set2"
+                        android:fontFamily="@font/actor"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+
+                    <EditText
+                        android:id="@+id/lblSet36"
+                        android:hint="set3"
+                        android:fontFamily="@font/actor"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+
+                    <EditText
+                        android:id="@+id/lblSet46"
+                        android:hint="set4"
+                        android:fontFamily="@font/actor"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+
+                    <EditText
+                        android:id="@+id/lblSet56"
+                        android:hint="set5"
+                        android:fontFamily="@font/actor"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+
+                    <EditText
+                        android:id="@+id/lblJugadorZ2"
+                        android:hint="JugadorZ"
+                        android:fontFamily="@font/actor"
+                        android:inputType="textPersonName"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+                </TableRow>
+
+                <TableRow>
+
+                    <EditText
+                        android:id="@+id/lblJugadorA3"
+                        android:hint="JugadorA"
+                        android:fontFamily="@font/actor"
+                        android:inputType="textPersonName"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+
+                    <EditText
+                        android:id="@+id/lblSet17"
+                        android:hint="set1"
+                        android:fontFamily="@font/actor"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+
+                    <EditText
+                        android:id="@+id/lblSet27"
+                        android:hint="set2"
+                        android:fontFamily="@font/actor"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+
+                    <EditText
+                        android:id="@+id/lblSet37"
+                        android:hint="set3"
+                        android:fontFamily="@font/actor"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+
+                    <EditText
+                        android:id="@+id/lblSet47"
+                        android:hint="set4"
+                        android:fontFamily="@font/actor"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+
+                    <EditText
+                        android:id="@+id/lblSet57"
+                        android:hint="set5"
+                        android:fontFamily="@font/actor"
+                        android:inputType="text"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+
+                    <EditText
+                        android:id="@+id/lblJugadorX3"
+                        android:hint="JugadorX"
+                        android:fontFamily="@font/actor"
+                        android:inputType="textPersonName"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/letra_size" />
+                </TableRow>
+
+                <EditText
+                    android:id="@+id/txtResultado"
+                    android:hint="Resultado Final:"
+                    android:fontFamily="@font/actor"
+                    android:inputType="textPersonName"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/letra_size" />
+
+            </TableLayout>
+        </LinearLayout>
     </ScrollView>
-
-    <TextView
-        android:id="@+id/lblEquipoLocal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/actor"
-        android:textColor="@color/color_letra"
-        android:textSize="@dimen/letra_size"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mtbBarActa" />
-
-    <TextView
-        android:id="@+id/lblEquipoVis"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
-        android:fontFamily="@font/actor"
-        android:textColor="@color/color_letra"
-        android:textSize="@dimen/letra_size"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mtbBarActa" />
 </androidx.constraintlayout.widget.ConstraintLayout>

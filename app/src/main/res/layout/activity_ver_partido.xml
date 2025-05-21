@@ -112,6 +112,7 @@
         android:text="@string/btn_acta"
         android:textColor="@color/color_letra"
         android:textSize="@dimen/letra_size_btn"
+        app:cornerRadius="@dimen/corner_radius"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

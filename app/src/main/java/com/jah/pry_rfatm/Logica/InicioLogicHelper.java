@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Clase de lógica para la clasificación de equipos.
+ */
 public class InicioLogicHelper {
 
     /**

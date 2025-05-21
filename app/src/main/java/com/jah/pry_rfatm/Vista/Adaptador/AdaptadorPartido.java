@@ -87,9 +87,9 @@ public class AdaptadorPartido extends RecyclerView.Adapter<AdaptadorPartido.Hold
             intent.putExtra("idVisitante", partido.getEquipoVisitanteId().split("/")[2]);
             intent.putExtra("fechaHora", holder.lblHora.getText().toString());
             intent.putExtra("partido", partido);
+            intent.putExtra("idDocumentoPartido", partido.getPartidoId());
             context.startActivity(intent);
         });
-
     }
 
     /**

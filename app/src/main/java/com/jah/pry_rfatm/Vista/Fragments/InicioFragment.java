@@ -35,6 +35,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * Fragmento que muestra la lista de partidos.
+ */
 public class InicioFragment extends Fragment {
 
     RecyclerView rvPartido;

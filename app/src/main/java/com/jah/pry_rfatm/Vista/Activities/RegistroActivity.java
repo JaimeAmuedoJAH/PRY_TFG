@@ -25,6 +25,9 @@ import com.jah.pry_rfatm.Vista.Recursos.UtilesUI;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Actividad de registro de usuarios.
+ */
 public class RegistroActivity extends AppCompatActivity {
 
     MaterialToolbar mtbBar;

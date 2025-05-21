@@ -294,7 +294,7 @@ public class PerfilFragment extends Fragment {
         TextView lblNombreJugador = view.findViewById(R.id.lblNombreJugador);
         TextView lblTipo = view.findViewById(R.id.lblTipo);
         TextView lblEstilo = view.findViewById(R.id.lblEstilo);
-        TextView lblNombreEquipo = view.findViewById(R.id.lblNombreEquipo);
+        TextView lblNombreEquipo = view.findViewById(R.id.lblActaA);
         TextView lblVictorias = view.findViewById(R.id.lblVictorias);
         TextView lblDerrotas = view.findViewById(R.id.lblDerrotas);
         TextView lblPorcentaje = view.findViewById(R.id.lblPorcentaje);

@@ -26,7 +26,6 @@ import com.jah.pry_rfatm.Modelo.Jugador;
 import com.jah.pry_rfatm.Modelo.Partido;
 import com.jah.pry_rfatm.Modelo.Usuario;
 import com.jah.pry_rfatm.R;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -54,7 +53,6 @@ public class FirebaseController {
     /** URL por defecto para la foto de perfil */
     public static String imagenPerfilPorDefecto = "gs://pry-rfatm.firebasestorage.app/foto_perfil_defecto.png";
 
-
     /**
      * Inicializa Firebase con el contexto dado.
      * También configura App Check con el proveedor de depuración.
@@ -69,7 +67,6 @@ public class FirebaseController {
             firebaseAppCheck.installAppCheckProviderFactory(
                     DebugAppCheckProviderFactory.getInstance()
             );
-
 
             mAuth = FirebaseAuth.getInstance();
             db = FirebaseFirestore.getInstance();
@@ -89,36 +86,43 @@ public class FirebaseController {
         db.collection("usuarios").document(uid).get()
                 .addOnSuccessListener(userDoc -> {
                     if (userDoc.exists()) {
-                        String equipoPath = userDoc.getString("equipoId");
+                        String equipoPath = userDoc.getString("equipoId"); // Obtenemos el equipoId al que pertenece el jugador
 
                         if (equipoPath != null && !equipoPath.isEmpty()) {
                             List<Partido> partidos = new ArrayList<>();
 
+                            // Consulta para obtener los partidos donde el equipo es local
                             db.collection("partidos")
                                     .whereEqualTo("equipoLocalId", equipoPath)
                                     .get()
                                     .addOnSuccessListener(snapshot1 -> {
                                         for (QueryDocumentSnapshot doc : snapshot1) {
-                                            partidos.add(doc.toObject(Partido.class));
+                                            Partido partido = doc.toObject(Partido.class);
+                                            partido.setPartidoId(doc.getId()); // <-- Asigna el ID del documento
+                                            partidos.add(partido);
                                         }
 
+                                        // Consulta para obtener los partidos donde el equipo es visitante
                                         db.collection("partidos")
                                                 .whereEqualTo("equipoVisitanteId", equipoPath)
                                                 .get()
                                                 .addOnSuccessListener(snapshot2 -> {
                                                     for (QueryDocumentSnapshot doc : snapshot2) {
-                                                        partidos.add(doc.toObject(Partido.class));
+                                                        Partido partido = doc.toObject(Partido.class);
+                                                        partido.setPartidoId(doc.getId()); // <-- Asigna el ID también aquí
+                                                        partidos.add(partido);
                                                     }
+
                                                     onSuccess.onSuccess(partidos);
                                                 })
                                                 .addOnFailureListener(onFailure);
                                     })
                                     .addOnFailureListener(onFailure);
                         } else {
-                            onFailure.onFailure(new Exception("El equipoId es nulo o vacío"));
+                            onFailure.onFailure(new Exception(String.valueOf(R.string.el_equipoid_es_nulo_o_vac_o)));
                         }
                     } else {
-                        onFailure.onFailure(new Exception("El documento de usuario no existe"));
+                        onFailure.onFailure(new Exception(String.valueOf(R.string.el_documento_de_usuario_no_existe)));
                     }
                 })
                 .addOnFailureListener(onFailure);
@@ -143,7 +147,7 @@ public class FirebaseController {
 
         String fotoPerfil = (user != null && user.getPhotoUrl() != null) ? user.getPhotoUrl().toString() : "";
         String nombre = (user != null && user.getDisplayName() != null) ? user.getDisplayName() : "Jugador";
-
+        //Creamos un objeto tipo jugador o entrenado rsegun el tipoUsuario.
         if (tipoUsuario.equals("jugador")) {
             Jugador jugador = new Jugador(
                     equipoId,
@@ -156,13 +160,13 @@ public class FirebaseController {
                     0, // derrotas
                     0  // porcentaje
             );
-
+            //Añadimos al jugador a la base de datos.
             db.collection("usuarios").document(uid).set(jugador)
                     .addOnSuccessListener(onSuccess)
                     .addOnFailureListener(onFailure);
 
             // Añadir a suplentes
-            DocumentReference equipoRef = db.collection("equipos").document(equipoId.split("/")[2]);
+            DocumentReference equipoRef = db.collection("equipos").document(equipoId.split("/")[2]);//Usamos split para obtener el ID del equipo ejemplo (equipo003)
             equipoRef.update("suplentes", FieldValue.arrayUnion(uid))
                     .addOnSuccessListener(aVoid -> Log.d("Firestore", String.valueOf((R.string.jugador_a_adido_como_suplente))))
                     .addOnFailureListener(e -> Log.w("Firestore", String.valueOf(R.string.error_al_a_adir_suplente), e));
@@ -218,17 +222,17 @@ public class FirebaseController {
      * @param urlEscudoDefecto URL de la imagen por defecto
      */
     public static void cargarImagenDesdeStorage(ImageView imageView, String url, String urlEscudoDefecto) {
-        StorageReference defaultRef = FirebaseStorage.getInstance().getReferenceFromUrl(urlEscudoDefecto);
+        StorageReference defaultRef = FirebaseStorage.getInstance().getReferenceFromUrl(urlEscudoDefecto); //Obtiene la imagen por defecto
 
         if (url != null && !url.isEmpty()) {
             if (url.startsWith("gs://")) {
                 StorageReference ref = FirebaseStorage.getInstance().getReferenceFromUrl(url);
                 ref.getDownloadUrl().addOnSuccessListener(uri ->
-                        Glide.with(imageView.getContext()).load(uri.toString()).into(imageView)
+                        Glide.with(imageView.getContext()).load(uri.toString()).into(imageView) //carga la imagen en el imageView
                 ).addOnFailureListener(e -> {
                     Log.e("FirebaseStorage", String.valueOf(R.string.fallo_al_cargar_imagen_gs_usando_por_defecto), e);
                     defaultRef.getDownloadUrl().addOnSuccessListener(uri ->
-                            Glide.with(imageView.getContext()).load(uri.toString()).into(imageView)
+                            Glide.with(imageView.getContext()).load(uri.toString()).into(imageView) //si no tiene imagen asigna la imagen por defecto
                     ).addOnFailureListener(ex -> {
                         Log.e("FirebaseStorage", String.valueOf(R.string.fallo_al_cargar_imagen_por_defecto), ex);
                     });
@@ -246,7 +250,6 @@ public class FirebaseController {
         }
     }
 
-
     /**
      * Obtiene los datos del usuario actual.
      *
@@ -256,11 +259,11 @@ public class FirebaseController {
     public static void obtenerDatosUsuario(OnSuccessListener<Usuario> onSuccess, OnFailureListener onFailure) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-            String uid = user.getUid();
+            String uid = user.getUid(); //obtiene el id del usuario
             db.collection("usuarios").document(uid).get()
                     .addOnSuccessListener(documentSnapshot -> {
                         if (documentSnapshot.exists()) {
-                            String tipoUsuario = documentSnapshot.getString("tipoUsuario");
+                            String tipoUsuario = documentSnapshot.getString("tipoUsuario"); //obtiene el tipo de usuario
 
                             if ("jugador".equalsIgnoreCase(tipoUsuario)) {
                                 Jugador jugador = documentSnapshot.toObject(Jugador.class);
@@ -280,6 +283,7 @@ public class FirebaseController {
             onFailure.onFailure(new Exception(String.valueOf(R.string.usuario_no_autenticado)));
         }
     }
+
     /**
      * Recupera todos los grupos disponibles desde Firestore.
      *
@@ -342,7 +346,6 @@ public class FirebaseController {
                 )
                 .addOnFailureListener(onFailure);
     }
-
 
     /**
      * Formatea una fecha en el formato "dd/MM/yyyy HH:mm".

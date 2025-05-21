@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.android.application)
     id("com.google.gms.google-services")
     id("org.jetbrains.dokka") version "1.9.10"
+    id("com.google.firebase.firebase-perf") version "1.4.2" apply false
 }
 
 android {
@@ -47,12 +48,13 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.gridlayout)
 
+    implementation(platform(libs.firebase.bom.v33130))
     implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.perf)
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.auth)
     implementation(libs.google.firebase.auth)
     implementation(libs.firebase.firestore)
-    implementation(libs.firebase.inappmessaging)
     implementation(libs.firebase.storage)
     implementation(libs.firebase.appcheck.debug)
 

@@ -10,21 +10,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.material.appbar.MaterialToolbar;
 import com.jah.pry_rfatm.Controlador.FirebaseController;
 import com.jah.pry_rfatm.Logica.EditarPerfilLogic;
 import com.jah.pry_rfatm.R;
 import com.jah.pry_rfatm.Vista.Recursos.UtilesUI;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Actividad para editar el perfil de un jugador o entrenador.
+ */
 public class EditarPerfilActivity extends AppCompatActivity {
     MaterialToolbar toolbar;
     EditText txtNombreUsuario, txtEstilo, txtNombreEntrenador;
@@ -42,6 +41,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //Dependiendo del tipo de usuario, se carga una vista u otra.
         tipoUsuario = getIntent().getStringExtra("tipoUsuario");
         if ("jugador".equals(tipoUsuario)) {
             setContentView(R.layout.activity_editar_perfil_jugador);
@@ -53,6 +53,17 @@ public class EditarPerfilActivity extends AppCompatActivity {
         UtilesUI.configurarStatusBar(this);
     }
 
+    /**
+     * Maneja el resultado de una actividad lanzada con startActivityForResult().
+     * @param requestCode The integer request code originally supplied to
+     *                    startActivityForResult(), allowing you to identify who this
+     *                    result came from.
+     * @param resultCode The integer result code returned by the child activity
+     *                   through its setResult().
+     * @param data An Intent, which can return result data to the caller
+     *               (various data can be attached to Intent "extras").
+     *
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -75,6 +86,12 @@ public class EditarPerfilActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Crea el menú de opciones en la barra de acción.
+     * @param menu The options menu in which you place your items.
+     *
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -82,6 +99,12 @@ public class EditarPerfilActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Maneja la selección de elementos del menú de opciones.
+     * @param item The menu item that was selected.
+     *
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.item_guardar) {
@@ -128,6 +151,9 @@ public class EditarPerfilActivity extends AppCompatActivity {
         return false;
     }
 
+    /**
+     * Inicializa los componentes de la interfaz de usuario para el jugador.
+     */
     private void initJugador() {
         toolbar = findViewById(R.id.mtbBarEditarJugador);
         setSupportActionBar(toolbar);
@@ -145,6 +171,9 @@ public class EditarPerfilActivity extends AppCompatActivity {
         imgPerfil.setOnClickListener(v -> seleccionarImagen(1));
     }
 
+    /**
+     * Inicializa los componentes de la interfaz de usuario para el entrenador.
+     */
     private void initEntrenador() {
         toolbar = findViewById(R.id.mtbEditarEntrenador);
         setSupportActionBar(toolbar);
@@ -178,6 +207,10 @@ public class EditarPerfilActivity extends AppCompatActivity {
         imgFotoEscudoEq.setOnClickListener(v -> seleccionarImagen(2));
     }
 
+    /**
+     * Abre la galería para seleccionar una imagen.
+     * @param tipo
+     */
     private void seleccionarImagen(int tipo) {
         tipoImagenSeleccionada = tipo;
         Intent intent = new Intent(Intent.ACTION_PICK);

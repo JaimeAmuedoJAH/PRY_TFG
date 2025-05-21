@@ -10,6 +10,8 @@ import java.util.Date;
  */
 public class Partido implements Serializable {
 
+    /** ID del partido en Firebase */
+    private String partidoId;
     /** ID del equipo local */
     private String equipoLocalId;
     /** ID del equipo visitante */
@@ -42,8 +44,9 @@ public class Partido implements Serializable {
      * @param setsGanados Sets ganados
      * @param setsPerdidos Sets perdidos
      */
-    public Partido(String equipoLocalId, String equipovVisitanteId, String estado, Date fecha,
+    public Partido(String partidoId, String equipoLocalId, String equipovVisitanteId, String estado, Date fecha,
                    String grupoId, String resultado, Integer setsGanados, Integer setsPerdidos) {
+        this.partidoId = partidoId;
         this.equipoLocalId = equipoLocalId;
         this.equipoVisitanteId = equipovVisitanteId;
         this.estado = estado;
@@ -52,6 +55,14 @@ public class Partido implements Serializable {
         this.resultado = resultado;
         this.setsGanados = setsGanados;
         this.setsPerdidos = setsPerdidos;
+    }
+
+    public String getPartidoId() {
+        return partidoId;
+    }
+
+    public void setPartidoId(String partidoId) {
+        this.partidoId = partidoId;
     }
 
     public String getEquipoLocalId() {

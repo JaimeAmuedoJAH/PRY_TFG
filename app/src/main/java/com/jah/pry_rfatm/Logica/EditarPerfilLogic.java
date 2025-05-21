@@ -14,12 +14,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Clase de lógica para la edición de perfil.
+ */
 public class EditarPerfilLogic {
 
+    /**
+     * Interfaz para manejar los resultados de la actualización de datos.
+     */
     public interface CallbackGuardar {
         void onComplete(boolean success, String message, @Nullable String downloadUrl);
     }
 
+    /**
+     * Guarda los datos del jugador en Firestore.
+     * @param uid
+     * @param nombreUsuario
+     * @param estilo
+     * @param imagenUri
+     * @param callback
+     */
     public static void guardarDatosJugador(String uid, String nombreUsuario, String estilo, Uri imagenUri, CallbackGuardar callback) {
         Map<String, Object> datosJugador = new HashMap<>();
         datosJugador.put("nombre", nombreUsuario);
@@ -48,6 +62,15 @@ public class EditarPerfilLogic {
         }
     }
 
+    /**
+     * Guarda los datos del entrenador en Firestore.
+     * @param uid
+     * @param nombreUsuario
+     * @param titulares
+     * @param suplentes
+     * @param imagenUri
+     * @param callback
+     */
     public static void guardarDatosEntrenador(String uid, String nombreUsuario, List<String> titulares, List<String> suplentes, Uri imagenUri, CallbackGuardar callback) {
         FirebaseController.db.collection("usuarios").document(uid).get()
                 .addOnSuccessListener(documentSnapshot -> {
@@ -95,7 +118,12 @@ public class EditarPerfilLogic {
                 .addOnFailureListener(e -> callback.onComplete(false, "Error al obtener los datos del usuario", null));
     }
 
-    // Método para obtener los IDs de usuarios por sus nombres
+    /**
+     * Obtiene los IDs de usuarios por nombres.
+     * @param nombres
+     * @param onSuccess
+     * @param onFailure
+     */
     public static void obtenerIdsUsuariosPorNombres(List<String> nombres, OnSuccessListener<List<String>> onSuccess, OnFailureListener onFailure) {
         if (nombres == null || nombres.isEmpty()) {
             onSuccess.onSuccess(new ArrayList<>());
@@ -117,6 +145,15 @@ public class EditarPerfilLogic {
                 .addOnFailureListener(onFailure);
     }
 
+    /**
+     * Actualiza los datos del usuario y del equipo en Firestore.
+     * @param uid
+     * @param equipoId
+     * @param datosUsuario
+     * @param datosEquipo
+     * @param callback
+     * @param downloadUrl
+     */
     private static void actualizarUsuarioYEquipo(String uid, String equipoId, Map<String, Object> datosUsuario, Map<String, Object> datosEquipo, CallbackGuardar callback, String downloadUrl) {
         FirebaseController.db.collection("usuarios").document(uid)
                 .update(datosUsuario)
