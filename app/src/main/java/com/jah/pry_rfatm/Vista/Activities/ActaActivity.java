@@ -5,27 +5,21 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
-
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.jah.pry_rfatm.Controlador.FirebaseController;
-import com.jah.pry_rfatm.Modelo.Acta;
 import com.jah.pry_rfatm.R;
 import com.jah.pry_rfatm.Vista.Recursos.UtilesUI;
-
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,7 +37,15 @@ public class ActaActivity extends AppCompatActivity {
     MaterialToolbar mtbActa;
     TextView lblEquipoABC, lblEquipoXYZ;
     String idPartido;
+    int puntosEquipoABC, puntosEquipoXYZ;
 
+    /**
+     * Crea la actividad.
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +69,9 @@ public class ActaActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Carga los datos del acta desde Firestore, en el caso de que exista el documento
+     */
     private void cargarDatosActa() {
         if (idPartido == null) return;
 
@@ -265,7 +270,12 @@ public class ActaActivity extends AppCompatActivity {
         });
     }
 
-
+    /**
+     * Crea el menú de opciones.
+     * @param menu The options menu in which you place your items.
+     *
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -273,6 +283,12 @@ public class ActaActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Maneja la selección de un elemento del menú.
+     * @param item The menu item that was selected.
+     *
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.item_guardar) {
@@ -283,6 +299,9 @@ public class ActaActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Guarda el acta en Firebase
+     */
     private void guardarActaEnFirebase() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         String actaId = idPartido; // Usa el ID correspondiente del partido
@@ -333,16 +352,22 @@ public class ActaActivity extends AppCompatActivity {
 
         // Datos globales
         actualizarPuntuacionFinal(actaMap);
+        modificarEquipos();
+        //modificarJugadores();
 
         // Guardar en Firestore
         db.collection("actas").document(actaId).set(actaMap)
-                .addOnSuccessListener(aVoid -> Log.d("Firestore", "Acta guardada con éxito"))
-                .addOnFailureListener(e -> Log.e("Firestore", "Error al guardar el acta", e));
+                .addOnSuccessListener(aVoid -> Toast.makeText(this, "Acta guardada con éxito", Toast.LENGTH_SHORT).show())
+                .addOnFailureListener(e -> Toast.makeText(this, "Error al guardar el acta", Toast.LENGTH_SHORT).show());
     }
 
+    /**
+     * Actualiza la puntuación final del acta
+     * @param actaData
+     */
     private void actualizarPuntuacionFinal(Map<String, Object> actaData) {
-        int puntosEquipoABC = 0;
-        int puntosEquipoXYZ = 0;
+        puntosEquipoABC = 0;
+        puntosEquipoXYZ = 0;
         boolean todosJugados = true;
 
         List<String> partidos = Arrays.asList("partidoAY", "partidoBX", "partidoCZ", "partidoAY2", "partidoCX", "partidoBZ", "partidoAX2");
@@ -373,6 +398,7 @@ public class ActaActivity extends AppCompatActivity {
             } else {
                 todosJugados = false;
             }
+            modificarJugadores(partidoKey);
         }
 
         // Mostrar resultado en UI
@@ -387,6 +413,12 @@ public class ActaActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Actualiza el estado del partido
+     * @param resultadoFinal
+     * @param setsGanados
+     * @param setsPerdidos
+     */
     private void actualizarEstadoPartido(String resultadoFinal, int setsGanados, int setsPerdidos) {
         Map<String, Object> datosPartido = new HashMap<>();
         datosPartido.put("estado", "jugado");
@@ -404,6 +436,13 @@ public class ActaActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Crea un partido con los jugadores dados
+     * @param jugadorABCId
+     * @param jugadorXYZId
+     * @param setIds
+     * @return
+     */
     private Map<String, Object> crearPartido(int jugadorABCId, int jugadorXYZId, int... setIds) {
         Map<String, Object> partido = new HashMap<>();
         partido.put("jugadorABC", getTexto(jugadorABCId));
@@ -416,7 +455,7 @@ public class ActaActivity extends AppCompatActivity {
 
         for (int id : setIds) {
             String texto = getTexto(id);
-            if (!texto.isEmpty() && texto.contains("-")) {
+            if (texto.contains("-")) {
                 String[] partes = texto.split("-");
                 if (partes.length == 2) {
                     try {
@@ -447,12 +486,21 @@ public class ActaActivity extends AppCompatActivity {
         return partido;
     }
 
-
+    /**
+     * Obtiene el texto de un campo de texto
+     * @param id
+     * @return
+     */
     private String getTexto(int id) {
         EditText editText = findViewById(id);
         return editText != null ? editText.getText().toString().trim() : "";
     }
 
+    /**
+     * Carga el nombre del equipo
+     * @param equipoId
+     * @param esABC
+     */
     private void cargarNombreEquipo(String equipoId, boolean esABC) {
         FirebaseFirestore.getInstance().collection("equipos").document(equipoId).get()
                 .addOnSuccessListener(doc -> {
@@ -467,11 +515,21 @@ public class ActaActivity extends AppCompatActivity {
                 .addOnFailureListener(e -> Log.e("Firebase", "Error al cargar nombre de equipo", e));
     }
 
+    /**
+     * Carga los jugadores
+     * @param idABC
+     * @param idXYZ
+     */
     private void cargarJugadoresDesdeFirestore(String idABC, String idXYZ) {
         cargarJugadores(idABC, true);
         cargarJugadores(idXYZ, false);
     }
 
+    /**
+     * Carga los jugadores
+     * @param equipoId
+     * @param esABC
+     */
     private void cargarJugadores(String equipoId, boolean esABC) {
         FirebaseController.db.collection("equipos").document(equipoId).get()
                 .addOnSuccessListener(doc -> {
@@ -511,6 +569,125 @@ public class ActaActivity extends AppCompatActivity {
                 .addOnFailureListener(e -> Log.e("Firebase", "Error al cargar jugadores", e));
     }
 
+    /**
+     * Modifica los equipos
+     */
+    private void modificarEquipos(){
+        FirebaseController.db.collection("partidos").document(idPartido).get()
+                .addOnSuccessListener(doc -> {
+                    if (doc.exists()) {
+                        String idLocal = doc.getString("equipoLocalId");
+                        String idVisitante = doc.getString("equipoVisitanteId");
+                        modificarPartidosJugados(idLocal.split("/")[2], idVisitante.split("/")[2]);
+                    }
+                })
+                .addOnFailureListener(e -> Toast.makeText(this, "Error al cargar equipos", Toast.LENGTH_SHORT).show());
+    }
+
+    /**
+     * Modifica los partidos jugados
+     * @param idLocal
+     * @param idVisitante
+     */
+    private void modificarPartidosJugados(String idLocal, String idVisitante) {
+        Map <String, Object> datosPartidoABC = new HashMap<>();
+        Map <String, Object> datosPartidoXYZ = new HashMap<>();
+        datosPartidoABC.put("partidosJugados", FieldValue.increment(1));
+        datosPartidoXYZ.put("partidosJugados", FieldValue.increment(1));
+        if(puntosEquipoABC > puntosEquipoXYZ){
+            datosPartidoABC.put("victorias", FieldValue.increment(1));
+            datosPartidoXYZ.put("derrotas", FieldValue.increment(1));
+        }else{
+            datosPartidoXYZ.put("victorias", FieldValue.increment(1));
+            datosPartidoABC.put("derrotas", FieldValue.increment(1));
+        }
+        FirebaseController.db.collection("equipos").document(idLocal).update(datosPartidoABC);
+        FirebaseController.db.collection("equipos").document(idVisitante).update(datosPartidoXYZ);
+    }
+
+    /**
+     * Modifica los jugadores
+     * @param partidoKey
+     */
+    private void modificarJugadores(String partidoKey) {
+        FirebaseController.db.collection("actas").document(idPartido).get()
+                .addOnSuccessListener(doc -> {
+                    if (doc.exists()) {
+                        Map<String, Object> partido = (Map<String, Object>) doc.get(partidoKey);
+                        if (partido != null) {
+                            String jugadorABC = (String) partido.get("jugadorABC");
+                            String jugadorXYZ = (String) partido.get("jugadorXYZ");
+                            String resultado = (String) partido.get("resultado");
+
+                            if (jugadorABC != null && jugadorXYZ != null && resultado != null && resultado.contains("-")) {
+                                String[] sets = resultado.split("-");
+                                if (sets.length == 2) {
+                                    try {
+                                        int setsABC = Integer.parseInt(sets[0].trim());
+                                        int setsXYZ = Integer.parseInt(sets[1].trim());
+
+                                        boolean abcGana = setsABC == 3;
+                                        boolean xyzGana = setsXYZ == 3;
+
+                                        // Actualizar estadísticas para ABC
+                                        actualizarEstadisticasJugador(jugadorABC, abcGana);
+                                        // Actualizar estadísticas para XYZ
+                                        actualizarEstadisticasJugador(jugadorXYZ, xyzGana == false);
+
+                                    } catch (NumberFormatException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(this, "Error al cargar jugadores", Toast.LENGTH_SHORT).show());
+    }
+
+    /**
+     * Actualiza las estadísticas de un jugador
+     * @param nombreUsuario
+     * @param victoria
+     */
+    private void actualizarEstadisticasJugador(String nombreUsuario, boolean victoria) {
+        FirebaseController.db.collection("usuarios")
+                .whereEqualTo("nombre", nombreUsuario)
+                .get()
+                .addOnSuccessListener(querySnapshot -> {
+                    if (!querySnapshot.isEmpty()) {
+                        DocumentSnapshot doc = querySnapshot.getDocuments().get(0);
+                        DocumentReference userRef = doc.getReference();
+
+                        Long victorias = doc.getLong("victorias");
+                        Long derrotas = doc.getLong("derrotas");
+                        Long partidosJugados = doc.getLong("partidosJugados");
+
+                        if (victorias == null) victorias = 0L;
+                        if (derrotas == null) derrotas = 0L;
+                        if (partidosJugados == null) partidosJugados = 0L;
+
+                        Map<String, Object> updates = new HashMap<>();
+                        updates.put("partidosJugados", partidosJugados + 1);
+                        if (victoria) {
+                            updates.put("victorias", victorias + 1);
+                        } else {
+                            updates.put("derrotas", derrotas + 1);
+                        }
+
+                        userRef.update(updates);
+                    }
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(this, "Error al actualizar estadísticas", Toast.LENGTH_SHORT).show());
+    }
+
+    /**
+     * Extrae el nombre de un jugador
+     * @param jugador
+     * @return
+     */
     private String extraerNombreJugador(Object jugador) {
         if (jugador instanceof String) return (String) jugador;
         if (jugador instanceof Map) {
@@ -520,6 +697,11 @@ public class ActaActivity extends AppCompatActivity {
         return null;
     }
 
+    /**
+     * Asigna el nombre del jugador a la lista
+     * @param i
+     * @param nombre
+     */
     private void asignarNombreJugadorABCPorIndice(int i, String nombre) {
         switch (i) {
             case 0:
@@ -538,6 +720,11 @@ public class ActaActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Asigna el nombre del jugador a la lista
+     * @param i
+     * @param nombre
+     */
     private void asignarNombreJugadorXYZPorIndice(int i, String nombre) {
         switch (i) {
             case 0:
@@ -556,6 +743,9 @@ public class ActaActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Inicializa los componentes de la UI
+     */
     private void initComponents() {
         mtbActa = findViewById(R.id.mtbActa);
         lblEquipoABC = findViewById(R.id.lblEquipoABC);

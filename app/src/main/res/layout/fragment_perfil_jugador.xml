@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".Vista.Fragments.PerfilFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/background">
+        android:layout_height="wrap_content">
 
+        <!-- Toolbar -->
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/mtbBarJugador"
             android:layout_width="0dp"
@@ -24,194 +25,214 @@
             app:menu="@menu/menu_bar_perfil"
             app:title="@string/navigation_btn4" />
 
+        <!-- Header de perfil -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardPerfil"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            app:cardBackgroundColor="@color/color_fondos"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mtbBarJugador"
+            app:strokeColor="@color/color_letra"
+            app:strokeWidth="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/imgJugador"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/circle_background"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_launcher_foreground" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingStart="16dp">
+
+                    <TextView
+                        android:id="@+id/lblNombreJugador"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/actor"
+                        android:text="Nombre del jugador"
+                        android:textColor="@color/color_letra"
+                        android:textSize="@dimen/letra_size_btn"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/lblTipo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/actor"
+                        android:text="Tipo de jugador"
+                        android:textColor="@color/color_letra"
+                        android:textSize="@dimen/letra_size" />
+
+                    <TextView
+                        android:id="@+id/lblEstilo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/actor"
+                        android:text="Estilo de juego"
+                        android:textColor="@color/color_letra"
+                        android:textSize="@dimen/letra_size" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/imgEscudo"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/ic_launcher_foreground" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Datos estadísticos -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardEstadisticas"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            app:cardBackgroundColor="@color/color_fondos"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardPerfil"
+            app:strokeColor="@color/color_letra"
+            app:strokeWidth="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/lblPartidosJugadosLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/actor"
+                    android:text="Partidos jugados:"
+                    android:textColor="@color/color_letra"
+                    android:textSize="@dimen/letra_size" />
+
+                <TextView
+                    android:id="@+id/lblPartidosJugados"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/actor"
+                    android:paddingBottom="8dp"
+                    android:text="0"
+                    android:textColor="@color/color_letra"
+                    android:textSize="@dimen/letra_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/lblVictoriasLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/actor"
+                    android:text="Victorias:"
+                    android:textColor="@color/color_letra"
+                    android:textSize="@dimen/letra_size" />
+
+                <TextView
+                    android:id="@+id/lblVictorias"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/actor"
+                    android:paddingBottom="8dp"
+                    android:text="0"
+                    android:textColor="@color/color_letra"
+                    android:textSize="@dimen/letra_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/lblDerrotasLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/actor"
+                    android:text="Derrotas:"
+                    android:textColor="@color/color_letra"
+                    android:textSize="@dimen/letra_size" />
+
+                <TextView
+                    android:id="@+id/lblDerrotas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/actor"
+                    android:paddingBottom="8dp"
+                    android:text="0"
+                    android:textColor="@color/color_letra"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/lblPorcentajeLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/actor"
+                    android:text="Porcentaje de victorias:"
+                    android:textColor="@color/color_letra"
+                    android:textSize="@dimen/letra_size" />
+
+                <TextView
+                    android:id="@+id/lblPorcentaje"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/actor"
+                    android:paddingBottom="8dp"
+                    android:text="0%"
+                    android:textColor="@color/color_letra"
+                    android:textSize="@dimen/letra_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/lblActaA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/actor"
+                    android:text="Acta asociada: N/A"
+                    android:textColor="@color/color_letra"
+                    android:textSize="@dimen/letra_size" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Botón cerrar sesión -->
         <Button
             android:id="@+id/btnCerrar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginRight="24dp"
             android:backgroundTint="@color/color_fondos"
             android:fontFamily="@font/actor"
             android:text="@string/btn_cerrar"
             android:textColor="@color/color_letra"
             android:textSize="@dimen/letra_size_btn"
             app:cornerRadius="@dimen/corner_radius"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <ImageView
-            android:id="@+id/imgJugador"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mtbBarJugador"
-            tools:src="@tools:sample/avatars" />
-
-        <ImageView
-            android:id="@+id/imgEscudo"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mtbBarJugador"
-            tools:src="@tools:sample/avatars" />
-
-        <TextView
-            android:id="@+id/lblNombreJugador"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/actor"
-            android:text="TextView"
-            android:textColor="@color/color_letra"
-            android:textSize="@dimen/letra_size"
-            app:layout_constraintStart_toStartOf="@+id/imgJugador"
-            app:layout_constraintTop_toBottomOf="@+id/imgJugador" />
-
-        <TextView
-            android:id="@+id/lblTipo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/actor"
-            android:text="TextView"
-            android:textColor="@color/color_letra"
-            android:textSize="@dimen/letra_size"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lblNombreJugador" />
-
-        <TextView
-            android:id="@+id/lblEstilo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/actor"
-            android:text="TextView"
-            android:textColor="@color/color_letra"
-            android:textSize="@dimen/letra_size"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lblTipo" />
-
-        <TextView
-            android:id="@+id/lblActaA"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/actor"
-            android:text="TextView"
-            android:textColor="@color/color_letra"
-            android:textSize="@dimen/letra_size"
-            app:layout_constraintEnd_toEndOf="@+id/imgEscudo"
-            app:layout_constraintStart_toStartOf="@+id/imgEscudo"
-            app:layout_constraintTop_toBottomOf="@+id/imgEscudo" />
-
-        <TextView
-            android:id="@+id/Textview"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:fontFamily="@font/actor"
-            android:text="Victorias"
-            android:textColor="@color/color_letra"
-            android:textSize="@dimen/letra_size"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView19" />
-
-        <TextView
-            android:id="@+id/lblVictorias"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/actor"
-            android:text="TextView"
-            android:textAlignment="center"
-            android:textColor="@color/color_letra"
-            android:textSize="@dimen/letra_size"
-            app:layout_constraintStart_toEndOf="@+id/Textview"
-            app:layout_constraintTop_toTopOf="@+id/Textview" />
-
-        <TextView
-            android:id="@+id/textView15"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/actor"
-            android:text="Derrotas"
-            android:textColor="@color/color_letra"
-            android:textSize="@dimen/letra_size"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Textview" />
-
-        <TextView
-            android:id="@+id/lblDerrotas"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/actor"
-            android:text="TextView"
-            android:textAlignment="center"
-            android:textColor="@color/color_letra"
-            android:textSize="@dimen/letra_size"
-            app:layout_constraintStart_toEndOf="@+id/textView15"
-            app:layout_constraintTop_toTopOf="@+id/textView15" />
-
-        <TextView
-            android:id="@+id/textView17"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/actor"
-            android:text="Porcentaje de victorias"
-            android:textColor="@color/color_letra"
-            android:textSize="@dimen/letra_size"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView15" />
-
-        <TextView
-            android:id="@+id/lblPorcentaje"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/actor"
-            android:text="TextView"
-            android:textAlignment="center"
-            android:textColor="@color/color_letra"
-            android:textSize="@dimen/letra_size"
-            app:layout_constraintStart_toEndOf="@+id/textView17"
-            app:layout_constraintTop_toTopOf="@+id/textView17" />
-
-        <TextView
-            android:id="@+id/textView19"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:fontFamily="@font/actor"
-            android:text="Partidos Jugados"
-            android:textColor="@color/color_letra"
-            android:textSize="@dimen/letra_size"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lblEstilo" />
-
-        <TextView
-            android:id="@+id/lblPartidosJugados"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="TextView"
-            android:textColor="@color/color_letra"
-            android:textSize="@dimen/letra_size"
-            app:layout_constraintStart_toEndOf="@+id/textView19"
-            app:layout_constraintTop_toTopOf="@+id/textView19"
-            android:fontFamily="@font/actor" />
+            app:layout_constraintTop_toBottomOf="@id/cardEstadisticas" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+</androidx.core.widget.NestedScrollView>
+

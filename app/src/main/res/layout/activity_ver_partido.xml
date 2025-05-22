@@ -15,97 +15,141 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:title="Partido"
-        app:titleTextColor="@color/color_letra" />
-
-    <ImageView
-        android:id="@+id/imgEquipoLocal"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        app:titleTextColor="@color/color_letra"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mtbBarVerPartido"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <ImageView
-        android:id="@+id/imgEquipoVisitante"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mtbBarVerPartido"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/lblNombreEquipoLocal"
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/actor"
-        android:text="TextView"
-        android:textAlignment="center"
-        android:textColor="@color/color_letra"
-        android:textSize="@dimen/letra_size"
-        app:layout_constraintEnd_toEndOf="@+id/imgEquipoLocal"
-        app:layout_constraintStart_toStartOf="@+id/imgEquipoLocal"
-        app:layout_constraintTop_toBottomOf="@+id/imgEquipoLocal" />
-
-    <TextView
-        android:id="@+id/lblNombreEquipoVis"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/actor"
-        android:text="TextView"
-        android:textAlignment="center"
-        android:textColor="@color/color_letra"
-        android:textSize="@dimen/letra_size"
-        app:layout_constraintEnd_toEndOf="@+id/imgEquipoVisitante"
-        app:layout_constraintStart_toStartOf="@+id/imgEquipoVisitante"
-        app:layout_constraintTop_toBottomOf="@+id/imgEquipoVisitante" />
-
-    <TextView
-        android:id="@+id/lblLocalizacion"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="60dp"
-        android:fontFamily="@font/actor"
-        android:text="TextView"
-        android:textAlignment="center"
-        android:textColor="@color/color_letra"
-        android:textSize="@dimen/letra_size"
+        android:layout_margin="16dp"
+        app:cardBackgroundColor="@color/color_fondos"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="4dp"
+        app:layout_constraintBottom_toTopOf="@id/btnActa"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblNombreEquipoLocal" />
+        app:layout_constraintTop_toBottomOf="@id/mtbBarVerPartido"
+        app:strokeColor="@color/color_letra"
+        app:strokeWidth="2dp">
 
-    <TextView
-        android:id="@+id/lblFechaHora"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="60dp"
-        android:text="TextView"
-        android:textAlignment="center"
-        android:textColor="@color/color_letra"
-        android:textSize="@dimen/letra_size"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblLocalizacion" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
 
+            <!-- Imágenes de Equipos -->
+            <ImageView
+                android:id="@+id/imgEquipoLocal"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <ImageView
+                android:id="@+id/imgEquipoVisitante"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <!-- VS -->
+            <TextView
+                android:id="@+id/lblResultadoPartido"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/actor"
+                android:text="VS"
+                android:textColor="@color/color_letra"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/imgEquipoLocal"
+                app:layout_constraintEnd_toStartOf="@id/imgEquipoVisitante"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@id/imgEquipoLocal"
+                app:layout_constraintTop_toTopOf="@+id/imgEquipoLocal" />
+
+            <!-- Nombres -->
+            <TextView
+                android:id="@+id/lblNombreEquipoLocal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/actor"
+                android:text="Equipo Local"
+                android:textAlignment="center"
+                android:textColor="@color/color_letra"
+                android:textSize="@dimen/letra_size"
+                app:layout_constraintEnd_toEndOf="@id/imgEquipoLocal"
+                app:layout_constraintStart_toStartOf="@id/imgEquipoLocal"
+                app:layout_constraintTop_toBottomOf="@id/imgEquipoLocal" />
+
+            <TextView
+                android:id="@+id/lblNombreEquipoVis"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Equipo Visitante"
+                android:textAlignment="center"
+                android:textColor="@color/color_letra"
+                android:textSize="@dimen/letra_size"
+                app:layout_constraintEnd_toEndOf="@id/imgEquipoVisitante"
+                app:layout_constraintStart_toStartOf="@id/imgEquipoVisitante"
+                app:layout_constraintTop_toBottomOf="@id/imgEquipoVisitante" />
+
+            <!-- Fecha, hora, ubicación, estado -->
+            <TextView
+                android:id="@+id/lblFechaHora"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/actor"
+                android:text="12/11/2025 10:00"
+                android:textAlignment="center"
+                android:textColor="@color/color_letra"
+                android:textSize="@dimen/letra_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblNombreEquipoLocal" />
+
+            <TextView
+                android:id="@+id/lblLocalizacion"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/actor"
+                android:text="Estadio Municipal"
+                android:textAlignment="center"
+                android:textColor="@color/color_letra"
+                android:textSize="@dimen/letra_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblFechaHora" />
+
+            <TextView
+                android:id="@+id/lblEstado"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/actor"
+                android:textAlignment="center"
+                android:textColor="@color/color_letra"
+                android:textSize="@dimen/letra_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblLocalizacion" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Botón inferior -->
     <Button
         android:id="@+id/btnActa"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginEnd="80dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/color_fondos"
         android:fontFamily="@font/actor"
@@ -115,36 +159,5 @@
         app:cornerRadius="@dimen/corner_radius"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/lblEstado"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="60dp"
-        android:text="TextView"
-        android:textAlignment="center"
-        android:textColor="@color/color_letra"
-        android:textSize="@dimen/letra_size"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblFechaHora" />
-
-    <TextView
-        android:id="@+id/lblResultadoPartido"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="60dp"
-        android:text="TextView"
-        android:textAlignment="center"
-        android:textColor="@color/color_letra"
-        android:textSize="@dimen/letra_size"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblEstado" />
 </androidx.constraintlayout.widget.ConstraintLayout>

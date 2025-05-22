@@ -88,7 +88,7 @@ public class AdaptadorRanking extends RecyclerView.Adapter<AdaptadorRanking.Hold
             tvNombre.setText(jugador.getNombre());
             tvVictorias.setText(String.valueOf(jugador.getVictorias()));
             tvDerrotas.setText(String.valueOf(jugador.getDerrotas()));
-            tvPuntos.setText(String.valueOf(jugador.getPorcentajeVictorias()));
+            tvPuntos.setText(String.valueOf(jugador.getVictorias() * 3));
         }
     }
 }

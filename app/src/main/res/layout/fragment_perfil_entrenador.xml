@@ -1,186 +1,239 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="@color/background"
+    tools:context=".Vista.Fragments.PerfilFragment">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/mtbBarEntrenador"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/menu_bar_perfil"
-        app:title="@string/navigation_btn4" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/imgFotoEntrenador"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mtbBarEntrenador"
-        tools:srcCompat="@tools:sample/avatars" />
+        <!-- Toolbar -->
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/mtbBarEntrenador"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@string/navigation_btn4"
+            app:menu="@menu/menu_bar_perfil" />
 
-    <ImageView
-        android:id="@+id/imgFotoEscudo"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mtbBarEntrenador"
-        tools:srcCompat="@tools:sample/avatars" />
+        <!-- Card perfil del entrenador -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardPerfilEntrenador"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:cardBackgroundColor="@color/color_fondos"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mtbBarEntrenador"
+            app:strokeColor="@color/color_letra"
+            app:strokeWidth="2dp">
 
-    <TextView
-        android:id="@+id/lblNombreEntrenador"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/actor"
-        android:text=""
-        android:textColor="@color/color_letra"
-        android:textSize="@dimen/letra_size"
-        app:layout_constraintEnd_toEndOf="@+id/imgFotoEntrenador"
-        app:layout_constraintStart_toStartOf="@+id/imgFotoEntrenador"
-        app:layout_constraintTop_toBottomOf="@+id/imgFotoEntrenador" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
 
-    <TextView
-        android:id="@+id/lblNombreEquipoEnt"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/actor"
-        android:text=""
-        android:textColor="@color/color_letra"
-        android:textSize="@dimen/letra_size"
-        app:layout_constraintEnd_toEndOf="@+id/imgFotoEscudo"
-        app:layout_constraintStart_toStartOf="@+id/imgFotoEscudo"
-        app:layout_constraintTop_toBottomOf="@+id/imgFotoEscudo" />
+                <ImageView
+                    android:id="@+id/imgFotoEntrenador"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/circle_background"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_launcher_foreground" />
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/actor"
-        android:text="@string/perfil_plantilla"
-        android:textColor="@color/color_letra"
-        android:textSize="@dimen/letra_size"
-        app:layout_constraintStart_toStartOf="@+id/lblNombreEntrenador"
-        app:layout_constraintTop_toBottomOf="@+id/textView23" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingStart="16dp">
 
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/actor"
-        android:text="@string/perfil_suplentes"
-        android:textColor="@color/color_letra"
-        android:textSize="@dimen/letra_size"
-        app:layout_constraintEnd_toEndOf="@+id/lblNombreEquipoEnt"
-        app:layout_constraintTop_toBottomOf="@+id/textView23" />
+                    <TextView
+                        android:id="@+id/lblNombreEntrenador"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/actor"
+                        android:text="Nombre del entrenador"
+                        android:textColor="@color/color_letra"
+                        android:textSize="@dimen/letra_size_btn"
+                        android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/lblJugador1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/actor"
-        android:textColor="@color/color_letra"
-        android:textSize="@dimen/letra_size"
-        app:layout_constraintStart_toStartOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+                    <TextView
+                        android:id="@+id/textView23"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/actor"
+                        android:text="@string/entrenador"
+                        android:textColor="@color/color_letra"
+                        android:textSize="@dimen/letra_size" />
 
-    <TextView
-        android:id="@+id/lblJugador2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/actor"
-        android:textColor="@color/color_letra"
-        android:textSize="@dimen/letra_size"
-        app:layout_constraintStart_toStartOf="@+id/lblJugador1"
-        app:layout_constraintTop_toBottomOf="@+id/lblJugador1" />
+                    <TextView
+                        android:id="@+id/lblNombreEquipoEnt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/actor"
+                        android:text="Nombre del equipo"
+                        android:textColor="@color/color_letra"
+                        android:textSize="@dimen/letra_size" />
+                </LinearLayout>
 
-    <TextView
-        android:id="@+id/lblJugador3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/actor"
-        android:textColor="@color/color_letra"
-        android:textSize="@dimen/letra_size"
-        app:layout_constraintStart_toStartOf="@+id/lblJugador2"
-        app:layout_constraintTop_toBottomOf="@+id/lblJugador2" />
+                <ImageView
+                    android:id="@+id/imgFotoEscudo"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/ic_launcher_foreground" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-    <TextView
-        android:id="@+id/lblJugador4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/actor"
-        android:textColor="@color/color_letra"
-        android:textSize="@dimen/letra_size"
-        app:layout_constraintEnd_toEndOf="@+id/textView11"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        <!-- Card plantilla -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardPlantilla"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:cardBackgroundColor="@color/color_fondos"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardPerfilEntrenador"
+            app:strokeColor="@color/color_letra"
+            app:strokeWidth="2dp">
 
-    <TextView
-        android:id="@+id/lblJugador5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/actor"
-        android:textColor="@color/color_letra"
-        android:textSize="@dimen/letra_size"
-        app:layout_constraintEnd_toEndOf="@+id/lblJugador4"
-        app:layout_constraintTop_toBottomOf="@+id/lblJugador4" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:weightSum="2">
 
-    <TextView
-        android:id="@+id/lblJugador6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/actor"
-        android:textColor="@color/color_letra"
-        android:textSize="@dimen/letra_size"
-        app:layout_constraintEnd_toEndOf="@+id/lblJugador5"
-        app:layout_constraintTop_toBottomOf="@+id/lblJugador5" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnCerrarSesion"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="8dp"
-        android:backgroundTint="@color/color_fondos"
-        android:fontFamily="@font/actor"
-        android:text="@string/btn_cerrar"
-        android:textSize="@dimen/letra_size_btn"
-        app:cornerRadius="@dimen/corner_radius"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+                    <TextView
+                        android:id="@+id/textView8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/actor"
+                        android:paddingBottom="8dp"
+                        android:text="@string/perfil_plantilla"
+                        android:textColor="@color/color_letra"
+                        android:textSize="@dimen/letra_size"
+                        android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textView23"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/actor"
-        android:text="@string/entrenador"
-        android:textColor="@color/color_letra"
-        android:textSize="@dimen/letra_size"
-        app:layout_constraintStart_toStartOf="@+id/lblNombreEntrenador"
-        app:layout_constraintTop_toBottomOf="@+id/lblNombreEntrenador" />
+                    <TextView
+                        android:id="@+id/lblJugador1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/actor"
+                        android:text="Jugador 1"
+                        android:textColor="@color/color_letra"
+                        android:textSize="@dimen/letra_size" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/lblJugador2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/actor"
+                        android:text="Jugador 2"
+                        android:textColor="@color/color_letra"
+                        android:textSize="@dimen/letra_size" />
+
+                    <TextView
+                        android:id="@+id/lblJugador3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/actor"
+                        android:text="Jugador 3"
+                        android:textColor="@color/color_letra"
+                        android:textSize="@dimen/letra_size" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/actor"
+                        android:paddingBottom="8dp"
+                        android:text="@string/perfil_suplentes"
+                        android:textColor="@color/color_letra"
+                        android:textSize="@dimen/letra_size"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/lblJugador4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/actor"
+                        android:text="Jugador 4"
+                        android:textColor="@color/color_letra"
+                        android:textSize="@dimen/letra_size" />
+
+                    <TextView
+                        android:id="@+id/lblJugador5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/actor"
+                        android:textColor="@color/color_letra"
+                        android:textSize="@dimen/letra_size" />
+
+                    <TextView
+                        android:id="@+id/lblJugador6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/actor"
+                        android:textColor="@color/color_letra"
+                        android:textSize="@dimen/letra_size" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Botón cerrar sesión -->
+        <Button
+            android:id="@+id/btnCerrarSesion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/color_fondos"
+            android:fontFamily="@font/actor"
+            android:text="@string/btn_cerrar"
+            android:textColor="@color/color_letra"
+            android:textSize="@dimen/letra_size_btn"
+            app:cornerRadius="@dimen/corner_radius"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardPlantilla" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

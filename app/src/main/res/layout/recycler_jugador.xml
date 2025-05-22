@@ -11,30 +11,38 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:fontFamily="@font/actor"
         android:text="Nombre"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textSize="@dimen/letra_size" />
 
     <TextView
         android:id="@+id/tvVictorias"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:fontFamily="@font/actor"
         android:text="V"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textSize="@dimen/letra_size" />
 
     <TextView
         android:id="@+id/tvDerrotas"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:fontFamily="@font/actor"
         android:text="D"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textSize="@dimen/letra_size" />
 
     <TextView
         android:id="@+id/tvPuntos"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:fontFamily="@font/actor"
         android:text="%"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textSize="@dimen/letra_size" />
 </LinearLayout>

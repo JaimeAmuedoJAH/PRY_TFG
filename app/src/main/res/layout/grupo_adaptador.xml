@@ -53,6 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:fontFamily="@font/actor"
                 android:text="Nombre" />
 
             <TextView
@@ -60,6 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:fontFamily="@font/actor"
                 android:text="Victorias" />
 
             <TextView
@@ -67,6 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:fontFamily="@font/actor"
                 android:text="Derrotas" />
 
             <TextView
@@ -74,19 +77,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:fontFamily="@font/actor"
                 android:text="Puntos" />
 
             <TextView
                 android:id="@+id/lblEq1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp" />
+                android:layout_margin="10dp"
+                android:fontFamily="@font/actor" />
 
             <TextView
                 android:id="@+id/lblvic1"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:fontFamily="@font/actor"
                 android:textAlignment="center" />
 
             <TextView
@@ -94,6 +100,7 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:fontFamily="@font/actor"
                 android:textAlignment="center" />
 
             <TextView
@@ -101,19 +108,22 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:fontFamily="@font/actor"
                 android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/lblEq2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp" />
+                android:layout_margin="10dp"
+                android:fontFamily="@font/actor" />
 
             <TextView
                 android:id="@+id/lblVic2"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:fontFamily="@font/actor"
                 android:textAlignment="center" />
 
             <TextView
@@ -121,6 +131,7 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:fontFamily="@font/actor"
                 android:textAlignment="center" />
 
             <TextView
@@ -128,6 +139,7 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:fontFamily="@font/actor"
                 android:textAlignment="center" />
 
             <!-- Fila 3 -->
@@ -135,13 +147,15 @@
                 android:id="@+id/lblEq3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp" />
+                android:layout_margin="10dp"
+                android:fontFamily="@font/actor" />
 
             <TextView
                 android:id="@+id/lblVic3"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:fontFamily="@font/actor"
                 android:textAlignment="center" />
 
             <TextView
@@ -149,6 +163,7 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:fontFamily="@font/actor"
                 android:textAlignment="center" />
 
             <TextView
@@ -156,6 +171,7 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:fontFamily="@font/actor"
                 android:textAlignment="center" />
 
             <!-- Fila 4 -->
@@ -163,13 +179,15 @@
                 android:id="@+id/lblEq4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp" />
+                android:layout_margin="10dp"
+                android:fontFamily="@font/actor" />
 
             <TextView
                 android:id="@+id/lblVic4"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:fontFamily="@font/actor"
                 android:textAlignment="center" />
 
             <TextView
@@ -177,6 +195,7 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:fontFamily="@font/actor"
                 android:textAlignment="center" />
 
             <TextView
@@ -184,6 +203,7 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:fontFamily="@font/actor"
                 android:textAlignment="center" />
 
             <!-- Fila 5 -->
@@ -191,13 +211,15 @@
                 android:id="@+id/lblEq5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp" />
+                android:layout_margin="10dp"
+                android:fontFamily="@font/actor" />
 
             <TextView
                 android:id="@+id/lblVic5"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:fontFamily="@font/actor"
                 android:textAlignment="center" />
 
             <TextView
@@ -205,6 +227,7 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:fontFamily="@font/actor"
                 android:textAlignment="center" />
 
             <TextView
@@ -212,6 +235,7 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:fontFamily="@font/actor"
                 android:textAlignment="center" />
 
             <!-- Fila 6 -->
@@ -219,13 +243,15 @@
                 android:id="@+id/lblEq6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp" />
+                android:layout_margin="10dp"
+                android:fontFamily="@font/actor" />
 
             <TextView
                 android:id="@+id/lblVic6"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:fontFamily="@font/actor"
                 android:textAlignment="center" />
 
             <TextView
@@ -233,6 +259,7 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:fontFamily="@font/actor"
                 android:textAlignment="center" />
 
             <TextView
@@ -240,6 +267,7 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:fontFamily="@font/actor"
                 android:textAlignment="center" />
 
             <!-- Fila 7 -->
@@ -247,13 +275,15 @@
                 android:id="@+id/lblEq7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp" />
+                android:layout_margin="10dp"
+                android:fontFamily="@font/actor" />
 
             <TextView
                 android:id="@+id/lblVic7"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:fontFamily="@font/actor"
                 android:textAlignment="center" />
 
             <TextView
@@ -261,6 +291,7 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:fontFamily="@font/actor"
                 android:textAlignment="center" />
 
             <TextView
@@ -268,6 +299,7 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:fontFamily="@font/actor"
                 android:textAlignment="center" />
 
             <!-- Fila 8 -->
@@ -275,13 +307,15 @@
                 android:id="@+id/lblEq8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp" />
+                android:layout_margin="10dp"
+                android:fontFamily="@font/actor" />
 
             <TextView
                 android:id="@+id/lblVic8"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:fontFamily="@font/actor"
                 android:textAlignment="center" />
 
             <TextView
@@ -289,6 +323,7 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:fontFamily="@font/actor"
                 android:textAlignment="center" />
 
             <TextView
@@ -296,6 +331,7 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:fontFamily="@font/actor"
                 android:textAlignment="center" />
 
         </androidx.gridlayout.widget.GridLayout>

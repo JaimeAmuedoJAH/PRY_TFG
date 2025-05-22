@@ -102,4 +102,5 @@
     <string name="el_equipoid_es_nulo_o_vac_o">El equipoId es nulo o vacío</string>
     <string name="el_documento_de_usuario_no_existe">El documento de usuario no existe</string>
     <string name="acta_del_partido">Acta del partido</string>
+    <string name="resultado_final">Resultado Final:</string>
 </resources>
