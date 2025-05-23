@@ -154,10 +154,12 @@ public class EditarPerfilActivity extends AppCompatActivity {
     /**
      * Inicializa los componentes de la interfaz de usuario para el jugador.
      */
-    private void initJugador() {
+    public void initJugador() {
         toolbar = findViewById(R.id.mtbBarEditarJugador);
         setSupportActionBar(toolbar);
-        toolbar.setBackgroundColor(getResources().getColor(R.color.color_fondos));
+        if (toolbar != null) {
+            toolbar.setBackgroundColor(getResources().getColor(R.color.color_fondos, null));
+        }
 
         txtNombreUsuario = findViewById(R.id.txtNombreUsuario);
         txtNombreUsuario.setText(getIntent().getStringExtra("nombreUsuario"));

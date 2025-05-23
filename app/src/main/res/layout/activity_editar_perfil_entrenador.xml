@@ -56,7 +56,9 @@
             android:id="@+id/txtNombreEntrenador"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/actor" />
+            android:fontFamily="@font/actor"
+            android:textColor="@color/color_letra"
+            android:textColorHint="@color/color_letra" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <ScrollView
@@ -100,7 +102,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/actor"
-                    android:textColor="@color/color_letra" />
+                    android:textColor="@color/color_letra"
+                    android:textColorHint="@color/color_letra" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -117,7 +120,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/actor"
-                    android:textColor="@color/color_letra" />
+                    android:textColor="@color/color_letra"
+                    android:textColorHint="@color/color_letra" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -134,7 +138,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/actor"
-                    android:textColor="@color/color_letra" />
+                    android:textColor="@color/color_letra"
+                    android:textColorHint="@color/color_letra" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -162,7 +167,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/actor"
-                    android:textColor="@color/color_letra" />
+                    android:textColor="@color/color_letra"
+                    android:textColorHint="@color/color_letra" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -179,7 +185,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/actor"
-                    android:textColor="@color/color_letra" />
+                    android:textColor="@color/color_letra"
+                    android:textColorHint="@color/color_letra" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -196,7 +203,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/actor"
-                    android:textColor="@color/color_letra" />
+                    android:textColor="@color/color_letra"
+                    android:textColorHint="@color/color_letra" />
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>

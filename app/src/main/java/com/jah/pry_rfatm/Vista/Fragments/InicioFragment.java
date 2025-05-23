@@ -68,7 +68,7 @@ public class InicioFragment extends Fragment {
                     if (equipoId == null || equipoId.isEmpty() || tipoUsuario == null || tipoUsuario.isEmpty()) {
                         mostrarDialogoEquipo(uid);
                     } else {
-                        cargarPartidos(); // ✅ Ahora sí, si ya está registrado
+                        cargarPartidos();
                     }
                 })
                 .addOnFailureListener(e -> {

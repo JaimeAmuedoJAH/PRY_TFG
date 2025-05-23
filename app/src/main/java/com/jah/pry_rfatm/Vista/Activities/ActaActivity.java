@@ -1,5 +1,6 @@
 package com.jah.pry_rfatm.Vista.Activities;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -34,17 +35,16 @@ public class ActaActivity extends AppCompatActivity {
     EditText lblJugadorB2, lblSet16, lblSet26, lblSet36, lblSet46, lblSet56, lblJugadorZ2;
     EditText lblJugadorA3, lblSet17, lblSet27, lblSet37, lblSet47, lblSet57, lblJugadorX3;
     EditText txtResultado;
+    EditText[] textos;
     MaterialToolbar mtbActa;
     TextView lblEquipoABC, lblEquipoXYZ;
     String idPartido;
     int puntosEquipoABC, puntosEquipoXYZ;
 
     /**
-     * Crea la actividad.
      * @param savedInstanceState If the activity is being re-initialized after
      *     previously being shut down then this Bundle contains the data it most
      *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
-     *
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +67,48 @@ public class ActaActivity extends AppCompatActivity {
         if(idPartido != null) {
             cargarDatosActa();
         }
+
+        SharedPreferences prefs = getSharedPreferences("config", MODE_PRIVATE);
+        boolean deshabilitar = prefs.getBoolean("camposDeshabilitados", false);
+
+       verEstadoPartido(idPartido, estado -> {
+            if (deshabilitar && "jugado".equals(estado)) {
+                for (EditText editText : textos) {
+                    editText.setEnabled(false);
+                    editText.setFocusable(false);
+                    editText.setClickable(false);
+                    editText.setCursorVisible(false);
+                }
+            }
+        });
+    }
+
+    /**
+     * Interfaz para obtener el estado del partido
+     */
+    public interface EstadoCallback {
+        void onEstadoObtenido(String estado);
+    }
+
+    /**
+     * Obtiene el estado del partido
+     * @param idPartido
+     * @param callback
+     */
+    private void verEstadoPartido(String idPartido, EstadoCallback callback) {
+        DocumentReference partidoRef = FirebaseController.db.collection("partidos").document(idPartido);
+
+        partidoRef.get().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists()) {
+                String estadoPartido = documentSnapshot.getString("estado");
+                callback.onEstadoObtenido(estadoPartido);
+            } else {
+                callback.onEstadoObtenido(null);
+            }
+        }).addOnFailureListener(e -> {
+            Log.e("ActaActivity", "Error al obtener el estado del partido", e);
+            callback.onEstadoObtenido(null);
+        });
     }
 
     /**
@@ -87,7 +129,6 @@ public class ActaActivity extends AppCompatActivity {
                     // partidoAY
                     Map<String, Object> partidoAY = (Map<String, Object>) actaData.get("partidoAY");
                     if (partidoAY != null) {
-                        String resultado = (String) partidoAY.get("resultado");
                         String setsABC = (String) partidoAY.get("setsABC");
                         String setsXYZ = (String) partidoAY.get("setsXYZ");
 
@@ -113,7 +154,6 @@ public class ActaActivity extends AppCompatActivity {
                     // partidoBX
                     Map<String, Object> partidoBX = (Map<String, Object>) actaData.get("partidoBX");
                     if (partidoBX != null) {
-                        String resultado = (String) partidoBX.get("resultado");
                         String setsABC = (String) partidoBX.get("setsABC");
                         String setsXYZ = (String) partidoBX.get("setsXYZ");
 
@@ -138,7 +178,6 @@ public class ActaActivity extends AppCompatActivity {
                     // partidoCZ
                     Map<String, Object> partidoCZ = (Map<String, Object>) actaData.get("partidoCZ");
                     if (partidoCZ != null) {
-                        String resultado = (String) partidoCZ.get("resultado");
                         String setsABC = (String) partidoCZ.get("setsABC");
                         String setsXYZ = (String) partidoCZ.get("setsXYZ");
 
@@ -163,7 +202,6 @@ public class ActaActivity extends AppCompatActivity {
                     // partidoAY2
                     Map<String, Object> partidoAY2 = (Map<String, Object>) actaData.get("partidoAY2");
                     if (partidoAY2 != null) {
-                        String resultado = (String) partidoAY2.get("resultado");
                         String setsABC = (String) partidoAY2.get("setsABC");
                         String setsXYZ = (String) partidoAY2.get("setsXYZ");
 
@@ -188,7 +226,6 @@ public class ActaActivity extends AppCompatActivity {
                     // partidoCX
                     Map<String, Object> partidoCX = (Map<String, Object>) actaData.get("partidoCX");
                     if (partidoCX != null) {
-                        String resultado = (String) partidoCX.get("resultado");
                         String setsABC = (String) partidoCX.get("setsABC");
                         String setsXYZ = (String) partidoCX.get("setsXYZ");
 
@@ -213,7 +250,6 @@ public class ActaActivity extends AppCompatActivity {
                     // partidoBZ
                     Map<String, Object> partidoBZ = (Map<String, Object>) actaData.get("partidoBZ");
                     if (partidoBZ != null) {
-                        String resultado = (String) partidoBZ.get("resultado");
                         String setsABC = (String) partidoBZ.get("setsABC");
                         String setsXYZ = (String) partidoBZ.get("setsXYZ");
 
@@ -238,7 +274,6 @@ public class ActaActivity extends AppCompatActivity {
                     // partidoAX2
                     Map<String, Object> partidoAX2 = (Map<String, Object>) actaData.get("partidoAX2");
                     if (partidoAX2 != null) {
-                        String resultado = (String) partidoAX2.get("resultado");
                         String setsABC = (String) partidoAX2.get("setsABC");
                         String setsXYZ = (String) partidoAX2.get("setsXYZ");
 
@@ -265,8 +300,7 @@ public class ActaActivity extends AppCompatActivity {
                 }
             }
         }).addOnFailureListener(e -> {
-            Log.e("ActaActivity", "Error al cargar acta", e);
-            // Manejar error aquí
+            Log.e("ActaActivity", getString(R.string.error_al_cargar_acta), e);
         });
     }
 
@@ -353,12 +387,11 @@ public class ActaActivity extends AppCompatActivity {
         // Datos globales
         actualizarPuntuacionFinal(actaMap);
         modificarEquipos();
-        //modificarJugadores();
 
         // Guardar en Firestore
         db.collection("actas").document(actaId).set(actaMap)
-                .addOnSuccessListener(aVoid -> Toast.makeText(this, "Acta guardada con éxito", Toast.LENGTH_SHORT).show())
-                .addOnFailureListener(e -> Toast.makeText(this, "Error al guardar el acta", Toast.LENGTH_SHORT).show());
+                .addOnSuccessListener(aVoid -> Toast.makeText(this, getString(R.string.acta_guardada_con_xito), Toast.LENGTH_SHORT).show())
+                .addOnFailureListener(e -> Toast.makeText(this, getString(R.string.error_al_guardar_el_acta), Toast.LENGTH_SHORT).show());
     }
 
     /**
@@ -410,6 +443,8 @@ public class ActaActivity extends AppCompatActivity {
 
         if (todosJugados) {
             actualizarEstadoPartido(resultadoFinal, puntosEquipoABC, puntosEquipoXYZ);
+            SharedPreferences prefs = getSharedPreferences("config", MODE_PRIVATE);
+            prefs.edit().putBoolean("camposDeshabilitados", true).apply();
         }
     }
 
@@ -429,10 +464,10 @@ public class ActaActivity extends AppCompatActivity {
         FirebaseController.db.collection("partidos").document(idPartido)
                 .update(datosPartido)
                 .addOnSuccessListener(aVoid -> {
-                    Log.d("ActaActivity", "Estado del partido actualizado a 'jugado'");
+                    Log.d("ActaActivity", getString(R.string.estado_del_partido_actualizado_a_jugado));
                 })
                 .addOnFailureListener(e -> {
-                    Log.e("ActaActivity", "Error al actualizar estado del partido", e);
+                    Log.e("ActaActivity", getString(R.string.error_al_actualizar_estado_del_partido), e);
                 });
     }
 
@@ -512,7 +547,7 @@ public class ActaActivity extends AppCompatActivity {
                         }
                     }
                 })
-                .addOnFailureListener(e -> Log.e("Firebase", "Error al cargar nombre de equipo", e));
+                .addOnFailureListener(e -> Log.e("Firebase", getString(R.string.error_al_cargar_nombre_de_equipo), e));
     }
 
     /**
@@ -554,7 +589,7 @@ public class ActaActivity extends AppCompatActivity {
                                                     }
                                                 }
                                             })
-                                            .addOnFailureListener(e -> Log.e("Firebase", "Error al obtener jugador " + jugadorId, e));
+                                            .addOnFailureListener(e -> Log.e("Firebase", getString(R.string.error_al_obtener_jugador) + jugadorId, e));
                                 } else if (jugador instanceof Map) {
                                     String nombre = extraerNombreJugador(jugador);
                                     if (nombre != null) {
@@ -566,7 +601,7 @@ public class ActaActivity extends AppCompatActivity {
                         }
                     }
                 })
-                .addOnFailureListener(e -> Log.e("Firebase", "Error al cargar jugadores", e));
+                .addOnFailureListener(e -> Log.e("Firebase", getString(R.string.error_al_cargar_jugadores), e));
     }
 
     /**
@@ -581,7 +616,7 @@ public class ActaActivity extends AppCompatActivity {
                         modificarPartidosJugados(idLocal.split("/")[2], idVisitante.split("/")[2]);
                     }
                 })
-                .addOnFailureListener(e -> Toast.makeText(this, "Error al cargar equipos", Toast.LENGTH_SHORT).show());
+                .addOnFailureListener(e -> Toast.makeText(this, getString(R.string.error_al_cargar_equipos), Toast.LENGTH_SHORT).show());
     }
 
     /**
@@ -601,8 +636,12 @@ public class ActaActivity extends AppCompatActivity {
             datosPartidoXYZ.put("victorias", FieldValue.increment(1));
             datosPartidoABC.put("derrotas", FieldValue.increment(1));
         }
-        FirebaseController.db.collection("equipos").document(idLocal).update(datosPartidoABC);
-        FirebaseController.db.collection("equipos").document(idVisitante).update(datosPartidoXYZ);
+        verEstadoPartido(idPartido, estado -> {
+            if ("pendiente".equals(estado)) {
+                FirebaseController.db.collection("equipos").document(idLocal).update(datosPartidoABC);
+                FirebaseController.db.collection("equipos").document(idVisitante).update(datosPartidoXYZ);
+            }
+        });
     }
 
     /**
@@ -632,7 +671,7 @@ public class ActaActivity extends AppCompatActivity {
                                         // Actualizar estadísticas para ABC
                                         actualizarEstadisticasJugador(jugadorABC, abcGana);
                                         // Actualizar estadísticas para XYZ
-                                        actualizarEstadisticasJugador(jugadorXYZ, xyzGana == false);
+                                        actualizarEstadisticasJugador(jugadorXYZ, !xyzGana);
 
                                     } catch (NumberFormatException e) {
                                         e.printStackTrace();
@@ -643,7 +682,7 @@ public class ActaActivity extends AppCompatActivity {
                     }
                 })
                 .addOnFailureListener(e ->
-                        Toast.makeText(this, "Error al cargar jugadores", Toast.LENGTH_SHORT).show());
+                        Toast.makeText(this, getString(R.string.error_al_cargar_jugadores), Toast.LENGTH_SHORT).show());
     }
 
     /**
@@ -680,7 +719,7 @@ public class ActaActivity extends AppCompatActivity {
                     }
                 })
                 .addOnFailureListener(e ->
-                        Toast.makeText(this, "Error al actualizar estadísticas", Toast.LENGTH_SHORT).show());
+                        Toast.makeText(this, getString(R.string.error_al_actualizar_estad_sticas), Toast.LENGTH_SHORT).show());
     }
 
     /**
@@ -809,6 +848,16 @@ public class ActaActivity extends AppCompatActivity {
 
         txtResultado = findViewById(R.id.txtResultado);
 
+        textos = new EditText[]{
+                lblJugadorA1, lblSet11, lblSet21, lblSet31, lblSet41, lblSet51, lblJugadorY1,
+                lblJugadorB1, lblSet12, lblSet22, lblSet32, lblSet42, lblSet52, lblJugadorX1,
+                lblJugadorC1, lblSet13, lblSet23, lblSet33, lblSet43, lblSet53, lblJugadorZ1,
+                lblJugadorA2, lblSet14, lblSet24, lblSet34, lblSet44, lblSet54, lblJugadorX2,
+                lblJugadorC2, lblSet15, lblSet25, lblSet35, lblSet45, lblSet55, lblJugadorY2,
+                lblJugadorB2, lblSet16, lblSet26, lblSet36, lblSet46, lblSet56, lblJugadorZ2,
+                lblJugadorA3, lblSet17, lblSet27, lblSet37, lblSet47, lblSet57, lblJugadorX3,
+                txtResultado
+        };
         idPartido = getIntent().getStringExtra("idDocumentoPartido");
     }
 }

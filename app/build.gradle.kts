@@ -69,6 +69,13 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    androidTestImplementation (libs.fragment.testing)
+    androidTestImplementation (libs.junit.v115)
+    androidTestImplementation (libs.espresso.core.v351)
+    androidTestImplementation (libs.rules)
+    androidTestImplementation (libs.runner)
+    androidTestImplementation (libs.mockito.android)
+    androidTestImplementation (libs.truth)
 }
 
 /*tasks.named<DokkaTask>("dokkaHtml") {

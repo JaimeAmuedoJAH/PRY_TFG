@@ -90,7 +90,6 @@ public class PerfilFragment extends Fragment {
         } else {
             mostrarError(getString(R.string.toast_usuario_no_autenticado));
         }
-
         return rootView;
     }
 
@@ -101,23 +100,16 @@ public class PerfilFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        // Forzar recarga de los datos del jugador al volver
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            String uid = user.getUid();
-            FirebaseFirestore.getInstance().collection("usuarios").document(uid)
-                    .get()
-                    .addOnSuccessListener(documentSnapshot -> {
-                        String tipoUser = documentSnapshot.getString("tipoUsuario");
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        ViewGroup container = rootView.findViewById(R.id.container);
 
-                        if ("jugador".equals(tipoUsuario)) {
-                            mostrarLayoutJugador(LayoutInflater.from(getContext()), (ViewGroup) rootView.findViewById(R.id.container));
-                        } else if ("entrenador".equals(tipoUsuario)) {
-                            mostrarLayoutEntrenador(LayoutInflater.from(getContext()), (ViewGroup) rootView.findViewById(R.id.container));
-                        }
-                    });
+        if ("jugador".equals(tipoUsuario)) {
+            mostrarLayoutJugador(inflater, container);
+        } else if ("entrenador".equals(tipoUsuario)) {
+            mostrarLayoutEntrenador(inflater, container);
         }
     }
+
     /**
      * Muestra un mensaje de error mediante un Toast.
      *
@@ -133,7 +125,7 @@ public class PerfilFragment extends Fragment {
      * @param inflater  LayoutInflater para inflar el layout.
      * @param container Contenedor padre.
      */
-    private void mostrarLayoutJugador(LayoutInflater inflater, ViewGroup container) {
+    public void mostrarLayoutJugador(LayoutInflater inflater, ViewGroup container) {
         View jugadorView = inflater.inflate(R.layout.fragment_perfil_jugador, container, false);
         FrameLayout frameLayout = rootView.findViewById(R.id.container);
         frameLayout.removeAllViews();
@@ -147,7 +139,7 @@ public class PerfilFragment extends Fragment {
      * @param inflater  LayoutInflater para inflar el layout.
      * @param container Contenedor padre.
      */
-    private void mostrarLayoutEntrenador(LayoutInflater inflater, ViewGroup container) {
+    public void mostrarLayoutEntrenador(LayoutInflater inflater, ViewGroup container) {
         View entrenadorView = inflater.inflate(R.layout.fragment_perfil_entrenador, container, false);
         FrameLayout frameLayout = rootView.findViewById(R.id.container);
         frameLayout.removeAllViews();
@@ -182,7 +174,7 @@ public class PerfilFragment extends Fragment {
         ImageView imgFotoEntrenador = view.findViewById(R.id.imgFotoEntrenador);
         ImageView imgFotoEscudo = view.findViewById(R.id.imgFotoEscudo);
 
-        jugadores = new String[6]; // Guardará los nombres para futuras acciones
+        jugadores = new String[6];
 
         FirebaseController.obtenerDatosUsuario(usuario -> {
             if (usuario instanceof Entrenador) {
@@ -200,7 +192,7 @@ public class PerfilFragment extends Fragment {
                     );
                 }
 
-                String equipoId = entrenador.getEquipoId().split("/")[2]; // Formato esperado: "equipos/{id}"
+                String equipoId = entrenador.getEquipoId().split("/")[2];
 
                 FirebaseController.obtenerEquipoPorId(equipoId, equipo -> {
                     lblNombreEquipoEnt.setText(equipo.getNombre());

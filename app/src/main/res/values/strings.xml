@@ -103,4 +103,15 @@
     <string name="el_documento_de_usuario_no_existe">El documento de usuario no existe</string>
     <string name="acta_del_partido">Acta del partido</string>
     <string name="resultado_final">Resultado Final:</string>
+    <string name="error_al_cargar_nombre_de_equipo">Error al cargar nombre de equipo</string>
+    <string name="error_al_obtener_jugador">"Error al obtener jugador "</string>
+    <string name="acta_guardada_con_xito">Acta guardada con éxito</string>
+    <string name="error_al_guardar_el_acta">Error al guardar el acta</string>
+    <string name="estado_del_partido_actualizado_a_jugado">Estado del partido actualizado a \'jugado\'</string>
+    <string name="error_al_actualizar_estado_del_partido">Error al actualizar estado del partido</string>
+    <string name="error_al_cargar_jugadores">Error al cargar jugadores</string>
+    <string name="error_al_actualizar_estad_sticas">Error al actualizar estadísticas</string>
+    <string name="error_al_obtener_el_estado_del_partido">Error al obtener el estado del partido</string>
+    <string name="error_al_cargar_equipos">Error al cargar equipos</string>
+    <string name="error_al_cargar_acta">Error al cargar acta</string>
 </resources>

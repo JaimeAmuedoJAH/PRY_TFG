@@ -49,10 +49,10 @@
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#004d25"
+                android:background="#DDDDDD"
                 android:stretchColumns="1,6">
 
-                <TableRow>
+                <TableRow android:background="#DDDDDD">
 
                     <TextView
                         android:id="@+id/lblEquipoABC"
@@ -79,6 +79,7 @@
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/color_fondos"
                 android:stretchColumns="1,2,3,4,5,6">
 
                 <!-- 7 FILAS DE DATOS -->
@@ -86,10 +87,12 @@
 
                     <EditText
                         android:id="@+id/lblJugadorA1"
-                        android:hint="JugadorA"
                         android:fontFamily="@font/actor"
+                        android:hint="JugadorA"
                         android:inputType="textPersonName"
                         android:textAlignment="center"
+                        android:textColor="@color/color_letra"
+                        android:textColorHint="@color/color_letra"
                         android:textSize="@dimen/letra_size" />
 
                     <EditText
@@ -139,22 +142,25 @@
 
                     <EditText
                         android:id="@+id/lblJugadorY1"
-                        android:hint="JugadorY"
                         android:fontFamily="@font/actor"
+                        android:hint="JugadorY"
                         android:inputType="textPersonName"
                         android:textAlignment="center"
-                        android:textSize="@dimen/letra_size"
-                        />
+                        android:textColor="@color/color_letra"
+                        android:textColorHint="@color/color_letra"
+                        android:textSize="@dimen/letra_size" />
                 </TableRow>
 
                 <TableRow>
 
                     <EditText
                         android:id="@+id/lblJugadorB1"
-                        android:hint="JugadorB"
                         android:fontFamily="@font/actor"
+                        android:hint="JugadorB"
                         android:inputType="textPersonName"
                         android:textAlignment="center"
+                        android:textColor="@color/color_letra"
+                        android:textColorHint="@color/color_letra"
                         android:textSize="@dimen/letra_size" />
 
                     <EditText
@@ -204,10 +210,12 @@
 
                     <EditText
                         android:id="@+id/lblJugadorX1"
-                        android:hint="JugadorX"
                         android:fontFamily="@font/actor"
+                        android:hint="JugadorX"
                         android:inputType="textPersonName"
                         android:textAlignment="center"
+                        android:textColor="@color/color_letra"
+                        android:textColorHint="@color/color_letra"
                         android:textSize="@dimen/letra_size" />
                 </TableRow>
 
@@ -215,10 +223,12 @@
 
                     <EditText
                         android:id="@+id/lblJugadorC1"
-                        android:hint="JugadorC"
                         android:fontFamily="@font/actor"
+                        android:hint="JugadorC"
                         android:inputType="textPersonName"
                         android:textAlignment="center"
+                        android:textColor="@color/color_letra"
+                        android:textColorHint="@color/color_letra"
                         android:textSize="@dimen/letra_size" />
 
                     <EditText
@@ -268,10 +278,12 @@
 
                     <EditText
                         android:id="@+id/lblJugadorZ1"
-                        android:hint="JugadorZ"
                         android:fontFamily="@font/actor"
+                        android:hint="JugadorZ"
                         android:inputType="textPersonName"
                         android:textAlignment="center"
+                        android:textColor="@color/color_letra"
+                        android:textColorHint="@color/color_letra"
                         android:textSize="@dimen/letra_size" />
                 </TableRow>
 
@@ -279,10 +291,12 @@
 
                     <EditText
                         android:id="@+id/lblJugadorA2"
-                        android:hint="JugadorA"
                         android:fontFamily="@font/actor"
+                        android:hint="JugadorA"
                         android:inputType="textPersonName"
                         android:textAlignment="center"
+                        android:textColor="@color/color_letra"
+                        android:textColorHint="@color/color_letra"
                         android:textSize="@dimen/letra_size" />
 
                     <EditText
@@ -332,10 +346,12 @@
 
                     <EditText
                         android:id="@+id/lblJugadorX2"
-                        android:hint="JugadorX"
                         android:fontFamily="@font/actor"
+                        android:hint="JugadorX"
                         android:inputType="textPersonName"
                         android:textAlignment="center"
+                        android:textColor="@color/color_letra"
+                        android:textColorHint="@color/color_letra"
                         android:textSize="@dimen/letra_size" />
                 </TableRow>
 
@@ -343,10 +359,12 @@
 
                     <EditText
                         android:id="@+id/lblJugadorC2"
-                        android:hint="JugadorC"
                         android:fontFamily="@font/actor"
+                        android:hint="JugadorC"
                         android:inputType="textPersonName"
                         android:textAlignment="center"
+                        android:textColor="@color/color_letra"
+                        android:textColorHint="@color/color_letra"
                         android:textSize="@dimen/letra_size" />
 
                     <EditText
@@ -396,10 +414,12 @@
 
                     <EditText
                         android:id="@+id/lblJugadorY2"
-                        android:hint="JugadorY"
                         android:fontFamily="@font/actor"
+                        android:hint="JugadorY"
                         android:inputType="textPersonName"
                         android:textAlignment="center"
+                        android:textColor="@color/color_letra"
+                        android:textColorHint="@color/color_letra"
                         android:textSize="@dimen/letra_size" />
                 </TableRow>
 
@@ -407,10 +427,12 @@
 
                     <EditText
                         android:id="@+id/lblJugadorB2"
-                        android:hint="JugadorB"
                         android:fontFamily="@font/actor"
+                        android:hint="JugadorB"
                         android:inputType="textPersonName"
                         android:textAlignment="center"
+                        android:textColor="@color/color_letra"
+                        android:textColorHint="@color/color_letra"
                         android:textSize="@dimen/letra_size" />
 
                     <EditText
@@ -460,10 +482,12 @@
 
                     <EditText
                         android:id="@+id/lblJugadorZ2"
-                        android:hint="JugadorZ"
                         android:fontFamily="@font/actor"
+                        android:hint="JugadorZ"
                         android:inputType="textPersonName"
                         android:textAlignment="center"
+                        android:textColor="@color/color_letra"
+                        android:textColorHint="@color/color_letra"
                         android:textSize="@dimen/letra_size" />
                 </TableRow>
 
@@ -471,10 +495,12 @@
 
                     <EditText
                         android:id="@+id/lblJugadorA3"
-                        android:hint="JugadorA"
                         android:fontFamily="@font/actor"
+                        android:hint="JugadorA"
                         android:inputType="textPersonName"
                         android:textAlignment="center"
+                        android:textColor="@color/color_letra"
+                        android:textColorHint="@color/color_letra"
                         android:textSize="@dimen/letra_size" />
 
                     <EditText
@@ -524,10 +550,12 @@
 
                     <EditText
                         android:id="@+id/lblJugadorX3"
-                        android:hint="JugadorX"
                         android:fontFamily="@font/actor"
+                        android:hint="JugadorX"
                         android:inputType="textPersonName"
                         android:textAlignment="center"
+                        android:textColor="@color/color_letra"
+                        android:textColorHint="@color/color_letra"
                         android:textSize="@dimen/letra_size" />
                 </TableRow>
 

@@ -50,7 +50,8 @@
             android:layout_height="match_parent"
             android:fontFamily="@font/actor"
             android:hint="@string/editar_perfil_nombre"
-            android:textColorHint="@color/hint_color"
+            android:textColor="@color/color_letra"
+            android:textColorHint="@color/color_letra"
             android:textSize="@dimen/letra_size" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -73,7 +74,8 @@
             android:layout_height="match_parent"
             android:fontFamily="@font/actor"
             android:hint="@string/editar_perfil_estilo"
-            android:textColorHint="@color/hint_color"
+            android:textColor="@color/color_letra"
+            android:textColorHint="@color/color_letra"
             android:textSize="@dimen/letra_size" />
     </com.google.android.material.textfield.TextInputLayout>
 

@@ -43,8 +43,6 @@ public class VerPartidoActivity extends AppCompatActivity {
         setSupportActionBar(mtbBarVerPartido);
         mtbBarVerPartido.setBackgroundColor(getResources().getColor(R.color.color_fondos));
 
-        asginarInformacion();
-
         btnActa.setOnClickListener(v -> {
             Intent intent = new Intent(this, ActaActivity.class);
             intent.putExtra("idLocal", partido.getEquipoLocalId().split("/")[2]);
@@ -52,6 +50,12 @@ public class VerPartidoActivity extends AppCompatActivity {
             intent.putExtra("idDocumentoPartido", partidoId);
             startActivity(intent);
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        recuperarPartido();
     }
 
     /**
@@ -124,7 +128,20 @@ public class VerPartidoActivity extends AppCompatActivity {
         fechaHora = getIntent().getStringExtra("fechaHora");
         idLocal = getIntent().getStringExtra("idLocal");
         idVisitante = getIntent().getStringExtra("idVisitante");
-        partido = (Partido) getIntent().getSerializableExtra("partido");
         partidoId = getIntent().getStringExtra("idDocumentoPartido");
+        recuperarPartido();
+    }
+
+    private void recuperarPartido(){
+        FirebaseController.db.collection("partidos").document(partidoId).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        partido = documentSnapshot.toObject(Partido.class);
+                        asginarInformacion();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    e.printStackTrace();
+                });
     }
 }
