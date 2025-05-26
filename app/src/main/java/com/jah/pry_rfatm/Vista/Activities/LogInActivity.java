@@ -33,7 +33,8 @@ import java.util.Map;
  */
 public class LogInActivity extends AppCompatActivity {
 
-    EditText txtCorreo, txtPass;
+    public EditText txtCorreo;
+    public EditText txtPass;
     TextView lblRecuperar;
     Button btnIni, btnIniGoogle, btnRegistrar;
     Intent intent;
@@ -71,7 +72,7 @@ public class LogInActivity extends AppCompatActivity {
     /**
      * Inicia sesión usando correo y contraseña mediante Firebase.
      */
-    private void iniciarSesionConCorreo() {
+    public void iniciarSesionConCorreo() {
         String correo = txtCorreo.getText().toString().trim();
         String pass = txtPass.getText().toString().trim();
 
@@ -90,14 +91,14 @@ public class LogInActivity extends AppCompatActivity {
                         FirebaseUser user = FirebaseController.mAuth.getCurrentUser();
 
                         if (user != null && !user.isEmailVerified()) {
-                            Toast.makeText(this, "Debes verificar tu correo electrónico antes de continuar", Toast.LENGTH_LONG).show();
+                            Toast.makeText(this, getString(R.string.debes_verificar_tu_correo_electr_nico_antes_de_continuar), Toast.LENGTH_LONG).show();
                             FirebaseController.mAuth.signOut();  // importante para cerrar sesión del usuario no verificado
                             return;
                         }
 
                         irAMainActivity();
                     } else {
-                        Toast.makeText(LogInActivity.this, "Correo o contraseña incorrectos.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LogInActivity.this, getString(R.string.correo_o_contrase_a_incorrectos), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -119,7 +120,7 @@ public class LogInActivity extends AppCompatActivity {
                 firebaseAuthConGoogle(account.getIdToken());
             } catch (ApiException e) {
                 Log.e("GoogleSignInError", "Código: " + e.getStatusCode(), e);
-                Toast.makeText(this, "Error en inicio de sesión con Google: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getString(R.string.error_en_inicio_de_sesi_n_con_google) + e.getMessage(), Toast.LENGTH_LONG).show();
             }
 
         }
@@ -136,7 +137,7 @@ public class LogInActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         irAMainActivity();
                     } else {
-                        Toast.makeText(this, "Falló la autenticación con Firebase", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, R.string.fall_la_autenticaci_n_con_firebase, Toast.LENGTH_SHORT).show();
                     }
                 });
     }

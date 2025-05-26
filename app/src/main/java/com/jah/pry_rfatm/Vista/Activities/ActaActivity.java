@@ -106,7 +106,7 @@ public class ActaActivity extends AppCompatActivity {
                 callback.onEstadoObtenido(null);
             }
         }).addOnFailureListener(e -> {
-            Log.e("ActaActivity", "Error al obtener el estado del partido", e);
+            Log.e("ActaActivity", getString(R.string.error_al_obtener_el_estado_del_partido), e);
             callback.onEstadoObtenido(null);
         });
     }
@@ -132,7 +132,6 @@ public class ActaActivity extends AppCompatActivity {
                         String setsABC = (String) partidoAY.get("setsABC");
                         String setsXYZ = (String) partidoAY.get("setsXYZ");
 
-                        // Sets partido AY - usan lblSet11..lblSet51
                         if (setsABC != null && setsXYZ != null) {
                             String[] setsABCArray = setsABC.split("-");
                             String[] setsXYZArray = setsXYZ.split("-");
@@ -294,8 +293,6 @@ public class ActaActivity extends AppCompatActivity {
                             lblSet57.setText(sets[4]);
                         }
                     }
-
-                    // Datos globales
                     txtResultado.setText((String) actaData.getOrDefault("resultadoFinal", ""));
                 }
             }
@@ -378,20 +375,24 @@ public class ActaActivity extends AppCompatActivity {
                 R.id.lblSet16, R.id.lblSet26, R.id.lblSet36, R.id.lblSet46, R.id.lblSet56
         ));
 
-        // Partido AX2 (tercer jugador A y Y)
+        // Partido AX2
         actaMap.put("partidoAX2", crearPartido(
                 R.id.lblJugadorA3, R.id.lblJugadorX3,
                 R.id.lblSet17, R.id.lblSet27, R.id.lblSet37, R.id.lblSet47, R.id.lblSet57
         ));
 
-        // Datos globales
+        // Actualizar los equipos y jugadores
         actualizarPuntuacionFinal(actaMap);
         modificarEquipos();
 
         // Guardar en Firestore
-        db.collection("actas").document(actaId).set(actaMap)
-                .addOnSuccessListener(aVoid -> Toast.makeText(this, getString(R.string.acta_guardada_con_xito), Toast.LENGTH_SHORT).show())
-                .addOnFailureListener(e -> Toast.makeText(this, getString(R.string.error_al_guardar_el_acta), Toast.LENGTH_SHORT).show());
+        verEstadoPartido(idPartido, estado -> {
+            if ("pendiente".equals(estado)) {
+                db.collection("actas").document(actaId).set(actaMap)
+                        .addOnSuccessListener(aVoid -> Toast.makeText(this, getString(R.string.acta_guardada_con_xito), Toast.LENGTH_SHORT).show())
+                        .addOnFailureListener(e -> Toast.makeText(this, getString(R.string.error_al_guardar_el_acta), Toast.LENGTH_SHORT).show());
+            }
+        });
     }
 
     /**
@@ -668,11 +669,14 @@ public class ActaActivity extends AppCompatActivity {
                                         boolean abcGana = setsABC == 3;
                                         boolean xyzGana = setsXYZ == 3;
 
-                                        // Actualizar estadísticas para ABC
-                                        actualizarEstadisticasJugador(jugadorABC, abcGana);
-                                        // Actualizar estadísticas para XYZ
-                                        actualizarEstadisticasJugador(jugadorXYZ, !xyzGana);
-
+                                        verEstadoPartido(idPartido, estado -> {
+                                            if ("pendiente".equals(estado)) {
+                                                // Actualizar estadísticas para ABC
+                                                actualizarEstadisticasJugador(jugadorABC, abcGana);
+                                                // Actualizar estadísticas para XYZ
+                                                actualizarEstadisticasJugador(jugadorXYZ, !xyzGana);
+                                            }
+                                        });
                                     } catch (NumberFormatException e) {
                                         e.printStackTrace();
                                     }

@@ -146,6 +146,7 @@ public class PerfilFragment extends Fragment {
         frameLayout.addView(entrenadorView);
         configurarVistaEntrenador(entrenadorView);
     }
+
     /**
      * Configura la vista de perfil del entrenador.
      *
@@ -204,8 +205,6 @@ public class PerfilFragment extends Fragment {
                                 FirebaseController.imagenPorDefecto
                         );
                     }
-
-                    //FirebaseFirestore db = FirebaseFirestore.getInstance();
 
                     List<String> titulares = equipo.getJugadores();
                     List<String> suplentes = equipo.getSuplentes();

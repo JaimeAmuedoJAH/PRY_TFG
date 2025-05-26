@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cvCardGrupo"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -9,331 +8,114 @@
     app:strokeColor="@color/color_letra"
     app:strokeWidth="2dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
+        <!-- Título -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="88dp"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/actor"
-            android:text="@string/clasificacion_fragment_tittle"
-            android:textSize="@dimen/letra_size"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
 
-        <TextView
-            android:id="@+id/lblGrupo"
-            android:layout_width="0dp"
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/actor"
+                android:text="@string/clasificacion_fragment_tittle"
+                android:textSize="@dimen/letra_size" />
+
+            <TextView
+                android:id="@+id/lblGrupo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/actor"
+                android:textSize="@dimen/letra_size" />
+        </LinearLayout>
+
+        <!-- Tabla de clasificación -->
+        <TableLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="20dp"
-            android:fontFamily="@font/actor"
-            android:textSize="@dimen/letra_size"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView2"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:stretchColumns="1,2,3">
 
-        <androidx.gridlayout.widget.GridLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            app:columnCount="4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2"
-            app:rowCount="9">
+            <!-- Cabecera -->
+            <TableRow>
+                <TextView android:text="Nombre" />
+                <TextView android:id="@+id/lblGanados" android:text="Victorias" android:gravity="center" />
+                <TextView android:id="@+id/lblPerdidos" android:text="Derrotas" android:gravity="center" />
+                <TextView android:id="@+id/lblPuntos" android:text="Puntos" android:gravity="center" />
+            </TableRow>
 
-            <TextView
-                android:id="@+id/TextView70"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/actor"
-                android:text="Nombre" />
+            <!-- Fila 1 -->
+            <TableRow>
+                <TextView android:id="@+id/lblEq1" />
+                <TextView android:id="@+id/lblvic1" android:gravity="center" />
+                <TextView android:id="@+id/lblDer1" android:gravity="center" />
+                <TextView android:id="@+id/lblPuntos1" android:gravity="center" />
+            </TableRow>
 
-            <TextView
-                android:id="@+id/lblGanados"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/actor"
-                android:text="Victorias" />
-
-            <TextView
-                android:id="@+id/lblPerdidos"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/actor"
-                android:text="Derrotas" />
-
-            <TextView
-                android:id="@+id/lblPuntos"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/actor"
-                android:text="Puntos" />
-
-            <TextView
-                android:id="@+id/lblEq1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/actor" />
-
-            <TextView
-                android:id="@+id/lblvic1"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/actor"
-                android:textAlignment="center" />
-
-            <TextView
-                android:id="@+id/lblDer1"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/actor"
-                android:textAlignment="center" />
-
-            <TextView
-                android:id="@+id/lblPuntos1"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/actor"
-                android:textAlignment="center" />
-
-            <TextView
-                android:id="@+id/lblEq2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/actor" />
-
-            <TextView
-                android:id="@+id/lblVic2"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/actor"
-                android:textAlignment="center" />
-
-            <TextView
-                android:id="@+id/lblDer2"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/actor"
-                android:textAlignment="center" />
-
-            <TextView
-                android:id="@+id/lblPuntos2"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/actor"
-                android:textAlignment="center" />
+            <!-- Fila 2 -->
+            <TableRow>
+                <TextView android:id="@+id/lblEq2" />
+                <TextView android:id="@+id/lblVic2" android:gravity="center" />
+                <TextView android:id="@+id/lblDer2" android:gravity="center" />
+                <TextView android:id="@+id/lblPuntos2" android:gravity="center" />
+            </TableRow>
 
             <!-- Fila 3 -->
-            <TextView
-                android:id="@+id/lblEq3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/actor" />
-
-            <TextView
-                android:id="@+id/lblVic3"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/actor"
-                android:textAlignment="center" />
-
-            <TextView
-                android:id="@+id/lblDer3"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/actor"
-                android:textAlignment="center" />
-
-            <TextView
-                android:id="@+id/lblPuntos3"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/actor"
-                android:textAlignment="center" />
+            <TableRow>
+                <TextView android:id="@+id/lblEq3" />
+                <TextView android:id="@+id/lblVic3" android:gravity="center" />
+                <TextView android:id="@+id/lblDer3" android:gravity="center" />
+                <TextView android:id="@+id/lblPuntos3" android:gravity="center" />
+            </TableRow>
 
             <!-- Fila 4 -->
-            <TextView
-                android:id="@+id/lblEq4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/actor" />
-
-            <TextView
-                android:id="@+id/lblVic4"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/actor"
-                android:textAlignment="center" />
-
-            <TextView
-                android:id="@+id/lblDer4"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/actor"
-                android:textAlignment="center" />
-
-            <TextView
-                android:id="@+id/lblPuntos4"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/actor"
-                android:textAlignment="center" />
+            <TableRow>
+                <TextView android:id="@+id/lblEq4" />
+                <TextView android:id="@+id/lblVic4" android:gravity="center" />
+                <TextView android:id="@+id/lblDer4" android:gravity="center" />
+                <TextView android:id="@+id/lblPuntos4" android:gravity="center" />
+            </TableRow>
 
             <!-- Fila 5 -->
-            <TextView
-                android:id="@+id/lblEq5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/actor" />
-
-            <TextView
-                android:id="@+id/lblVic5"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/actor"
-                android:textAlignment="center" />
-
-            <TextView
-                android:id="@+id/lblDer5"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/actor"
-                android:textAlignment="center" />
-
-            <TextView
-                android:id="@+id/lblPuntos5"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/actor"
-                android:textAlignment="center" />
+            <TableRow>
+                <TextView android:id="@+id/lblEq5" />
+                <TextView android:id="@+id/lblVic5" android:gravity="center" />
+                <TextView android:id="@+id/lblDer5" android:gravity="center" />
+                <TextView android:id="@+id/lblPuntos5" android:gravity="center" />
+            </TableRow>
 
             <!-- Fila 6 -->
-            <TextView
-                android:id="@+id/lblEq6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/actor" />
-
-            <TextView
-                android:id="@+id/lblVic6"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/actor"
-                android:textAlignment="center" />
-
-            <TextView
-                android:id="@+id/lblDer6"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/actor"
-                android:textAlignment="center" />
-
-            <TextView
-                android:id="@+id/lblPuntos6"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/actor"
-                android:textAlignment="center" />
+            <TableRow>
+                <TextView android:id="@+id/lblEq6" />
+                <TextView android:id="@+id/lblVic6" android:gravity="center" />
+                <TextView android:id="@+id/lblDer6" android:gravity="center" />
+                <TextView android:id="@+id/lblPuntos6" android:gravity="center" />
+            </TableRow>
 
             <!-- Fila 7 -->
-            <TextView
-                android:id="@+id/lblEq7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/actor" />
-
-            <TextView
-                android:id="@+id/lblVic7"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/actor"
-                android:textAlignment="center" />
-
-            <TextView
-                android:id="@+id/lblDer7"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/actor"
-                android:textAlignment="center" />
-
-            <TextView
-                android:id="@+id/lblPuntos7"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/actor"
-                android:textAlignment="center" />
+            <TableRow>
+                <TextView android:id="@+id/lblEq7" />
+                <TextView android:id="@+id/lblVic7" android:gravity="center" />
+                <TextView android:id="@+id/lblDer7" android:gravity="center" />
+                <TextView android:id="@+id/lblPuntos7" android:gravity="center" />
+            </TableRow>
 
             <!-- Fila 8 -->
-            <TextView
-                android:id="@+id/lblEq8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/actor" />
+            <TableRow>
+                <TextView android:id="@+id/lblEq8" />
+                <TextView android:id="@+id/lblVic8" android:gravity="center" />
+                <TextView android:id="@+id/lblDer8" android:gravity="center" />
+                <TextView android:id="@+id/lblPuntos8" android:gravity="center" />
+            </TableRow>
 
-            <TextView
-                android:id="@+id/lblVic8"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/actor"
-                android:textAlignment="center" />
-
-            <TextView
-                android:id="@+id/lblDer8"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/actor"
-                android:textAlignment="center" />
-
-            <TextView
-                android:id="@+id/lblPuntos8"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/actor"
-                android:textAlignment="center" />
-
-        </androidx.gridlayout.widget.GridLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </TableLayout>
+    </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

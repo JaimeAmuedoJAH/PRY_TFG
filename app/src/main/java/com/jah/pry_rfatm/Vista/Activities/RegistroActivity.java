@@ -77,10 +77,10 @@ public class RegistroActivity extends AppCompatActivity {
                     // Enviar correo de verificación
                     user.sendEmailVerification()
                             .addOnSuccessListener(unused -> {
-                                Toast.makeText(this, "Correo de verificación enviado a " + user.getEmail(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(this, getString(R.string.correo_de_verificaci_n_enviado_a) + user.getEmail(), Toast.LENGTH_SHORT).show();
                             })
                             .addOnFailureListener(e -> {
-                                Toast.makeText(this, "Error al enviar verificación: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(this, getString(R.string.error_al_enviar_verificaci_n) + e.getMessage(), Toast.LENGTH_LONG).show();
                             });
 
                     FirebaseController.db.collection("usuarios")
@@ -90,10 +90,10 @@ public class RegistroActivity extends AppCompatActivity {
                                 if (!querySnapshot.isEmpty()) {
                                     DocumentSnapshot doc = querySnapshot.getDocuments().get(0);
                                     doc.getReference().update("email", correo).addOnSuccessListener(unused -> {
-                                        Toast.makeText(this, "Usuario existente actualizado", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(this, getString(R.string.usuario_existente_actualizado), Toast.LENGTH_SHORT).show();
                                         finish();
                                     }).addOnFailureListener(e -> {
-                                        Toast.makeText(this, "Error al actualizar usuario", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(this, getString(R.string.error_al_actualizar_usuario), Toast.LENGTH_SHORT).show();
                                     });
                                 } else {
                                     Map<String, Object> userData = new HashMap<>();
@@ -104,25 +104,25 @@ public class RegistroActivity extends AppCompatActivity {
                                             .document(user.getUid())
                                             .set(userData)
                                             .addOnSuccessListener(unused -> {
-                                                Toast.makeText(this, "¡Registro completo!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(this, getString(R.string.registro_completo), Toast.LENGTH_SHORT).show();
                                                 finish();
                                             })
                                             .addOnFailureListener(e -> {
-                                                Toast.makeText(this, "Error al guardar datos", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(this, getString(R.string.error_al_guardar_datos), Toast.LENGTH_SHORT).show();
                                             });
                                 }
                             })
                             .addOnFailureListener(e -> {
-                                Toast.makeText(this, "Error al buscar username", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(this, getString(R.string.error_al_buscar_username), Toast.LENGTH_SHORT).show();
                             });
                 })
                 .addOnFailureListener(e -> {
                     String errorMsg = e.getMessage();
                     if (errorMsg != null && errorMsg.contains("The given password is invalid")) {
-                        inputPass.setError("La contraseña debe tener al menos 6 caracteres, una mayúscula, un número y un carácter especial.");
+                        inputPass.setError(getString(R.string.la_contrase_a_debe_tener_al_menos_6_caracteres_una_may_scula_un_n_mero_y_un_car_cter_especial));
                     } else {
                         inputPass.setError(null);
-                        Toast.makeText(this, "Error al registrar: " + errorMsg, Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, getString(R.string.error_al_registrar) + errorMsg, Toast.LENGTH_LONG).show();
                     }
                 });
     }

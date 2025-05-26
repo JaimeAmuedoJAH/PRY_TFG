@@ -52,11 +52,11 @@ public class ResetPasswordActivity extends AppCompatActivity {
         String email = txtMail.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(this, "Ingresa tu correo", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.ingresa_tu_correo), Toast.LENGTH_SHORT).show();
             return;
         }
         FirebaseController.enviarCorreoRecuperacion(email,
-                aVoid -> Toast.makeText(this, "Correo enviado. Revisa tu bandeja.", Toast.LENGTH_LONG).show(),
+                aVoid -> Toast.makeText(this, getString(R.string.correo_enviado_revisa_tu_bandeja), Toast.LENGTH_LONG).show(),
                 e -> Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show()
         );
     }

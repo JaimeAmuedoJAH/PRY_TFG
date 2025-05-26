@@ -130,7 +130,6 @@ public class EditarPerfilLogic {
             return;
         }
 
-        // Firestore tiene limitaciones en whereIn (máximo 10 elementos), asegúrate que la lista no sea muy larga
         FirebaseController.db.collection("usuarios")
                 .whereEqualTo("tipoUsuario", "jugador")
                 .whereIn("nombre", nombres)

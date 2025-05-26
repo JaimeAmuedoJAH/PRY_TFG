@@ -114,4 +114,19 @@
     <string name="error_al_obtener_el_estado_del_partido">Error al obtener el estado del partido</string>
     <string name="error_al_cargar_equipos">Error al cargar equipos</string>
     <string name="error_al_cargar_acta">Error al cargar acta</string>
+    <string name="fall_la_autenticaci_n_con_firebase">Falló la autenticación con Firebase</string>
+    <string name="error_en_inicio_de_sesi_n_con_google">"Error en inicio de sesión con Google: "</string>
+    <string name="correo_o_contrase_a_incorrectos">Correo o contraseña incorrectos.</string>
+    <string name="debes_verificar_tu_correo_electr_nico_antes_de_continuar">Debes verificar tu correo electrónico antes de continuar</string>
+    <string name="correo_de_verificaci_n_enviado_a">"Correo de verificación enviado a "</string>
+    <string name="error_al_enviar_verificaci_n">"Error al enviar verificación: "</string>
+    <string name="usuario_existente_actualizado">Usuario existente actualizado</string>
+    <string name="error_al_actualizar_usuario">Error al actualizar usuario</string>
+    <string name="registro_completo">¡Registro completo!</string>
+    <string name="error_al_guardar_datos">Error al guardar datos</string>
+    <string name="error_al_buscar_username">Error al buscar username</string>
+    <string name="la_contrase_a_debe_tener_al_menos_6_caracteres_una_may_scula_un_n_mero_y_un_car_cter_especial">La contraseña debe tener al menos 6 caracteres, una mayúscula, un número y un carácter especial.</string>
+    <string name="error_al_registrar">"Error al registrar: "</string>
+    <string name="ingresa_tu_correo">Ingresa tu correo</string>
+    <string name="correo_enviado_revisa_tu_bandeja">Correo enviado. Revisa tu bandeja.</string>
 </resources>

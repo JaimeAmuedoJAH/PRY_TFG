@@ -147,18 +147,18 @@ public class FirebaseController {
 
         String fotoPerfil = (user != null && user.getPhotoUrl() != null) ? user.getPhotoUrl().toString() : "";
         String nombre = (user != null && user.getDisplayName() != null) ? user.getDisplayName() : "Jugador";
-        //Creamos un objeto tipo jugador o entrenado rsegun el tipoUsuario.
+        //Creamos un objeto tipo jugador o entrenador segun el tipoUsuario.
         if (tipoUsuario.equals("jugador")) {
             Jugador jugador = new Jugador(
                     equipoId,
                     fotoPerfil,
                     nombre,
                     tipoUsuario,
-                    "", // estilo
-                    0, // partidos
-                    0, // victorias
-                    0, // derrotas
-                    0  // porcentaje
+                    "",
+                    0,
+                    0,
+                    0,
+                    0
             );
             //Añadimos al jugador a la base de datos.
             db.collection("usuarios").document(uid).set(jugador)

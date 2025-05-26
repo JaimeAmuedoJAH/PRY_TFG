@@ -4,7 +4,7 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2025-04-16T08:06:56.674219500Z">
+        <DropdownSelection timestamp="2025-05-26T08:03:13.432489500Z">
           <Target type="DEFAULT_BOOT">
             <handle>
               <DeviceId pluginId="PhysicalDevice" identifier="serial=R5CTC1FVBXK" />
@@ -13,19 +13,19 @@
         </DropdownSelection>
         <DialogSelection />
       </SelectionState>
-      <SelectionState runConfigName="InicioLogicHelperTest">
+      <SelectionState runConfigName="PerfilFragmentPerformanceTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="RankingLogicSimpleTest">
+      <SelectionState runConfigName="LogInActivityTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="LogInIntegrationTest">
+      <SelectionState runConfigName="modificarEquipoSecurityTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="RankingFragmentAcceptanceTest">
+      <SelectionState runConfigName="ModificarEquipoSecurityTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="PerfilFragmentAcceptanceTest">
+      <SelectionState runConfigName="LogInValidationTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
