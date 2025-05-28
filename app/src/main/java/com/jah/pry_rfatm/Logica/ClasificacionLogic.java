@@ -31,7 +31,7 @@ public class ClasificacionLogic {
     public static void obtenerClasificacion(Grupo grupo, FirebaseFirestore db, ClasificacionCallback callback) {
         List<String> idsEquipos = grupo.getEquipos();
         if (idsEquipos == null || idsEquipos.isEmpty()) {
-            callback.onClasificacionObtenida(new ArrayList<>());
+            callback.onClasificacionObtenida(new ArrayList<>()); // Devuelve una lista vacía si no hay equipos
             return;
         }
 
@@ -46,11 +46,11 @@ public class ClasificacionLogic {
                             Equipo equipo = documentSnapshot.toObject(Equipo.class);
                             if (equipo != null) {
                                 int puntos = equipo.getVictorias() * 3;
-                                listaEquipos.add(new Pair<>(equipo, puntos));
+                                listaEquipos.add(new Pair<>(equipo, puntos)); // Agrega el equipo y sus puntos
 
                                 if (listaEquipos.size() == idsEquipos.size()) {
-                                    listaEquipos.sort((e1, e2) -> Integer.compare(e2.second, e1.second));
-                                    callback.onClasificacionObtenida(listaEquipos);
+                                    listaEquipos.sort((e1, e2) -> Integer.compare(e2.second, e1.second)); // Ordena la lista
+                                    callback.onClasificacionObtenida(listaEquipos); // Devuelve la clasificación
                                 }
                             }
                         }

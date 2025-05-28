@@ -626,6 +626,7 @@ public class ActaActivity extends AppCompatActivity {
      * @param idVisitante
      */
     private void modificarPartidosJugados(String idLocal, String idVisitante) {
+        // Crear mapas para los datos
         Map <String, Object> datosPartidoABC = new HashMap<>();
         Map <String, Object> datosPartidoXYZ = new HashMap<>();
         datosPartidoABC.put("partidosJugados", FieldValue.increment(1));

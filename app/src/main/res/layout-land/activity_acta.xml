@@ -98,7 +98,7 @@
                     <EditText
                         android:id="@+id/lblSet11"
                         android:fontFamily="@font/actor"
-                        android:hint="set1"
+                        android:hint="@string/sets_hint"
                         android:inputType="text"
                         android:textAlignment="center"
                         android:textColorHint="@color/color_letra"
@@ -107,7 +107,7 @@
                     <EditText
                         android:id="@+id/lblSet21"
                         android:fontFamily="@font/actor"
-                        android:hint="set2"
+                        android:hint="@string/sets_hint"
                         android:inputType="text"
                         android:textAlignment="center"
                         android:textColorHint="@color/color_letra"
@@ -116,7 +116,7 @@
                     <EditText
                         android:id="@+id/lblSet31"
                         android:fontFamily="@font/actor"
-                        android:hint="set3"
+                        android:hint="@string/sets_hint"
                         android:inputType="text"
                         android:textAlignment="center"
                         android:textColorHint="@color/color_letra"
@@ -125,7 +125,7 @@
                     <EditText
                         android:id="@+id/lblSet41"
                         android:fontFamily="@font/actor"
-                        android:hint="set4"
+                        android:hint="@string/sets_hint"
                         android:inputType="text"
                         android:textAlignment="center"
                         android:textColorHint="@color/color_letra"
@@ -134,7 +134,7 @@
                     <EditText
                         android:id="@+id/lblSet51"
                         android:fontFamily="@font/actor"
-                        android:hint="set5"
+                        android:hint="@string/sets_hint"
                         android:inputType="text"
                         android:textAlignment="center"
                         android:textColorHint="@color/color_letra"
@@ -166,7 +166,7 @@
                     <EditText
                         android:id="@+id/lblSet12"
                         android:fontFamily="@font/actor"
-                        android:hint="set1"
+                        android:hint="@string/sets_hint"
                         android:inputType="text"
                         android:textAlignment="center"
                         android:textColorHint="@color/color_letra"
@@ -175,7 +175,7 @@
                     <EditText
                         android:id="@+id/lblSet22"
                         android:fontFamily="@font/actor"
-                        android:hint="set2"
+                        android:hint="@string/sets_hint"
                         android:inputType="text"
                         android:textAlignment="center"
                         android:textColorHint="@color/color_letra"
@@ -184,7 +184,7 @@
                     <EditText
                         android:id="@+id/lblSet32"
                         android:fontFamily="@font/actor"
-                        android:hint="set3"
+                        android:hint="@string/sets_hint"
                         android:inputType="text"
                         android:textAlignment="center"
                         android:textColorHint="@color/color_letra"
@@ -193,7 +193,7 @@
                     <EditText
                         android:id="@+id/lblSet42"
                         android:fontFamily="@font/actor"
-                        android:hint="set4"
+                        android:hint="@string/sets_hint"
                         android:inputType="text"
                         android:textAlignment="center"
                         android:textColorHint="@color/color_letra"
@@ -202,7 +202,7 @@
                     <EditText
                         android:id="@+id/lblSet52"
                         android:fontFamily="@font/actor"
-                        android:hint="set5"
+                        android:hint="@string/sets_hint"
                         android:inputType="text"
                         android:textAlignment="center"
                         android:textColorHint="@color/color_letra"
@@ -234,7 +234,7 @@
                     <EditText
                         android:id="@+id/lblSet13"
                         android:fontFamily="@font/actor"
-                        android:hint="set1"
+                        android:hint="@string/sets_hint"
                         android:inputType="text"
                         android:textAlignment="center"
                         android:textColorHint="@color/color_letra"
@@ -243,7 +243,7 @@
                     <EditText
                         android:id="@+id/lblSet23"
                         android:fontFamily="@font/actor"
-                        android:hint="set2"
+                        android:hint="@string/sets_hint"
                         android:inputType="text"
                         android:textAlignment="center"
                         android:textColorHint="@color/color_letra"
@@ -252,7 +252,7 @@
                     <EditText
                         android:id="@+id/lblSet33"
                         android:fontFamily="@font/actor"
-                        android:hint="set3"
+                        android:hint="@string/sets_hint"
                         android:inputType="text"
                         android:textAlignment="center"
                         android:textColorHint="@color/color_letra"
@@ -261,7 +261,7 @@
                     <EditText
                         android:id="@+id/lblSet43"
                         android:fontFamily="@font/actor"
-                        android:hint="set4"
+                        android:hint="@string/sets_hint"
                         android:inputType="text"
                         android:textAlignment="center"
                         android:textColorHint="@color/color_letra"
@@ -270,7 +270,7 @@
                     <EditText
                         android:id="@+id/lblSet53"
                         android:fontFamily="@font/actor"
-                        android:hint="set5"
+                        android:hint="@string/sets_hint"
                         android:inputType="text"
                         android:textAlignment="center"
                         android:textColorHint="@color/color_letra"
@@ -302,7 +302,7 @@
                     <EditText
                         android:id="@+id/lblSet14"
                         android:fontFamily="@font/actor"
-                        android:hint="set1"
+                        android:hint="@string/sets_hint"
                         android:inputType="text"
                         android:textAlignment="center"
                         android:textColorHint="@color/color_letra"
@@ -311,7 +311,7 @@
                     <EditText
                         android:id="@+id/lblSet24"
                         android:fontFamily="@font/actor"
-                        android:hint="set2"
+                        android:hint="@string/sets_hint"
                         android:inputType="text"
                         android:textAlignment="center"
                         android:textColorHint="@color/color_letra"
@@ -320,7 +320,7 @@
                     <EditText
                         android:id="@+id/lblSet34"
                         android:fontFamily="@font/actor"
-                        android:hint="set3"
+                        android:hint="@string/sets_hint"
                         android:inputType="text"
                         android:textAlignment="center"
                         android:textColorHint="@color/color_letra"
@@ -329,7 +329,7 @@
                     <EditText
                         android:id="@+id/lblSet44"
                         android:fontFamily="@font/actor"
-                        android:hint="set4"
+                        android:hint="@string/sets_hint"
                         android:inputType="text"
                         android:textAlignment="center"
                         android:textColorHint="@color/color_letra"
@@ -338,7 +338,7 @@
                     <EditText
                         android:id="@+id/lblSet54"
                         android:fontFamily="@font/actor"
-                        android:hint="set5"
+                        android:hint="@string/sets_hint"
                         android:inputType="text"
                         android:textAlignment="center"
                         android:textColorHint="@color/color_letra"
@@ -370,7 +370,7 @@
                     <EditText
                         android:id="@+id/lblSet15"
                         android:fontFamily="@font/actor"
-                        android:hint="set1"
+                        android:hint="@string/sets_hint"
                         android:inputType="text"
                         android:textAlignment="center"
                         android:textColorHint="@color/color_letra"
@@ -379,7 +379,7 @@
                     <EditText
                         android:id="@+id/lblSet25"
                         android:fontFamily="@font/actor"
-                        android:hint="set2"
+                        android:hint="@string/sets_hint"
                         android:inputType="text"
                         android:textAlignment="center"
                         android:textColorHint="@color/color_letra"
@@ -388,7 +388,7 @@
                     <EditText
                         android:id="@+id/lblSet35"
                         android:fontFamily="@font/actor"
-                        android:hint="set3"
+                        android:hint="@string/sets_hint"
                         android:inputType="text"
                         android:textAlignment="center"
                         android:textColorHint="@color/color_letra"
@@ -397,7 +397,7 @@
                     <EditText
                         android:id="@+id/lblSet45"
                         android:fontFamily="@font/actor"
-                        android:hint="set4"
+                        android:hint="@string/sets_hint"
                         android:inputType="text"
                         android:textAlignment="center"
                         android:textColorHint="@color/color_letra"
@@ -406,7 +406,7 @@
                     <EditText
                         android:id="@+id/lblSet55"
                         android:fontFamily="@font/actor"
-                        android:hint="set5"
+                        android:hint="@string/sets_hint"
                         android:inputType="text"
                         android:textAlignment="center"
                         android:textColorHint="@color/color_letra"
@@ -438,7 +438,7 @@
                     <EditText
                         android:id="@+id/lblSet16"
                         android:fontFamily="@font/actor"
-                        android:hint="set1"
+                        android:hint="@string/sets_hint"
                         android:inputType="text"
                         android:textAlignment="center"
                         android:textColorHint="@color/color_letra"
@@ -447,7 +447,7 @@
                     <EditText
                         android:id="@+id/lblSet26"
                         android:fontFamily="@font/actor"
-                        android:hint="set2"
+                        android:hint="@string/sets_hint"
                         android:inputType="text"
                         android:textAlignment="center"
                         android:textColorHint="@color/color_letra"
@@ -456,7 +456,7 @@
                     <EditText
                         android:id="@+id/lblSet36"
                         android:fontFamily="@font/actor"
-                        android:hint="set3"
+                        android:hint="@string/sets_hint"
                         android:inputType="text"
                         android:textAlignment="center"
                         android:textColorHint="@color/color_letra"
@@ -465,7 +465,7 @@
                     <EditText
                         android:id="@+id/lblSet46"
                         android:fontFamily="@font/actor"
-                        android:hint="set4"
+                        android:hint="@string/sets_hint"
                         android:inputType="text"
                         android:textAlignment="center"
                         android:textColorHint="@color/color_letra"
@@ -474,7 +474,7 @@
                     <EditText
                         android:id="@+id/lblSet56"
                         android:fontFamily="@font/actor"
-                        android:hint="set5"
+                        android:hint="@string/sets_hint"
                         android:inputType="text"
                         android:textAlignment="center"
                         android:textColorHint="@color/color_letra"
@@ -506,7 +506,7 @@
                     <EditText
                         android:id="@+id/lblSet17"
                         android:fontFamily="@font/actor"
-                        android:hint="set1"
+                        android:hint="@string/sets_hint"
                         android:inputType="text"
                         android:textAlignment="center"
                         android:textColorHint="@color/color_letra"
@@ -515,7 +515,7 @@
                     <EditText
                         android:id="@+id/lblSet27"
                         android:fontFamily="@font/actor"
-                        android:hint="set2"
+                        android:hint="@string/sets_hint"
                         android:inputType="text"
                         android:textAlignment="center"
                         android:textColorHint="@color/color_letra"
@@ -524,7 +524,7 @@
                     <EditText
                         android:id="@+id/lblSet37"
                         android:fontFamily="@font/actor"
-                        android:hint="set3"
+                        android:hint="@string/sets_hint"
                         android:inputType="text"
                         android:textAlignment="center"
                         android:textColorHint="@color/color_letra"
@@ -533,7 +533,7 @@
                     <EditText
                         android:id="@+id/lblSet47"
                         android:fontFamily="@font/actor"
-                        android:hint="set4"
+                        android:hint="@string/sets_hint"
                         android:inputType="text"
                         android:textAlignment="center"
                         android:textColorHint="@color/color_letra"
@@ -542,7 +542,7 @@
                     <EditText
                         android:id="@+id/lblSet57"
                         android:fontFamily="@font/actor"
-                        android:hint="set5"
+                        android:hint="@string/sets_hint"
                         android:inputType="text"
                         android:textAlignment="center"
                         android:textColorHint="@color/color_letra"

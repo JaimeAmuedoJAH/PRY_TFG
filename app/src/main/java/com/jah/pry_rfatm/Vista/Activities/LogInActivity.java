@@ -119,7 +119,6 @@ public class LogInActivity extends AppCompatActivity {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthConGoogle(account.getIdToken());
             } catch (ApiException e) {
-                Log.e("GoogleSignInError", "Código: " + e.getStatusCode(), e);
                 Toast.makeText(this, getString(R.string.error_en_inicio_de_sesi_n_con_google) + e.getMessage(), Toast.LENGTH_LONG).show();
             }
 

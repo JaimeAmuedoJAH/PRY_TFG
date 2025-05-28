@@ -266,10 +266,10 @@ public class FirebaseController {
                             String tipoUsuario = documentSnapshot.getString("tipoUsuario"); //obtiene el tipo de usuario
 
                             if ("jugador".equalsIgnoreCase(tipoUsuario)) {
-                                Jugador jugador = documentSnapshot.toObject(Jugador.class);
+                                Jugador jugador = documentSnapshot.toObject(Jugador.class); // si es jugador lo convierte a jugador
                                 onSuccess.onSuccess(jugador);
                             } else if ("entrenador".equalsIgnoreCase(tipoUsuario)) {
-                                Entrenador entrenador = documentSnapshot.toObject(Entrenador.class);
+                                Entrenador entrenador = documentSnapshot.toObject(Entrenador.class); // si es entrenador lo convierte a entrenador
                                 onSuccess.onSuccess(entrenador);
                             } else {
                                 onFailure.onFailure(new Exception(String.valueOf(R.string.tipo_de_usuario_no_reconocido)));
@@ -383,6 +383,6 @@ public class FirebaseController {
                 .update(actualizacion)
                 .addOnSuccessListener(aVoid -> Log.d("Firebase", String.valueOf(R.string.porcentaje_actualizado)))
                 .addOnFailureListener(e -> Log.e("Firebase", String.valueOf(R.string.error_al_actualizar_porcentaje), e));
-        lblPorcentaje.setText(String.valueOf(porcentaje + "%"));
+        lblPorcentaje.setText(porcentaje + "%");
     }
 }

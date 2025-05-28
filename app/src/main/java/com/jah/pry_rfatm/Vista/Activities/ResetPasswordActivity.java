@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.jah.pry_rfatm.Controlador.FirebaseController;
 import com.jah.pry_rfatm.R;
@@ -25,6 +26,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
     EditText txtMail;
     Button btnReset;
+    TextInputLayout layoutCorreo;
     MaterialToolbar mtbBarReset;
     private FirebaseAuth mAuth;
 
@@ -39,6 +41,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
         txtMail = findViewById(R.id.txtMail);
         btnReset = findViewById(R.id.btnReset);
         mtbBarReset = findViewById(R.id.mtbBarReset);
+        layoutCorreo = findViewById(R.id.layoutCorreo);
         FirebaseController.iniciarFirebase(this);
         setSupportActionBar(mtbBarReset);
         mtbBarReset.setBackgroundColor(getResources().getColor(R.color.color_fondos));
@@ -54,7 +57,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
         String email = txtMail.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(this, getString(R.string.ingresa_tu_correo), Toast.LENGTH_SHORT).show();
+            layoutCorreo.setError(getString(R.string.ingresa_tu_correo));
             return;
         }
         FirebaseController.enviarCorreoRecuperacion(email,
