@@ -5,6 +5,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.jah.pry_rfatm.Controlador.FirebaseController;
 import com.jah.pry_rfatm.Modelo.Jugador;
+import com.jah.pry_rfatm.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,16 +74,16 @@ public class RankingLogic {
                                         FirebaseController.db.collection("ligas").document(ligaId.split("/")[2]).get()
                                                 .addOnSuccessListener(ligaDoc -> {
                                                     String nombre = ligaDoc.getString("nombre");
-                                                    callback.onNombreObtenido(nombre != null ? nombre : "Sin nombre");
+                                                    callback.onNombreObtenido(nombre != null ? nombre : String.valueOf(R.string.sin_nombre));
                                                 })
                                                 .addOnFailureListener(callback::onError);
                                     } else {
-                                        callback.onError(new Exception("Liga no asignada"));
+                                        callback.onError(new Exception(String.valueOf(R.string.liga_no_asignada)));
                                     }
                                 })
                                 .addOnFailureListener(callback::onError);
                     } else {
-                        callback.onError(new Exception("Equipo no asignado"));
+                        callback.onError(new Exception(String.valueOf(R.string.equipo_no_asignado)));
                     }
                 })
                 .addOnFailureListener(callback::onError);

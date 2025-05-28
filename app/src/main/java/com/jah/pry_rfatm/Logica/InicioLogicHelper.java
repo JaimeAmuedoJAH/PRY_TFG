@@ -15,7 +15,7 @@ public class InicioLogicHelper {
     public static Map<String, String> procesarEquipos(List<String> nombres, List<String> ids) {
         Map<String, String> nombreToId = new HashMap<>();
         for (int i = 0; i < nombres.size(); i++) {
-            nombreToId.put(nombres.get(i), ids.get(i));
+            nombreToId.put(nombres.get(i), ids.get(i)); // Asignar ID al nombre
         }
         return nombreToId;
     }

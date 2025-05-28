@@ -1,5 +1,4 @@
 <resources>
-    <!-- Log in -->
     <string name="app_name">RFATM</string>
     <string name="hint_txt_correo">Email</string>
     <string name="hint_txt_pass">Password</string>
@@ -8,15 +7,11 @@
     <string name="txt_btn_registro">Sign Up</string>
     <string name="lbl_recuperar">Forgot your password?</string>
     <string name="txt_recuperar">Recover Password</string>
-
-    <!-- RegistroActivity -->
     <string name="txt_registro_title">Sign Up</string>
     <string name="hint_txt_usuario">User (first and last name)</string>
     <string name="txt_jugador">Player</string>
     <string name="txt_entrenador">Coach</string>
     <string name="toast_error_registro">You must fill in all fields to register.</string>
-
-    <!-- MainActivity -->
     <string name="navigation_btn1">Home</string>
     <string name="navigation_btn2">Standings</string>
     <string name="navigation_btn3">Ranking</string>
@@ -30,11 +25,7 @@
     <string name="btn_acta">Match Report</string>
     <string name="lbl_sin_fecha">No date</string>
     <string name="tolbar_acta">Match Report</string>
-    <string name="set_1">SET 1</string>
-    <string name="set_2">SET 2</string>
-    <string name="set_3">SET 3</string>
-    <string name="set_4">SET 4</string>
-    <string name="set_5">SET 5</string>
+    <string name="sets_hint">Ex: 11–7</string>
     <string name="resultado">Result</string>
     <string name="clasificacion_fragment_tittle">Standings:</string>
     <string name="editar_perfil_estilo">Playing Style</string>
@@ -129,4 +120,14 @@
     </string>
     <string name="ingresa_tu_correo">Enter your email</string>
     <string name="correo_enviado_revisa_tu_bandeja">Email sent. Check your inbox.</string>
+    <string name="datos_actualizados_correctamente">Data updated successfully</string>
+    <string name="error_al_actualizar_los_datos">Error updating data</string>
+    <string name="no_se_encontr_el_id_del_equipo">Team ID not found</string>
+    <string name="error_al_subir_la_imagen">Error uploading image</string>
+    <string name="error_al_obtener_ids_suplentes">Error retrieving substitute IDs</string>
+    <string name="error_al_obtener_ids_titulares">Error retrieving starting player IDs</string>
+    <string name="error_al_obtener_los_datos_del_usuario">Error retrieving user data</string>
+    <string name="error_al_actualizar_el_usuario">Error updating user</string>
+    <string name="sin_nombre">No name</string>
+    <string name="liga_no_asignada">League not assigned</string>
 </resources>

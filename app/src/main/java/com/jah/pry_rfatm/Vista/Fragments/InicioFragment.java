@@ -64,11 +64,11 @@ public class InicioFragment extends Fragment {
                 .addOnSuccessListener(document -> {
                     String equipoId = document.getString("equipoId");
                     String tipoUsuario = document.getString("tipoUsuario");
-
+                     // Si es usuario nuevo, debe seleccionar equipo y tipo de usuario
                     if (equipoId == null || equipoId.isEmpty() || tipoUsuario == null || tipoUsuario.isEmpty()) {
                         mostrarDialogoEquipo(uid);
                     } else {
-                        cargarPartidos();
+                        cargarPartidos(); // Si ya tiene equipo y tipo, carga los partidos
                     }
                 })
                 .addOnFailureListener(e -> {
@@ -197,5 +197,4 @@ public class InicioFragment extends Fragment {
                 e -> Toast.makeText(getContext(), R.string.toast_error_al_registrar + " " + e.getMessage(), Toast.LENGTH_SHORT).show()
         );
     }
-
 }

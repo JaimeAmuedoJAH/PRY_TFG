@@ -8,6 +8,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.jah.pry_rfatm.Controlador.FirebaseController;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.jah.pry_rfatm.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,20 +46,21 @@ public class EditarPerfilLogic {
                     imagenUri,
                     downloadUrl -> {
                         if (downloadUrl != null) {
-                            datosJugador.put("fotoPerfil", downloadUrl);
+                            datosJugador.put("fotoPerfil", downloadUrl); // Actualizar la URL de la imagen
                         }
+                        // Actualizar datos del jugador
                         FirebaseController.db.collection("usuarios").document(uid)
                                 .update(datosJugador)
-                                .addOnSuccessListener(unused -> callback.onComplete(true, "Datos actualizados correctamente", downloadUrl))
-                                .addOnFailureListener(e -> callback.onComplete(false, "Error al actualizar los datos", null));
+                                .addOnSuccessListener(unused -> callback.onComplete(true, String.valueOf(R.string.datos_actualizados_correctamente), downloadUrl))
+                                .addOnFailureListener(e -> callback.onComplete(false, String.valueOf(R.string.error_al_actualizar_los_datos), null));
                     },
                     e -> callback.onComplete(false, "Error al subir imagen", null)
             );
         } else {
             FirebaseController.db.collection("usuarios").document(uid)
                     .update(datosJugador)
-                    .addOnSuccessListener(unused -> callback.onComplete(true, "Datos actualizados correctamente", null))
-                    .addOnFailureListener(e -> callback.onComplete(false, "Error al actualizar los datos", null));
+                    .addOnSuccessListener(unused -> callback.onComplete(true, String.valueOf(R.string.datos_actualizados_correctamente), null))
+                    .addOnFailureListener(e -> callback.onComplete(false, String.valueOf(R.string.error_al_actualizar_los_datos), null));
         }
     }
 
@@ -76,7 +78,7 @@ public class EditarPerfilLogic {
                 .addOnSuccessListener(documentSnapshot -> {
                     String equipoId = documentSnapshot.getString("equipoId");
                     if (equipoId == null || equipoId.isEmpty()) {
-                        callback.onComplete(false, "No se encontró el ID del equipo", null);
+                        callback.onComplete(false, String.valueOf(R.string.no_se_encontr_el_id_del_equipo), null);
                         return;
                     }
 
@@ -89,7 +91,7 @@ public class EditarPerfilLogic {
                                 // Obtener IDs de suplentes
                                 obtenerIdsUsuariosPorNombres(suplentes,
                                         suplentesIds -> {
-                                            Map<String, Object> datosEquipo = new HashMap<>();
+                                            Map<String, Object> datosEquipo = new HashMap<>(); // Crear mapa para los datos del equipo
                                             datosEquipo.put("jugadores", titularesIds);
                                             datosEquipo.put("suplentes", suplentesIds);
 
@@ -101,21 +103,22 @@ public class EditarPerfilLogic {
                                                             if (downloadUrl != null) {
                                                                 datosUsuario.put("fotoPerfil", downloadUrl);
                                                             }
+                                                            // Actualizar datos del usuario y equipo
                                                             actualizarUsuarioYEquipo(uid, equipoId, datosUsuario, datosEquipo, callback, downloadUrl);
                                                         },
-                                                        e -> callback.onComplete(false, "Error al subir la imagen", null)
+                                                        e -> callback.onComplete(false, String.valueOf(R.string.error_al_subir_la_imagen), null)
                                                 );
                                             } else {
                                                 actualizarUsuarioYEquipo(uid, equipoId, datosUsuario, datosEquipo, callback, null);
                                             }
                                         },
-                                        e -> callback.onComplete(false, "Error al obtener IDs suplentes", null)
+                                        e -> callback.onComplete(false, String.valueOf(R.string.error_al_obtener_ids_suplentes), null)
                                 );
                             },
-                            e -> callback.onComplete(false, "Error al obtener IDs titulares", null)
+                            e -> callback.onComplete(false, String.valueOf(R.string.error_al_obtener_ids_titulares), null)
                     );
                 })
-                .addOnFailureListener(e -> callback.onComplete(false, "Error al obtener los datos del usuario", null));
+                .addOnFailureListener(e -> callback.onComplete(false, String.valueOf(R.string.error_al_obtener_los_datos_del_usuario), null));
     }
 
     /**
@@ -159,9 +162,9 @@ public class EditarPerfilLogic {
                 .addOnSuccessListener(unused -> {
                     FirebaseController.db.collection("equipos").document(equipoId.split("/")[2])
                             .update(datosEquipo)
-                            .addOnSuccessListener(unused2 -> callback.onComplete(true, "Datos actualizados correctamente", downloadUrl))
-                            .addOnFailureListener(e -> callback.onComplete(false, "Error al actualizar el equipo", null));
+                            .addOnSuccessListener(unused2 -> callback.onComplete(true, String.valueOf(R.string.datos_actualizados_correctamente), downloadUrl))
+                            .addOnFailureListener(e -> callback.onComplete(false, String.valueOf(R.string.error_al_actualizar_los_datos), null));
                 })
-                .addOnFailureListener(e -> callback.onComplete(false, "Error al actualizar el usuario", null));
+                .addOnFailureListener(e -> callback.onComplete(false, String.valueOf(R.string.error_al_actualizar_el_usuario), null));
     }
 }

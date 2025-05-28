@@ -76,10 +76,10 @@ public class PerfilFragment extends Fragment {
 
                         if ("jugador".equals(tipoUser)) {
                             tipoUsuario = "jugador";
-                            mostrarLayoutJugador(inflater, container);
+                            mostrarLayoutJugador(inflater, container); // Mostrar layout jugador
                         } else if ("entrenador".equals(tipoUser)) {
                             tipoUsuario = "entrenador";
-                            mostrarLayoutEntrenador(inflater, container);
+                            mostrarLayoutEntrenador(inflater, container); // Mostrar layout entrenador
                         } else {
                             mostrarError(getString(R.string.toast_tipo_de_usuario_no_reconocido));
                         }

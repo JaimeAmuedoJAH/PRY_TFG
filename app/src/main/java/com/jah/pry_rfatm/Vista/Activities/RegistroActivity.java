@@ -82,12 +82,12 @@ public class RegistroActivity extends AppCompatActivity {
                             .addOnFailureListener(e -> {
                                 Toast.makeText(this, getString(R.string.error_al_enviar_verificaci_n) + e.getMessage(), Toast.LENGTH_LONG).show();
                             });
-
+                        // Verificar si el usuario ya existe en Firestore
                     FirebaseController.db.collection("usuarios")
                             .whereEqualTo("nombre", username)
                             .get()
                             .addOnSuccessListener(querySnapshot -> {
-                                if (!querySnapshot.isEmpty()) {
+                                if (!querySnapshot.isEmpty()) { // Si el usuario ya existe
                                     DocumentSnapshot doc = querySnapshot.getDocuments().get(0);
                                     doc.getReference().update("email", correo).addOnSuccessListener(unused -> {
                                         Toast.makeText(this, getString(R.string.usuario_existente_actualizado), Toast.LENGTH_SHORT).show();
@@ -95,7 +95,7 @@ public class RegistroActivity extends AppCompatActivity {
                                     }).addOnFailureListener(e -> {
                                         Toast.makeText(this, getString(R.string.error_al_actualizar_usuario), Toast.LENGTH_SHORT).show();
                                     });
-                                } else {
+                                } else { // Si el usuario no existe, crearlo
                                     Map<String, Object> userData = new HashMap<>();
                                     userData.put("email", correo);
                                     userData.put("name", username);
@@ -118,7 +118,7 @@ public class RegistroActivity extends AppCompatActivity {
                 })
                 .addOnFailureListener(e -> {
                     String errorMsg = e.getMessage();
-                    if (errorMsg != null && errorMsg.contains("The given password is invalid")) {
+                    if (errorMsg != null) { // Si el mensaje de error no es nulo, muestra el mensaje en el campo de texto
                         inputPass.setError(getString(R.string.la_contrase_a_debe_tener_al_menos_6_caracteres_una_may_scula_un_n_mero_y_un_car_cter_especial));
                     } else {
                         inputPass.setError(getString(R.string.la_contrase_a_debe_tener_al_menos_6_caracteres_una_may_scula_un_n_mero_y_un_car_cter_especial));
@@ -131,7 +131,6 @@ public class RegistroActivity extends AppCompatActivity {
      * Crea el menú de opciones en la barra de acción.
      * @param menu The options menu in which you place your items.
      *
-     * @return
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -144,7 +143,6 @@ public class RegistroActivity extends AppCompatActivity {
      * Maneja la selección de elementos del menú.
      * @param item The menu item that was selected.
      *
-     * @return
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
