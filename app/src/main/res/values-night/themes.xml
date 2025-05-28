@@ -1,7 +1,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.PRYRFATM" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">@color/color_letra</item>
+        <item name="colorOnPrimary">@color/color_letra</item>
+        <item name="colorSecondary">@color/color_letra</item>
+
     </style>
+
+    <style name="Theme.PRYRFATM" parent="Base.Theme.PRYRFATM" />
 </resources>

@@ -16,6 +16,7 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.jah.pry_rfatm.Controlador.FirebaseController;
 import com.jah.pry_rfatm.R;
+import com.jah.pry_rfatm.Vista.Recursos.UtilesUI;
 
 /**
  * Actividad que permite a los usuarios recuperar su contraseña enviando un correo a través de Firebase.
@@ -41,6 +42,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
         FirebaseController.iniciarFirebase(this);
         setSupportActionBar(mtbBarReset);
         mtbBarReset.setBackgroundColor(getResources().getColor(R.color.color_fondos));
+        UtilesUI.configurarStatusBar(this);
 
         btnReset.setOnClickListener(view -> recuperarContrasenia());
     }

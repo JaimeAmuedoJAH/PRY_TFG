@@ -1,7 +1,6 @@
 package com.jah.pry_rfatm.Unitario;
 
 import com.jah.pry_rfatm.Controlador.FirebaseController;
-import com.jah.pry_rfatm.Logica.RankingLogic;
 import com.jah.pry_rfatm.Modelo.Jugador;
 
 import org.junit.Before;

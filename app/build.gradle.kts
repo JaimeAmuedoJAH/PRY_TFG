@@ -1,5 +1,3 @@
-import org.jetbrains.dokka.gradle.DokkaTask
-
 plugins {
     alias(libs.plugins.android.application)
     id("com.google.gms.google-services")
@@ -49,7 +47,6 @@ dependencies {
     implementation(libs.gridlayout)
 
     implementation(platform(libs.firebase.bom.v33130))
-    implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.perf)
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.auth)
@@ -67,31 +64,16 @@ dependencies {
     annotationProcessor(libs.compiler)
 
     testImplementation(libs.junit)
-    androidTestImplementation(libs.ext.junit)
-    androidTestImplementation(libs.espresso.core)
-    androidTestImplementation (libs.fragment.testing)
-    androidTestImplementation (libs.junit.v115)
-    androidTestImplementation (libs.espresso.core.v351)
-    androidTestImplementation (libs.rules)
-    androidTestImplementation (libs.runner)
-    androidTestImplementation (libs.mockito.android)
-    androidTestImplementation (libs.truth)
+
+    // ✅ Android Test Dependencies (versión coherente y estable)
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
+    androidTestImplementation("androidx.test.espresso:espresso-intents:3.6.1")
+    androidTestImplementation("androidx.test:rules:1.6.1")
+    androidTestImplementation("androidx.test:runner:1.6.1")
+    androidTestImplementation("androidx.fragment:fragment-testing:1.6.2")
+    androidTestImplementation("org.mockito:mockito-android:5.11.0")
+    androidTestImplementation("com.google.truth:truth:1.4.2")
 }
 
-/*tasks.named<DokkaTask>("dokkaHtml") {
-    outputDirectory.set(buildDir.resolve("dokka/html"))
 
-    dokkaSourceSets.configureEach {
-        includeNonPublic.set(true)
-        skipEmptyPackages.set(false)
-        reportUndocumented.set(true)
-
-        // Necesario para incluir código Java
-        sourceRoots.from(file("src/main/java"))
-
-        perPackageOption {
-            matchingRegex.set(".*")
-            suppress.set(false)
-        }
-    }
-}*/

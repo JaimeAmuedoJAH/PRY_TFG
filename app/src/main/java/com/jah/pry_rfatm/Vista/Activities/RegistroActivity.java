@@ -122,7 +122,7 @@ public class RegistroActivity extends AppCompatActivity {
                         inputPass.setError(getString(R.string.la_contrase_a_debe_tener_al_menos_6_caracteres_una_may_scula_un_n_mero_y_un_car_cter_especial));
                     } else {
                         inputPass.setError(null);
-                        Toast.makeText(this, getString(R.string.error_al_registrar) + errorMsg, Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, getString(R.string.toast_error_al_registrar) + errorMsg, Toast.LENGTH_LONG).show();
                     }
                 });
     }

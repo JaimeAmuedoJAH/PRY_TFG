@@ -31,6 +31,7 @@ gridlayout = "1.1.0"
 rules = "1.6.1"
 runner = "1.6.2"
 truth = "1.1.4"
+espressoIntents = "3.6.1"
 
 [libraries]
 compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "compiler" }
@@ -69,6 +70,7 @@ gridlayout = { group = "androidx.gridlayout", name = "gridlayout", version.ref =
 rules = { module = "androidx.test:rules", version.ref = "rules" }
 runner = { module = "androidx.test:runner", version.ref = "runner" }
 truth = { module = "com.google.truth:truth", version.ref = "truth" }
+espresso-intents = { group = "androidx.test.espresso", name = "espresso-intents", version.ref = "espressoIntents" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
