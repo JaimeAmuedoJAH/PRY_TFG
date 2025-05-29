@@ -20,6 +20,9 @@ import java.util.List;
 public class AdaptadorRanking extends RecyclerView.Adapter<AdaptadorRanking.HolderRanking> {
 
     private List<Jugador> listaJugadores;
+    private static final int TIPO_ENCABEZADO = 0;
+    private static final int TIPO_JUGADOR = 1;
+
 
     /**
      * Constructor que recibe la lista de jugadores a mostrar.
@@ -37,9 +40,16 @@ public class AdaptadorRanking extends RecyclerView.Adapter<AdaptadorRanking.Hold
      */
     @NonNull
     @Override
-    public AdaptadorRanking.HolderRanking onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View vista = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_jugador, parent, false);
-        return new HolderRanking(vista);
+    public HolderRanking onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        if (viewType == TIPO_ENCABEZADO) {
+            View vistaEncabezado = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.recycler_encabezado_ranking, parent, false);
+            return new HolderRanking.HolderEncabezado(vistaEncabezado);
+        } else {
+            View vistaJugador = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.recycler_jugador, parent, false);
+            return new HolderRanking(vistaJugador);
+        }
     }
 
     /**
@@ -49,7 +59,9 @@ public class AdaptadorRanking extends RecyclerView.Adapter<AdaptadorRanking.Hold
      */
     @Override
     public void onBindViewHolder(@NonNull AdaptadorRanking.HolderRanking holder, int position) {
-        holder.bind(listaJugadores.get(position));
+        if (getItemViewType(position) == TIPO_JUGADOR) {
+            holder.bind(listaJugadores.get(position - 1)); // restamos 1 porque el header ocupa la posición 0
+        }
     }
 
     /**
@@ -58,8 +70,14 @@ public class AdaptadorRanking extends RecyclerView.Adapter<AdaptadorRanking.Hold
      */
     @Override
     public int getItemCount() {
-        return listaJugadores.size();
+        return listaJugadores.size() + 1;
     }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position == 0 ? TIPO_ENCABEZADO : TIPO_JUGADOR;
+    }
+
 
     /**
      * ViewHolder para mostrar los datos de un jugador.
@@ -78,6 +96,15 @@ public class AdaptadorRanking extends RecyclerView.Adapter<AdaptadorRanking.Hold
             tvVictorias = itemView.findViewById(R.id.tvVictorias);
             tvDerrotas = itemView.findViewById(R.id.tvDerrotas);
             tvPuntos = itemView.findViewById(R.id.tvPuntos);
+        }
+
+        /**
+         * ViewHolder para mostrar los datos del encabezado.
+         */
+        public static class HolderEncabezado extends HolderRanking {
+            public HolderEncabezado(@NonNull View itemView) {
+                super(itemView);
+            }
         }
 
         /**

@@ -3,42 +3,50 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="12dp"
-    android:background="#FFFFFF">
+    android:paddingVertical="12dp"
+    android:background="#E0E0E0"> <!-- gris claro para diferenciar encabezado -->
 
     <TextView
         android:id="@+id/tvNombre"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:fontFamily="@font/actor"
-        android:textAlignment="viewStart"
-        android:textSize="@dimen/letra_size" />
+        android:text="@string/nombre"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="@dimen/letra_size"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tvVictorias"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:fontFamily="@font/actor"
+        android:text="@string/victorias"
         android:textAlignment="center"
-        android:textSize="@dimen/letra_size" />
+        android:textColor="#000000"
+        android:textSize="@dimen/letra_size"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tvDerrotas"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:fontFamily="@font/actor"
+        android:text="@string/derrotas"
         android:textAlignment="center"
-        android:textSize="@dimen/letra_size" />
+        android:textColor="#000000"
+        android:textSize="@dimen/letra_size"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tvPuntos"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:fontFamily="@font/actor"
+        android:text="@string/puntos"
         android:textAlignment="center"
-        android:textSize="@dimen/letra_size" />
+        android:textColor="#000000"
+        android:textSize="@dimen/letra_size"
+        android:textStyle="bold" />
 </LinearLayout>
