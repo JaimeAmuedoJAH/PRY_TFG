@@ -130,7 +130,15 @@
     <string name="error_al_actualizar_el_usuario">Error updating user</string>
     <string name="sin_nombre">No name</string>
     <string name="liga_no_asignada">League not assigned</string>
-    <string name="el_correo_es_obligatorio">El correo es obligatorio</string>
-    <string name="la_contrase_a_es_obligatoria">La contraseña es obligatoria</string>
-    <string name="perfil_actualizado">Perfil actualizado</string>
+    <string name="el_correo_es_obligatorio">Email is required</string>
+    <string name="la_contrase_a_es_obligatoria">Password is required</string>
+    <string name="perfil_actualizado">Profile updated</string>
+    <string name="error_al_guardar_acta">Error saving record</string>
+    <string name="error_al_verificar_estado_del_partido">Error checking match status</string>
+    <string name="partido_actualizado">Match updated</string>
+    <string name="necesitas_rellenar_todos_los_campos">You need to fill in all the fields</string>
+    <string name="el_partido_ya_fue_jugado">The match has already been played</string>
+    <string name="error_al_procesar_estad_sticas_para_partido">Error processing statistics for match</string>
+    <string name="acta_inicial_creada">Initial record created</string>
+    <string name="error_al_crear_acta_inicial">Error creating initial record</string>
 </resources>
