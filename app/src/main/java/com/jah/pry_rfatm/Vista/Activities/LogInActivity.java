@@ -77,11 +77,11 @@ public class LogInActivity extends AppCompatActivity {
         String pass = txtPass.getText().toString().trim();
 
         if (correo.isEmpty()) {
-            txtCorreo.setError("El correo es obligatorio");
+            txtCorreo.setError(getString(R.string.el_correo_es_obligatorio));
             return;
         }
         if (pass.isEmpty()) {
-            txtPass.setError("La contraseña es obligatoria");
+            txtPass.setError(getString(R.string.la_contrase_a_es_obligatoria));
             return;
         }
 

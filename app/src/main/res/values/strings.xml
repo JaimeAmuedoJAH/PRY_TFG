@@ -130,4 +130,7 @@
     <string name="error_al_actualizar_el_usuario">Error updating user</string>
     <string name="sin_nombre">No name</string>
     <string name="liga_no_asignada">League not assigned</string>
+    <string name="el_correo_es_obligatorio">El correo es obligatorio</string>
+    <string name="la_contrase_a_es_obligatoria">La contraseña es obligatoria</string>
+    <string name="perfil_actualizado">Perfil actualizado</string>
 </resources>

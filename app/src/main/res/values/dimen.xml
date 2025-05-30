@@ -2,6 +2,6 @@
 <resources>
     <dimen name="letra_size_btn">20sp</dimen>
     <dimen name="letra_lbl_titulo">24sp</dimen>
-    <dimen name="letra_size">18sp</dimen>
-    <dimen name="corner_radius">4dp</dimen>
+    <dimen name="letra_size">16sp</dimen>
+    <dimen name="corner_radius">32dp</dimen>
 </resources>

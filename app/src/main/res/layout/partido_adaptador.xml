@@ -1,97 +1,95 @@
-<?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cvCardPartido"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="13dp"
-    android:layout_marginTop="13dp"
-    android:layout_marginRight="13dp"
-    android:layout_marginBottom="13dp"
-    app:cardBackgroundColor="@color/color_fondos"
+    android:layout_margin="16dp"
     app:cardCornerRadius="20dp"
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="@color/color_fondos"
     app:strokeColor="@color/color_letra"
     app:strokeWidth="2dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:padding="16dp">
 
+        <!-- Imagen Equipo 1 -->
+        <ImageView
+            android:id="@+id/imgEquipo1"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/lblEquipo1" />
+
+        <!-- Imagen Equipo 2 -->
+        <ImageView
+            android:id="@+id/imgEquipo2"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/lblEquipo2" />
+
+        <!-- Texto central VS -->
+        <TextView
+            android:id="@+id/textViewVS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/vs_recycler_partido"
+            android:textColor="@color/color_letra"
+            android:textSize="18sp"
+            android:fontFamily="@font/actor"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imgEquipo1"
+            app:layout_constraintEnd_toStartOf="@id/imgEquipo2"
+            app:layout_constraintHorizontal_bias="0.5" />
+
+        <!-- Nombre equipo 1 -->
         <TextView
             android:id="@+id/lblEquipo1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
+            android:text="Equipo 1"
+            android:textColor="@color/color_letra"
+            android:textSize="16sp"
             android:fontFamily="@font/actor"
-            android:text="TextView"
-            android:textAlignment="textStart"
-            android:textSize="@dimen/letra_size"
-            app:layout_constraintEnd_toStartOf="@+id/textView4"
+            app:layout_constraintTop_toBottomOf="@id/imgEquipo1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgEquipo1" />
+            app:layout_constraintEnd_toStartOf="@id/textViewVS"
+            app:layout_constraintHorizontal_bias="0.0" />
 
+        <!-- Nombre equipo 2 -->
         <TextView
             android:id="@+id/lblEquipo2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:text="Equipo 2"
+            android:textColor="@color/color_letra"
+            android:textSize="16sp"
             android:fontFamily="@font/actor"
-            android:text="TextView"
-            android:textAlignment="textEnd"
-            android:textSize="@dimen/letra_size"
+            android:gravity="end"
+            app:layout_constraintTop_toBottomOf="@id/imgEquipo2"
+            app:layout_constraintStart_toEndOf="@id/textViewVS"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView4"
-            app:layout_constraintTop_toBottomOf="@+id/imgEquipo2" />
+            app:layout_constraintHorizontal_bias="1.0" />
 
-        <ImageView
-            android:id="@+id/imgEquipo1"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
-
-        <ImageView
-            android:id="@+id/imgEquipo2"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="50dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/actor"
-            android:text="@string/vs_recycler_partido"
-            android:textSize="@dimen/letra_size"
-            app:layout_constraintEnd_toStartOf="@+id/imgEquipo2"
-            app:layout_constraintStart_toEndOf="@+id/imgEquipo1"
-            app:layout_constraintTop_toTopOf="@+id/imgEquipo1" />
-
+        <!-- Hora del partido -->
         <TextView
             android:id="@+id/lblHora"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="16dp"
+            android:text="18:00"
+            android:textColor="@color/color_letra"
+            android:textSize="14sp"
             android:fontFamily="@font/actor"
-            android:text="TextView"
-            android:textSize="@dimen/letra_size"
+            app:layout_constraintTop_toBottomOf="@id/lblEquipo1"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/lblEquipo2"
-            app:layout_constraintStart_toEndOf="@+id/lblEquipo1"
-            app:layout_constraintTop_toBottomOf="@+id/lblEquipo1" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

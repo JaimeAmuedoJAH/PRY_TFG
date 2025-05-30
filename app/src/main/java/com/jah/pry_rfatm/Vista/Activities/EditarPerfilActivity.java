@@ -116,7 +116,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
                         txtEstilo.getText().toString().trim(),
                         imagenPerfilUri,
                         (success, message, urlImagen) -> {
-                            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, getString(R.string.perfil_actualizado), Toast.LENGTH_SHORT).show();
                             if (success && urlImagen != null) {
                                 FirebaseController.cargarImagenDesdeStorage(imgPerfil, urlImagen, FirebaseController.imagenPerfilPorDefecto);
                             }
@@ -142,7 +142,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
                         nombresSuplentes,
                         imagenPerfilUri,
                         (success, message, urlImagenPerfil) -> {
-                            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, getString(R.string.perfil_actualizado), Toast.LENGTH_SHORT).show();
                             if (success) finish();
                         }
                 );

@@ -8,30 +8,35 @@
     android:background="@color/background"
     tools:context=".Vista.Activities.LogInActivity">
 
-    <!-- Logo -->
+    <!-- LOGO -->
     <ImageView
         android:id="@+id/imgIcon"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
         android:layout_marginTop="32dp"
         android:contentDescription="@string/app_name"
+        android:scaleType="centerInside"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/app_icon" />
 
-    <!-- Campo de correo con TextInputLayout -->
+    <!-- EMAIL -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layoutCorreo"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="40dp"
-        android:textColorHint="@color/hint_color"
+        android:layout_marginEnd="32dp"
+        android:textColorHint="@color/color_letra"
         app:boxBackgroundColor="@android:color/transparent"
+        app:boxCornerRadiusBottomEnd="16dp"
+        app:boxCornerRadiusBottomStart="16dp"
+        app:boxCornerRadiusTopEnd="16dp"
+        app:boxCornerRadiusTopStart="16dp"
         app:boxStrokeColor="@color/color_fondos"
-        app:hintTextColor="@color/color_letra"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imgIcon">
@@ -44,23 +49,26 @@
             android:hint="@string/hint_txt_correo"
             android:inputType="textEmailAddress"
             android:textColor="@color/color_letra"
-            android:textColorHint="@color/hint_color"
-            android:textColorLink="@color/color_fondos"
+            android:textColorHint="@color/color_letra"
             android:textSize="@dimen/letra_size" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Campo de contraseña -->
+    <!-- PASSWORD -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layoutPass"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="40dp"
-        android:textColorHint="@color/hint_color"
+        android:layout_marginEnd="32dp"
+        android:textColorHint="@color/color_letra"
         app:boxBackgroundColor="@android:color/transparent"
+        app:boxCornerRadiusBottomEnd="16dp"
+        app:boxCornerRadiusBottomStart="16dp"
+        app:boxCornerRadiusTopEnd="16dp"
+        app:boxCornerRadiusTopStart="16dp"
         app:boxStrokeColor="@color/color_fondos"
-        app:hintTextColor="@color/color_letra"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layoutCorreo"
@@ -74,100 +82,101 @@
             android:hint="@string/hint_txt_pass"
             android:inputType="textPassword"
             android:textColor="@color/color_letra"
-            android:textColorHint="@color/hint_color"
-            android:textColorLink="@color/color_fondos"
+            android:textColorHint="@color/color_letra"
             android:textSize="@dimen/letra_size" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Botón Iniciar sesión -->
+    <!-- FORGOT PASSWORD -->
+    <LinearLayout
+        android:id="@+id/layoutForgot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/layoutPass"
+        app:layout_constraintStart_toStartOf="@id/layoutPass">
 
-    <!-- Botón Google -->
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/actor"
+            android:text="@string/lbl_recuperar"
+            android:textColor="@color/color_letra"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/lblRecuperar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/actor"
+            android:paddingStart="6dp"
+            android:text="@string/txt_recuperar"
+            android:textColor="@color/recuperar"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <!-- LOGIN BUTTON -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnIni"
         style="@style/Widget.MaterialComponents.Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
         android:backgroundTint="@color/color_fondos"
         android:fontFamily="@font/actor"
+        android:icon="@drawable/baseline_email_24"
         android:text="@string/txt_btn_ini_sesion"
         android:textColor="@color/color_letra"
-        android:textSize="@dimen/letra_size_btn"
+        android:textSize="@dimen/letra_size"
         app:cornerRadius="@dimen/corner_radius"
-        app:icon="@drawable/baseline_email_24"
-        app:iconSize="30dp"
+        app:iconGravity="start"
+        app:iconPadding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@id/layoutForgot" />
 
+    <!-- GOOGLE BUTTON -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnIniGoogle"
         style="@style/Widget.MaterialComponents.Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginEnd="32dp"
         android:backgroundTint="@color/color_fondos"
         android:fontFamily="@font/actor"
+        android:icon="@drawable/google"
         android:text="@string/txt_btn_ini_google"
         android:textColor="@color/color_letra"
-        android:textSize="@dimen/letra_size_btn"
+        android:textSize="@dimen/letra_size"
         app:cornerRadius="@dimen/corner_radius"
-        app:icon="@drawable/google"
-        app:iconPadding="0dp"
-        app:iconSize="28dp"
-        app:iconTint="@null"
+        app:iconGravity="start"
+        app:iconPadding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnIni" />
 
-    <!-- Botón Registrarse -->
+    <!-- SIGNUP BUTTON -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnRegistrar"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginEnd="32dp"
         android:fontFamily="@font/actor"
-
         android:strokeColor="@color/color_letra"
         android:text="@string/txt_btn_registro"
         android:textColor="@color/color_letra"
-        android:textSize="@dimen/letra_size_btn"
+        android:textSize="@dimen/letra_size"
         app:backgroundTint="@color/color_fondos"
         app:cornerRadius="@dimen/corner_radius"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnIniGoogle" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/actor"
-        android:text="@string/lbl_recuperar"
-        android:textColor="@color/color_letra"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layoutPass" />
-
-    <TextView
-        android:id="@+id/lblRecuperar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/actor"
-        android:text="@string/txt_recuperar"
-        android:textColor="@color/recuperar"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/layoutPass" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

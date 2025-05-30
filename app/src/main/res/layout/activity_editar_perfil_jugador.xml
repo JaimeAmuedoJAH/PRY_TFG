@@ -40,6 +40,11 @@
         android:layout_marginEnd="40dp"
         android:textColorHint="@color/color_letra"
         app:boxStrokeColor="@color/color_fondos"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusTopStart="16dp"
+        app:boxCornerRadiusTopEnd="16dp"
+        app:boxCornerRadiusBottomStart="16dp"
+        app:boxCornerRadiusBottomEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgPerfil">
@@ -64,6 +69,11 @@
         android:layout_marginEnd="40dp"
         android:textColorHint="@color/color_letra"
         app:boxStrokeColor="@color/color_fondos"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusTopStart="16dp"
+        app:boxCornerRadiusTopEnd="16dp"
+        app:boxCornerRadiusBottomStart="16dp"
+        app:boxCornerRadiusBottomEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layoutUser">
@@ -78,6 +88,7 @@
             android:textColorHint="@color/color_letra"
             android:textSize="@dimen/letra_size" />
     </com.google.android.material.textfield.TextInputLayout>
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnCambiar"

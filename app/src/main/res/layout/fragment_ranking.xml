@@ -4,55 +4,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Vista.Fragments.RankingFragment">
+    tools:context=".Vista.Fragments.RankingFragment"
+    android:background="#004d25">
 
-    <LinearLayout
-        android:id="@+id/rankingContainer"
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:background="#004d25">
+        android:layout_margin="16dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
+        app:strokeColor="@color/color_letra"
+        app:strokeWidth="2dp">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textViewTituloLiga"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
-                android:text="@string/ranking"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/letra_size_btn"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/lblLiga"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:textColor="@color/color_letra"
-                android:textSize="@dimen/letra_size_btn" />
-
-        </LinearLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvRanking"
+            android:id="@+id/rankingContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/white"
-            android:padding="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"/>
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:background="@android:color/white">
 
-    </LinearLayout>
+            <!-- Encabezado de liga -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
 
+                <TextView
+                    android:id="@+id/textViewTituloLiga"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ranking"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/letra_size_btn"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/actor" />
+
+                <TextView
+                    android:id="@+id/lblLiga"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:textColor="@color/color_letra"
+                    android:textSize="@dimen/letra_size_btn"
+                    android:fontFamily="@font/actor" />
+            </LinearLayout>
+
+            <!-- Lista de ranking -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvRanking"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:padding="8dp" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
 </FrameLayout>
