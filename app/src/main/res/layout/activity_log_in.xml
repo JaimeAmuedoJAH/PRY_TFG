@@ -132,6 +132,7 @@
         android:textColor="@color/color_letra"
         android:textSize="@dimen/letra_size"
         app:cornerRadius="@dimen/corner_radius"
+        app:icon="@drawable/baseline_email_24"
         app:iconGravity="start"
         app:iconPadding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -154,8 +155,10 @@
         android:textColor="@color/color_letra"
         android:textSize="@dimen/letra_size"
         app:cornerRadius="@dimen/corner_radius"
+        app:icon="@drawable/google"
         app:iconGravity="start"
         app:iconPadding="12dp"
+        app:iconTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnIni" />

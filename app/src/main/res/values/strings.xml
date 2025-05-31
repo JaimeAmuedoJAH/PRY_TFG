@@ -141,4 +141,6 @@
     <string name="error_al_procesar_estad_sticas_para_partido">Error processing statistics for match</string>
     <string name="acta_inicial_creada">Initial record created</string>
     <string name="error_al_crear_acta_inicial">Error creating initial record</string>
+    <string name="selecciona_equipo">Choose your team</string>
+    <string name="btn_aceptar">Accept</string>
 </resources>

@@ -1,42 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layoutDialog"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/color_fondos"
+    android:background="@color/background"
+    android:backgroundTint="@color/background"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
     android:padding="24dp">
 
+    <!-- Título -->
     <TextView
+        android:id="@+id/txtTitulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/actor"
-        android:paddingBottom="8dp"
+        android:gravity="center"
+        android:paddingBottom="16dp"
         android:text="@string/dialog_nuevo_usuario"
         android:textColor="@color/color_letra"
-        android:textSize="16sp"
+        android:textSize="20sp"
         android:textStyle="bold" />
+
+    <!-- Spinner con etiqueta -->
 
     <Spinner
         android:id="@+id/spEquipos"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="@color/color_fondos" />
 
+    <!-- Tipo de usuario -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/actor"
         android:paddingBottom="8dp"
         android:text="@string/dialog_nuevo_usuario_radiogroup"
         android:textColor="@color/color_letra"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:textStyle="bold" />
 
     <RadioGroup
         android:id="@+id/rgdTipoUsuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/color_fondos"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <RadioButton
@@ -51,10 +63,9 @@
             android:id="@+id/rbdEntrenador"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="24dp"
             android:fontFamily="@font/actor"
             android:text="@string/txt_entrenador"
             android:textColor="@color/color_letra" />
     </RadioGroup>
-
 </LinearLayout>

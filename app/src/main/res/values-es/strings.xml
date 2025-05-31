@@ -141,4 +141,6 @@
     <string name="error_al_procesar_estad_sticas_para_partido">"Error al procesar estadísticas para partido "</string>
     <string name="acta_inicial_creada">Acta inicial creada</string>
     <string name="error_al_crear_acta_inicial">Error al crear acta inicial</string>
+    <string name="selecciona_equipo">Selecciona tu equipo</string>
+    <string name="btn_aceptar">Aceptar</string>
 </resources>
