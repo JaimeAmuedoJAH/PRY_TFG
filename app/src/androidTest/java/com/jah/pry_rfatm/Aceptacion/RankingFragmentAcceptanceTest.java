@@ -25,9 +25,7 @@ public class RankingFragmentAcceptanceTest {
     public void recyclerViewIsDisplayed() {
         FragmentScenario<RankingFragment> scenario = FragmentScenario.launchInContainer(RankingFragment.class);
 
-        // Verifica que el RecyclerView está visible
         Espresso.onView(ViewMatchers.withId(R.id.rvRanking))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
     }
 }
-

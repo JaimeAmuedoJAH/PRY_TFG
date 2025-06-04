@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.firebase.Firebase;
 import com.jah.pry_rfatm.Controlador.FirebaseController;
 import com.jah.pry_rfatm.Logica.EditarPerfilLogic;
 import com.jah.pry_rfatm.R;
@@ -36,6 +37,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
     private Uri imagenEscudoUri;
     private int tipoImagenSeleccionada = 0;
     private String tipoUsuario;
+    String equipoId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +111,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.item_guardar) {
             String uid = Objects.requireNonNull(FirebaseController.mAuth.getCurrentUser()).getUid();
+
             if ("jugador".equals(tipoUsuario)) {
                 EditarPerfilLogic.guardarDatosJugador(
                         uid,
@@ -123,7 +126,9 @@ public class EditarPerfilActivity extends AppCompatActivity {
                             if (success) finish();
                         }
                 );
-            } else {
+
+            } else { // entrenador
+
                 List<String> nombresTitulares = Arrays.asList(
                         txtJugador1.getText().toString().trim(),
                         txtJugador2.getText().toString().trim(),
@@ -135,17 +140,54 @@ public class EditarPerfilActivity extends AppCompatActivity {
                         txtJugador6.getText().toString().trim()
                 );
 
-                EditarPerfilLogic.guardarDatosEntrenador(
-                        uid,
-                        txtNombreEntrenador.getText().toString().trim(),
-                        nombresTitulares,
-                        nombresSuplentes,
-                        imagenPerfilUri,
-                        (success, message, urlImagenPerfil) -> {
-                            Toast.makeText(this, getString(R.string.perfil_actualizado), Toast.LENGTH_SHORT).show();
-                            if (success) finish();
-                        }
-                );
+                // Primero obtenemos el equipoId del usuario (entrenador)
+                FirebaseController.db.collection("usuarios").document(uid).get()
+                        .addOnSuccessListener(documentSnapshot -> {
+                            String equipoId = null;
+                            if (documentSnapshot.contains("equipoId") && documentSnapshot.getString("equipoId") != null) {
+                                equipoId = documentSnapshot.getString("equipoId").split("/")[2];
+                            }
+
+                            if (equipoId != null && !equipoId.isEmpty()) {
+                                // Guardamos los datos del entrenador
+                                EditarPerfilLogic.guardarDatosEntrenador(
+                                        uid,
+                                        txtNombreEntrenador.getText().toString().trim(),
+                                        nombresTitulares,
+                                        nombresSuplentes,
+                                        imagenPerfilUri,
+                                        (success, message, urlImagenPerfil) -> {
+                                            Toast.makeText(this, getString(R.string.perfil_actualizado), Toast.LENGTH_SHORT).show();
+                                            if (success) finish();
+                                        }
+                                );
+
+                                // Actualizamos la foto del escudo del equipo SOLO para este equipo
+                                EditarPerfilLogic.actualizarFotoEscudoEquipo(
+                                        equipoId,
+                                        imagenEscudoUri,
+                                        (success, message, urlImagenEscudo) -> {
+                                            if (success) {
+                                                Toast.makeText(this, getString(R.string.escudo_actualizado_correctamente), Toast.LENGTH_SHORT).show();
+                                                if (urlImagenEscudo != null) {
+                                                    if (!isFinishing() && !isDestroyed()) {
+                                                        FirebaseController.cargarImagenDesdeStorage(imgFotoEscudoEq, urlImagenEscudo, FirebaseController.imagenPorDefecto);
+                                                    }
+                                                }
+                                            } else {
+                                                Toast.makeText(this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        }
+                                );
+
+                            } else {
+                                Toast.makeText(this, getString(R.string.no_se_pudo_obtener_el_id_del_equipo), Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnFailureListener(e -> {
+                            Toast.makeText(this, getString(R.string.error_al_obtener_el_id_del_equipo) + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        });
             }
         }
         return false;

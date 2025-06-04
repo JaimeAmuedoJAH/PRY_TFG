@@ -121,6 +121,41 @@ public class EditarPerfilLogic {
                 .addOnFailureListener(e -> callback.onComplete(false, String.valueOf(R.string.error_al_obtener_los_datos_del_usuario), null));
     }
 
+    public static void actualizarFotoEscudoEquipo(String equipoId, Uri nuevaImagenUri, CallbackGuardar callback) {
+        if (equipoId == null || equipoId.isEmpty()) {
+            callback.onComplete(false, "ID del equipo inválido", null);
+            return;
+        }
+        if (nuevaImagenUri == null) {
+            callback.onComplete(false, "No se proporcionó imagen", null);
+            return;
+        }
+
+        String rutaStorage = "equipos/" + equipoId + "/escudo.jpg";
+
+        FirebaseController.subirImagenAFirebaseStorage(
+                rutaStorage,
+                nuevaImagenUri,
+                downloadUrl -> {
+                    if (downloadUrl != null) {
+                        // Actualizar el campo "escudo" en Firestore
+                        FirebaseController.db.collection("equipos").document(equipoId)
+                                .update("escudo", downloadUrl)
+                                .addOnSuccessListener(aVoid -> {
+                                    callback.onComplete(true, "Escudo actualizado correctamente", downloadUrl);
+                                })
+                                .addOnFailureListener(e -> {
+                                    callback.onComplete(false, "Error al actualizar el escudo en Firestore: " + e.getMessage(), null);
+                                });
+                    } else {
+                        callback.onComplete(false, "Error al obtener URL de la imagen", null);
+                    }
+                },
+                e -> callback.onComplete(false, "Error al subir la imagen: " + e.getMessage(), null)
+        );
+    }
+
+
     /**
      * Obtiene los IDs de usuarios por nombres.
      * @param nombres
