@@ -143,7 +143,8 @@
     <string name="error_al_crear_acta_inicial">Error creating initial record</string>
     <string name="selecciona_equipo">Choose your team</string>
     <string name="btn_aceptar">Accept</string>
-    <string name="escudo_actualizado_correctamente">Escudo actualizado correctamente</string>
-    <string name="no_se_pudo_obtener_el_id_del_equipo">No se pudo obtener el ID del equipo</string>
-    <string name="error_al_obtener_el_id_del_equipo">"Error al obtener el ID del equipo: "</string>
+    <string name="escudo_actualizado_correctamente">Badge updated successfully</string>
+    <string name="no_se_pudo_obtener_el_id_del_equipo">Could not retrieve the team ID</string>
+    <string name="error_al_obtener_el_id_del_equipo">Error retrieving the team ID: </string>
+    <string name="id_del_equipo_inv_lido">ID del equipo inválido</string>
 </resources>

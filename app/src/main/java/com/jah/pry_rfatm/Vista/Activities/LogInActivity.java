@@ -15,6 +15,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -33,8 +34,8 @@ import java.util.Map;
  */
 public class LogInActivity extends AppCompatActivity {
 
-    public EditText txtCorreo;
-    public EditText txtPass;
+    public EditText txtCorreo, txtPass;
+    TextInputLayout layoutCorreo, layoutPass;
     TextView lblRecuperar;
     Button btnIni, btnIniGoogle, btnRegistrar;
     Intent intent;
@@ -77,11 +78,11 @@ public class LogInActivity extends AppCompatActivity {
         String pass = txtPass.getText().toString().trim();
 
         if (correo.isEmpty()) {
-            txtCorreo.setError(getString(R.string.el_correo_es_obligatorio));
+            layoutCorreo.setError(getString(R.string.el_correo_es_obligatorio));
             return;
         }
         if (pass.isEmpty()) {
-            txtPass.setError(getString(R.string.la_contrase_a_es_obligatoria));
+            layoutPass.setError(getString(R.string.la_contrase_a_es_obligatoria));
             return;
         }
 
@@ -95,7 +96,6 @@ public class LogInActivity extends AppCompatActivity {
                             FirebaseController.mAuth.signOut();  // importante para cerrar sesión del usuario no verificado
                             return;
                         }
-
                         irAMainActivity();
                     } else {
                         Toast.makeText(LogInActivity.this, getString(R.string.correo_o_contrase_a_incorrectos), Toast.LENGTH_SHORT).show();
@@ -195,6 +195,8 @@ public class LogInActivity extends AppCompatActivity {
     private void initComponents() {
         txtCorreo = findViewById(R.id.txtCorreo);
         txtPass = findViewById(R.id.txtPass);
+        layoutCorreo = findViewById(R.id.layoutCorreo);
+        layoutPass = findViewById(R.id.layoutPass);
         btnIni = findViewById(R.id.btnIni);
         btnIniGoogle = findViewById(R.id.btnIniGoogle);
         btnRegistrar = findViewById(R.id.btnRegistrar);

@@ -83,10 +83,13 @@
                 android:stretchColumns="1,2,3,4,5,6">
 
                 <!-- 7 FILAS DE DATOS -->
-                <TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                     <EditText
                         android:id="@+id/lblJugadorA1"
+                        android:layout_width="150dp"
                         android:fontFamily="@font/actor"
                         android:hint="JugadorA"
                         android:inputType="textPersonName"
@@ -142,6 +145,7 @@
 
                     <EditText
                         android:id="@+id/lblJugadorY1"
+                        android:layout_width="150dp"
                         android:fontFamily="@font/actor"
                         android:hint="JugadorY"
                         android:inputType="textPersonName"
@@ -151,10 +155,13 @@
                         android:textSize="@dimen/letra_size" />
                 </TableRow>
 
-                <TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                     <EditText
                         android:id="@+id/lblJugadorB1"
+                        android:layout_width="150dp"
                         android:fontFamily="@font/actor"
                         android:hint="JugadorB"
                         android:inputType="textPersonName"
@@ -210,6 +217,7 @@
 
                     <EditText
                         android:id="@+id/lblJugadorX1"
+                        android:layout_width="150dp"
                         android:fontFamily="@font/actor"
                         android:hint="JugadorX"
                         android:inputType="textPersonName"
@@ -219,10 +227,13 @@
                         android:textSize="@dimen/letra_size" />
                 </TableRow>
 
-                <TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                     <EditText
                         android:id="@+id/lblJugadorC1"
+                        android:layout_width="150dp"
                         android:fontFamily="@font/actor"
                         android:hint="JugadorC"
                         android:inputType="textPersonName"
@@ -278,6 +289,7 @@
 
                     <EditText
                         android:id="@+id/lblJugadorZ1"
+                        android:layout_width="150dp"
                         android:fontFamily="@font/actor"
                         android:hint="JugadorZ"
                         android:inputType="textPersonName"
@@ -287,10 +299,13 @@
                         android:textSize="@dimen/letra_size" />
                 </TableRow>
 
-                <TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                     <EditText
                         android:id="@+id/lblJugadorA2"
+                        android:layout_width="150dp"
                         android:fontFamily="@font/actor"
                         android:hint="JugadorA"
                         android:inputType="textPersonName"
@@ -346,6 +361,7 @@
 
                     <EditText
                         android:id="@+id/lblJugadorX2"
+                        android:layout_width="150dp"
                         android:fontFamily="@font/actor"
                         android:hint="JugadorX"
                         android:inputType="textPersonName"
@@ -355,10 +371,13 @@
                         android:textSize="@dimen/letra_size" />
                 </TableRow>
 
-                <TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                     <EditText
                         android:id="@+id/lblJugadorC2"
+                        android:layout_width="150dp"
                         android:fontFamily="@font/actor"
                         android:hint="JugadorC"
                         android:inputType="textPersonName"
@@ -414,6 +433,7 @@
 
                     <EditText
                         android:id="@+id/lblJugadorY2"
+                        android:layout_width="150dp"
                         android:fontFamily="@font/actor"
                         android:hint="JugadorY"
                         android:inputType="textPersonName"
@@ -423,10 +443,13 @@
                         android:textSize="@dimen/letra_size" />
                 </TableRow>
 
-                <TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                     <EditText
                         android:id="@+id/lblJugadorB2"
+                        android:layout_width="150dp"
                         android:fontFamily="@font/actor"
                         android:hint="JugadorB"
                         android:inputType="textPersonName"
@@ -482,6 +505,7 @@
 
                     <EditText
                         android:id="@+id/lblJugadorZ2"
+                        android:layout_width="150dp"
                         android:fontFamily="@font/actor"
                         android:hint="JugadorZ"
                         android:inputType="textPersonName"
@@ -491,10 +515,13 @@
                         android:textSize="@dimen/letra_size" />
                 </TableRow>
 
-                <TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                     <EditText
                         android:id="@+id/lblJugadorA3"
+                        android:layout_width="150dp"
                         android:fontFamily="@font/actor"
                         android:hint="JugadorA"
                         android:inputType="textPersonName"
@@ -550,6 +577,7 @@
 
                     <EditText
                         android:id="@+id/lblJugadorX3"
+                        android:layout_width="150dp"
                         android:fontFamily="@font/actor"
                         android:hint="JugadorX"
                         android:inputType="textPersonName"

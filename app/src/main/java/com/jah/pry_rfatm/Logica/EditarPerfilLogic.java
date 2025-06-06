@@ -123,11 +123,10 @@ public class EditarPerfilLogic {
 
     public static void actualizarFotoEscudoEquipo(String equipoId, Uri nuevaImagenUri, CallbackGuardar callback) {
         if (equipoId == null || equipoId.isEmpty()) {
-            callback.onComplete(false, "ID del equipo inválido", null);
+            callback.onComplete(false, String.valueOf(R.string.id_del_equipo_inv_lido), null);
             return;
         }
         if (nuevaImagenUri == null) {
-            callback.onComplete(false, "No se proporcionó imagen", null);
             return;
         }
 

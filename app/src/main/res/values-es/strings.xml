@@ -143,4 +143,7 @@
     <string name="error_al_crear_acta_inicial">Error al crear acta inicial</string>
     <string name="selecciona_equipo">Selecciona tu equipo</string>
     <string name="btn_aceptar">Aceptar</string>
+    <string name="escudo_actualizado_correctamente">Escudo actualizado correctamente</string>
+    <string name="no_se_pudo_obtener_el_id_del_equipo">No se pudo obtener el ID del equipo</string>
+    <string name="error_al_obtener_el_id_del_equipo">"Error al obtener el ID del equipo: "</string>
 </resources>
