@@ -37,7 +37,7 @@ public class ActaManager {
     }
 
     /**
-     * Carga los datos del acta desde Firestore.
+     * Carga los datos de la acta desde Firestore.
      */
     public void cargarDatosActa() {
         if (idPartido == null) return;
@@ -52,7 +52,7 @@ public class ActaManager {
     }
 
     /**
-     * Guarda los datos del acta en Firestore.
+     * Guarda los datos de la acta en Firestore.
      */
     public void guardarActa() {
         Map<String, Object> actaMap = ui.obtenerActaDeUI();
@@ -66,9 +66,10 @@ public class ActaManager {
 
                     if (!todosJugados) {
                         Toast.makeText(context, context.getString(R.string.necesitas_rellenar_todos_los_campos), Toast.LENGTH_LONG).show();
-                    }else if(!esPendiente){
+                    } else if (!esPendiente) {
                         Toast.makeText(context, context.getString(R.string.el_partido_ya_fue_jugado), Toast.LENGTH_LONG).show();
                     }
+
                     db.collection("actas").document(idPartido).set(actaMap)
                             .addOnSuccessListener(unused -> {
                                 if (todosJugados && esPendiente) {
@@ -84,7 +85,6 @@ public class ActaManager {
                                 Toast.makeText(context, R.string.error_al_guardar_el_acta, Toast.LENGTH_SHORT).show();
                                 Log.e("ActaManager", context.getString(R.string.error_al_guardar_acta), e);
                             });
-
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(context, context.getString(R.string.error_al_obtener_el_estado_del_partido), Toast.LENGTH_SHORT).show();
@@ -110,7 +110,7 @@ public class ActaManager {
     }
 
     /**
-     * Verifica si el partido ya fue jugado y deshabilita los campos si es necesario.
+     * Verifica si los campos están deshabilitados y si el partido ya fue jugado.
      */
     public void verEstadoPartidoYDeshabilitarCamposSiEsNecesario() {
         SharedPreferences prefs = context.getSharedPreferences("config", Context.MODE_PRIVATE);
@@ -126,7 +126,7 @@ public class ActaManager {
     }
 
     /**
-     * Actualiza la puntuación final del acta.
+     * Actualiza la puntuación final del partido.
      * @param actaData
      * @return
      */
@@ -174,6 +174,10 @@ public class ActaManager {
     private void actualizarEstadisticasJugadores(Map<String, Object> actaData) {
         List<String> partidos = Arrays.asList("partidoAY", "partidoBX", "partidoCZ", "partidoAY2", "partidoCX", "partidoBZ", "partidoAX2");
 
+        // Contadores por jugador
+        Map<String, Integer> victoriasPorJugador = new HashMap<>();
+        Map<String, Integer> derrotasPorJugador = new HashMap<>();
+
         for (String key : partidos) {
             Map<String, Object> partido = (Map<String, Object>) actaData.get(key);
             if (partido != null) {
@@ -182,26 +186,45 @@ public class ActaManager {
                 String resultado = (String) partido.get("resultado");
 
                 if (nombreABC != null && nombreXYZ != null && resultado != null && resultado.contains("-")) {
-                    String[] sets = resultado.split("-");
-                    try {
-                        int setsABC = Integer.parseInt(sets[0].trim());
-                        int setsXYZ = Integer.parseInt(sets[1].trim());
+                    String[] sets = resultado.trim().split("-");
 
-                        boolean victoriaABC = setsABC == 3;
-                        boolean victoriaXYZ = setsXYZ == 3;
+                    if (sets.length == 2) {
+                        try {
+                            int setsABC = Integer.parseInt(sets[0].trim());
+                            int setsXYZ = Integer.parseInt(sets[1].trim());
 
-                        jugadorManager.actualizarEstadisticasJugador(nombreABC, victoriaABC);
-                        jugadorManager.actualizarEstadisticasJugador(nombreXYZ, victoriaXYZ);
-                    } catch (NumberFormatException e) {
-                        Log.e("ActaManager", context.getString(R.string.error_al_procesar_estad_sticas_para_partido) + key, e);
+                            if (setsABC == 3 && setsXYZ < 3) {
+                                // Gana ABC
+                                victoriasPorJugador.put(nombreABC, victoriasPorJugador.getOrDefault(nombreABC, 0) + 1);
+                                derrotasPorJugador.put(nombreXYZ, derrotasPorJugador.getOrDefault(nombreXYZ, 0) + 1);
+                            } else if (setsXYZ == 3 && setsABC < 3) {
+                                // Gana XYZ
+                                victoriasPorJugador.put(nombreXYZ, victoriasPorJugador.getOrDefault(nombreXYZ, 0) + 1);
+                                derrotasPorJugador.put(nombreABC, derrotasPorJugador.getOrDefault(nombreABC, 0) + 1);
+                            }
+
+                        } catch (NumberFormatException e) {
+                            Log.e("ActaManager", "Resultado inválido en " + key + ": " + resultado);
+                        }
                     }
                 }
             }
         }
+        for (Map.Entry<String, Integer> entry : victoriasPorJugador.entrySet()) {
+            String jugador = entry.getKey();
+            int victorias = entry.getValue();
+            jugadorManager.actualizarEstadisticasJugadorPorVictorias(jugador, victorias);
+        }
+
+        for (Map.Entry<String, Integer> entry : derrotasPorJugador.entrySet()) {
+            String jugador = entry.getKey();
+            int derrotas = entry.getValue();
+            jugadorManager.actualizarEstadisticasJugadorPorDerrotas(jugador, derrotas);
+        }
     }
 
     /**
-     * Crea la acta inicial en Firestore si no existe.
+     * Crea la acta inicial si no existe.
      */
     public void crearActaSiNoExiste() {
         if (idPartido == null) return;

@@ -100,11 +100,11 @@ public class JugadorManager {
     }
 
     /**
-     * Actualiza las estadísticas de los jugadores en Firestore.
+     * Actualiza las victorias de los jugadores en Firestore.
      * @param nombre
-     * @param victoria
+     * @param victorias
      */
-    public void actualizarEstadisticasJugador(String nombre, boolean victoria) {
+    public void actualizarEstadisticasJugadorPorVictorias(String nombre, int victorias) {
         db.collection("usuarios")
                 .whereEqualTo("nombre", nombre)
                 .get()
@@ -113,13 +113,11 @@ public class JugadorManager {
                         DocumentSnapshot doc = querySnapshot.getDocuments().get(0);
                         Map<String, Object> updates = new HashMap<>();
 
-                        long victorias = doc.getLong("victorias") != null ? doc.getLong("victorias") : 0;
-                        long derrotas = doc.getLong("derrotas") != null ? doc.getLong("derrotas") : 0;
-                        long jugados = doc.getLong("partidosJugados") != null ? doc.getLong("partidosJugados") : 0;
+                        long victoriasActuales = doc.getLong("victorias") != null ? doc.getLong("victorias") : 0;
+                        long partidosJugados = doc.getLong("partidosJugados") != null ? doc.getLong("partidosJugados") : 0;
 
-                        updates.put("partidosJugados", jugados + 1);
-                        if (victoria) updates.put("victorias", victorias + 1);
-                        else updates.put("derrotas", derrotas + 1);
+                        updates.put("victorias", victoriasActuales + victorias);
+                        updates.put("partidosJugados", partidosJugados + victorias); // Solo sumar si se considera cada victoria como partido individual
 
                         doc.getReference().update(updates);
                     }
@@ -128,4 +126,33 @@ public class JugadorManager {
                         Toast.makeText(context, context.getString(R.string.error_al_actualizar_estad_sticas), Toast.LENGTH_SHORT).show()
                 );
     }
+
+    /**
+     * Actualiza las derrotas de los jugadores en Firestore.
+     * @param nombre
+     * @param derrotas
+     */
+    public void actualizarEstadisticasJugadorPorDerrotas(String nombre, int derrotas) {
+        db.collection("usuarios")
+                .whereEqualTo("nombre", nombre)
+                .get()
+                .addOnSuccessListener(querySnapshot -> {
+                    if (!querySnapshot.isEmpty()) {
+                        DocumentSnapshot doc = querySnapshot.getDocuments().get(0);
+                        Map<String, Object> updates = new HashMap<>();
+
+                        long derrotasActuales = doc.getLong("derrotas") != null ? doc.getLong("derrotas") : 0;
+                        long partidosJugados = doc.getLong("partidosJugados") != null ? doc.getLong("partidosJugados") : 0;
+
+                        updates.put("derrotas", derrotasActuales + derrotas);
+                        updates.put("partidosJugados", partidosJugados + derrotas);
+
+                        doc.getReference().update(updates);
+                    }
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(context, context.getString(R.string.error_al_actualizar_estad_sticas), Toast.LENGTH_SHORT).show()
+                );
+    }
+
 }

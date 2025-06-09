@@ -370,9 +370,9 @@ public class FirebaseController {
      */
     public static void actualizarPorcentajeVictorias(String uid, int victorias, int partidosJugados, TextView lblPorcentaje) {
         int porcentaje;
-        if(partidosJugados > 0){
-            porcentaje = (victorias/partidosJugados) * 100;
-        }else{
+        if (partidosJugados != 0) {
+            porcentaje = (int) ((double) victorias / partidosJugados * 100);
+        } else {
             porcentaje = 0;
         }
 
@@ -383,6 +383,6 @@ public class FirebaseController {
                 .update(actualizacion)
                 .addOnSuccessListener(aVoid -> Log.d("Firebase", String.valueOf(R.string.porcentaje_actualizado)))
                 .addOnFailureListener(e -> Log.e("Firebase", String.valueOf(R.string.error_al_actualizar_porcentaje), e));
-        lblPorcentaje.setText(porcentaje + "%");
     }
+
 }

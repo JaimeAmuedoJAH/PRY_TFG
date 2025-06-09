@@ -69,7 +69,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/actor"
-                        android:text="Nombre del entrenador"
+                        android:text="@string/nombre_entrenador"
                         android:textColor="@color/color_letra"
                         android:textSize="@dimen/letra_size_btn"
                         android:textStyle="bold" />
@@ -88,7 +88,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/actor"
-                        android:text="Nombre del equipo"
+                        android:text="@string/Nombre_del_equipo"
                         android:textColor="@color/color_letra"
                         android:textSize="@dimen/letra_size" />
                 </LinearLayout>
@@ -193,7 +193,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/actor"
-                        android:text="Jugador 4"
                         android:textColor="@color/color_letra"
                         android:textSize="@dimen/letra_size" />
 

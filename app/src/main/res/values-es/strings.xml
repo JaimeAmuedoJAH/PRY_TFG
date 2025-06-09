@@ -146,4 +146,7 @@
     <string name="escudo_actualizado_correctamente">Escudo actualizado correctamente</string>
     <string name="no_se_pudo_obtener_el_id_del_equipo">No se pudo obtener el ID del equipo</string>
     <string name="error_al_obtener_el_id_del_equipo">"Error al obtener el ID del equipo: "</string>
+    <string name="id_del_equipo_inv_lido">ID del equipo inválido</string>
+    <string name="nombre_entrenador">Nombre del entrenador</string>
+    <string name="Nombre_del_equipo">Nombre del equipo</string>
 </resources>

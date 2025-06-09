@@ -146,5 +146,7 @@
     <string name="escudo_actualizado_correctamente">Badge updated successfully</string>
     <string name="no_se_pudo_obtener_el_id_del_equipo">Could not retrieve the team ID</string>
     <string name="error_al_obtener_el_id_del_equipo">Error retrieving the team ID: </string>
-    <string name="id_del_equipo_inv_lido">ID del equipo inválido</string>
+    <string name="id_del_equipo_inv_lido">Equip invalid name</string>
+    <string name="nombre_entrenador">Trainer name</string>
+    <string name="Nombre_del_equipo">Team name</string>
 </resources>
