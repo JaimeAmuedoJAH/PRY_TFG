@@ -4,13 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Vista.Fragments.RankingFragment"
-    android:background="#004d25">
+    android:background="#004d25"
+    tools:context=".Vista.Fragments.RankingFragment">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="16dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
         app:cardCornerRadius="16dp"
         app:cardElevation="4dp"
         app:strokeColor="@color/color_letra"
@@ -20,36 +23,36 @@
             android:id="@+id/rankingContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@android:color/white"
             android:orientation="vertical"
-            android:padding="16dp"
-            android:background="@android:color/white">
+            android:padding="16dp">
 
             <!-- Encabezado de liga -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_marginBottom="8dp">
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/textViewTituloLiga"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/actor"
                     android:text="@string/ranking"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/letra_size_btn"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/actor" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/lblLiga"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:fontFamily="@font/actor"
                     android:textColor="@color/color_letra"
-                    android:textSize="@dimen/letra_size_btn"
-                    android:fontFamily="@font/actor" />
+                    android:textSize="@dimen/letra_size_btn" />
             </LinearLayout>
 
             <!-- Lista de ranking -->

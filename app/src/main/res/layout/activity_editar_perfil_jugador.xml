@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:background="@color/color_fondos"
         android:minHeight="?attr/actionBarSize"
+        android:paddingTop="20dp"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -95,17 +96,17 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="8dp"
         android:fontFamily="@font/actor"
         android:text="@string/editar_perfil_cambiar"
         android:textColor="@color/color_letra"
         android:textSize="@dimen/letra_size_btn"
         app:backgroundTint="@color/color_fondos"
         app:cornerRadius="@dimen/corner_radius"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutEstilo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

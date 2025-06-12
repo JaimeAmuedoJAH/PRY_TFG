@@ -18,6 +18,8 @@ import com.jah.pry_rfatm.Modelo.Jugador;
 import com.jah.pry_rfatm.R;
 import com.jah.pry_rfatm.Vista.Adaptador.AdaptadorRanking;
 import com.jah.pry_rfatm.Logica.RankingLogic;
+import com.jah.pry_rfatm.Vista.Recursos.UtilesUI;
+
 import java.util.ArrayList;
 import java.util.List;
 

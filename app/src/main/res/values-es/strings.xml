@@ -149,4 +149,7 @@
     <string name="id_del_equipo_inv_lido">ID del equipo inválido</string>
     <string name="nombre_entrenador">Nombre del entrenador</string>
     <string name="Nombre_del_equipo">Nombre del equipo</string>
+    <string name="Partidos_jugados">Partidos jugados:</string>
+    <string name="Victorias">Victorias:</string>
+    <string name="Porcentaje_de_victorias">Porcentaje de victorias:</string>
 </resources>

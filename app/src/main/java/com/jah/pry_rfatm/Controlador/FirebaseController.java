@@ -233,9 +233,9 @@ public class FirebaseController {
                     Log.e("FirebaseStorage", String.valueOf(R.string.fallo_al_cargar_imagen_gs_usando_por_defecto), e);
                     defaultRef.getDownloadUrl().addOnSuccessListener(uri ->
                             Glide.with(imageView.getContext()).load(uri.toString()).into(imageView) //si no tiene imagen asigna la imagen por defecto
-                    ).addOnFailureListener(ex -> {
-                        Log.e("FirebaseStorage", String.valueOf(R.string.fallo_al_cargar_imagen_por_defecto), ex);
-                    });
+                    ).addOnFailureListener(ex ->
+                        Log.e("FirebaseStorage", String.valueOf(R.string.fallo_al_cargar_imagen_por_defecto), ex)
+                    );
                 });
             } else {
                 // Si no es gs://, asumir que es URL pública directa
@@ -244,9 +244,9 @@ public class FirebaseController {
         } else {
             defaultRef.getDownloadUrl().addOnSuccessListener(uri ->
                     Glide.with(imageView.getContext()).load(uri.toString()).into(imageView)
-            ).addOnFailureListener(e -> {
-                Log.e("FirebaseStorage", String.valueOf(R.string.fallo_al_cargar_imagen_por_defecto), e);
-            });
+            ).addOnFailureListener(e ->
+                Log.e("FirebaseStorage", String.valueOf(R.string.fallo_al_cargar_imagen_por_defecto), e)
+            );
         }
     }
 
@@ -376,6 +376,7 @@ public class FirebaseController {
             porcentaje = 0;
         }
 
+        lblPorcentaje.setText(porcentaje + "%");
         Map<String, Object> actualizacion = new HashMap<>();
         actualizacion.put("porcentajeVictorias", porcentaje);
 

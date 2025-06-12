@@ -149,4 +149,7 @@
     <string name="id_del_equipo_inv_lido">Equip invalid name</string>
     <string name="nombre_entrenador">Trainer name</string>
     <string name="Nombre_del_equipo">Team name</string>
+    <string name="Partidos_jugados">Matches played</string>
+    <string name="Victorias">Wins</string>
+    <string name="Porcentaje_de_victorias">Victories percentage</string>
 </resources>

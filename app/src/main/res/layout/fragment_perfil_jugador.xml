@@ -18,6 +18,7 @@
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
+            android:paddingTop="20dp"
             android:theme="?attr/actionBarTheme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -130,7 +131,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/actor"
-                    android:text="Partidos jugados:"
+                    android:text="@string/Partidos_jugados"
                     android:textColor="@color/color_letra"
                     android:textSize="@dimen/letra_size" />
 
@@ -150,7 +151,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/actor"
-                    android:text="Victorias:"
+                    android:text="@string/Victorias"
                     android:textColor="@color/color_letra"
                     android:textSize="@dimen/letra_size" />
 
@@ -170,7 +171,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/actor"
-                    android:text="Derrotas:"
+                    android:text="@string/derrotas"
                     android:textColor="@color/color_letra"
                     android:textSize="@dimen/letra_size" />
 
@@ -189,7 +190,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/actor"
-                    android:text="Porcentaje de victorias:"
+                    android:text="@string/Porcentaje_de_victorias"
                     android:textColor="@color/color_letra"
                     android:textSize="@dimen/letra_size" />
 
@@ -209,7 +210,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/actor"
-                    android:text="Acta asociada: N/A"
                     android:textColor="@color/color_letra"
                     android:textSize="@dimen/letra_size" />
             </LinearLayout>

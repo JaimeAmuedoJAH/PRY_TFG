@@ -14,21 +14,22 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
+        android:paddingTop="20dp"
         android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
-        app:title="Partido"
-        app:titleTextColor="@color/color_letra"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Partido"
+        app:titleTextColor="@color/color_letra" />
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         app:cardBackgroundColor="@color/color_fondos"
         app:cardCornerRadius="20dp"
         app:cardElevation="4dp"
-        app:layout_constraintBottom_toTopOf="@id/btnActa"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mtbBarVerPartido"
@@ -149,15 +150,15 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="16dp"
         android:backgroundTint="@color/color_fondos"
         android:fontFamily="@font/actor"
         android:text="@string/btn_acta"
         android:textColor="@color/color_letra"
         android:textSize="@dimen/letra_size_btn"
         app:cornerRadius="@dimen/corner_radius"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

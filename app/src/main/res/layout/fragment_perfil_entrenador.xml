@@ -18,12 +18,13 @@
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
+            android:paddingTop="20dp"
             android:theme="?attr/actionBarTheme"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:title="@string/navigation_btn4"
-            app:menu="@menu/menu_bar_perfil" />
+            app:menu="@menu/menu_bar_perfil"
+            app:title="@string/navigation_btn4" />
 
         <!-- Card perfil del entrenador -->
         <com.google.android.material.card.MaterialCardView

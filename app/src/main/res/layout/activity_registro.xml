@@ -14,12 +14,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/color_fondos"
+        android:paddingTop="40dp"
         android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
-        app:title="@string/txt_registro_title"
-        app:titleTextColor="@color/color_letra"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/txt_registro_title"
+        app:titleTextColor="@color/color_letra" />
 
     <!-- Logo -->
     <ImageView
