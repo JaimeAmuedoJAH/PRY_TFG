@@ -1,1 +1,12 @@
+# Module build
 /build
+
+# Firebase config
+google-services.json
+
+# Generated Android files
+/generated/
+
+/outputs/
+
+/intermediates/
